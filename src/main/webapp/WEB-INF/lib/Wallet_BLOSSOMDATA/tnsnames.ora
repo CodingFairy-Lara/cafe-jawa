@@ -1,0 +1,12 @@
+blossomdata_high = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.ap-seoul-1.oraclecloud.com))(connect_data=(service_name=gc441246bb48e0a_blossomdata_high.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+blossomdata_low = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.ap-seoul-1.oraclecloud.com))(connect_data=(service_name=gc441246bb48e0a_blossomdata_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+blossomdata_medium = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.ap-seoul-1.oraclecloud.com))(connect_data=(service_name=gc441246bb48e0a_blossomdata_medium.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+blossomdata_tp = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.ap-seoul-1.oraclecloud.com))(connect_data=(service_name=gc441246bb48e0a_blossomdata_tp.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+blossomdata_tpurgent = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.ap-seoul-1.oraclecloud.com))(connect_data=(service_name=gc441246bb48e0a_blossomdata_tpurgent.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+
+
