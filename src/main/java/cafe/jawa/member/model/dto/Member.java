@@ -2,6 +2,7 @@ package cafe.jawa.member.model.dto;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 /**
  * 
@@ -23,33 +24,33 @@ public class Member {
 	private String password;
 	private String memberName;
 	private MemberRole memberRole;
-	private Gender gender;
 	private Date birthday;
 	private String email;
 	private String phone;
-	private String hobby;
-	private int point;
 	private Timestamp enrollDate;
+	private int orderCount;
+	private Withdrawal withdrawal;
+	
+	
 	
 	public Member() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Member(String memberId, String password, String memberName, MemberRole memberRole, Gender gender,
-			Date birthday, String email, String phone, String hobby, int point, Timestamp enrollDate) {
+	public Member(String memberId, String password, String memberName, MemberRole memberRole, Date birthday,
+			String email, String phone, Timestamp enrollDate, int orderCount, Withdrawal withdrawal) {
 		super();
 		this.memberId = memberId;
 		this.password = password;
 		this.memberName = memberName;
 		this.memberRole = memberRole;
-		this.gender = gender;
 		this.birthday = birthday;
 		this.email = email;
 		this.phone = phone;
-		this.hobby = hobby;
-		this.point = point;
 		this.enrollDate = enrollDate;
+		this.orderCount = orderCount;
+		this.withdrawal = withdrawal;
 	}
 
 	public String getMemberId() {
@@ -84,14 +85,6 @@ public class Member {
 		this.memberRole = memberRole;
 	}
 
-	public Gender getGender() {
-		return gender;
-	}
-
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
-
 	public Date getBirthday() {
 		return birthday;
 	}
@@ -116,22 +109,6 @@ public class Member {
 		this.phone = phone;
 	}
 
-	public String getHobby() {
-		return hobby;
-	}
-
-	public void setHobby(String hobby) {
-		this.hobby = hobby;
-	}
-
-	public int getPoint() {
-		return point;
-	}
-
-	public void setPoint(int point) {
-		this.point = point;
-	}
-
 	public Timestamp getEnrollDate() {
 		return enrollDate;
 	}
@@ -140,14 +117,52 @@ public class Member {
 		this.enrollDate = enrollDate;
 	}
 
+	public int getOrderCount() {
+		return orderCount;
+	}
+
+	public void setOrderCount(int orderCount) {
+		this.orderCount = orderCount;
+	}
+
+	public Withdrawal getWithdrawal() {
+		return withdrawal;
+	}
+
+	public void setWithdrawal(Withdrawal withdrawal) {
+		this.withdrawal = withdrawal;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", password=" + password + ", memberName=" + memberName
-				+ ", memberRole=" + memberRole + ", gender=" + gender + ", birthday=" + birthday + ", email=" + email
-				+ ", phone=" + phone + ", hobby=" + hobby + ", point=" + point + ", enrollDate=" + enrollDate + "]";
+				+ ", memberRole=" + memberRole + ", birthday=" + birthday + ", email=" + email + ", phone=" + phone
+				+ ", enrollDate=" + enrollDate + ", orderCount=" + orderCount + ", withdrawal=" + withdrawal + "]";
 	}
-	
-	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(birthday, email, enrollDate, memberId, memberName, memberRole, orderCount, password, phone,
+				withdrawal);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Member other = (Member) obj;
+		return Objects.equals(birthday, other.birthday) && Objects.equals(email, other.email)
+				&& Objects.equals(enrollDate, other.enrollDate) && Objects.equals(memberId, other.memberId)
+				&& Objects.equals(memberName, other.memberName) && memberRole == other.memberRole
+				&& orderCount == other.orderCount && Objects.equals(password, other.password)
+				&& Objects.equals(phone, other.phone) && withdrawal == other.withdrawal;
+	}
+
 	
 	
 }
+

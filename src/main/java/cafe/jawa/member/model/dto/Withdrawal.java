@@ -1,7 +1,7 @@
 package cafe.jawa.member.model.dto;
 
-public enum Gender {
+public enum Withdrawal {
 
-	M, F;
+	Y, N;
 	
 }
