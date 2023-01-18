@@ -21,3 +21,13 @@ alter table member add constraint withdrawal_check check (withdrawal in ('Y', 'N
 alter table product add constraint enabled_check check (enabled in ('Y', 'N'));
 alter table inquiry add constraint is_answered_check check (is_answered in ('Y', 'N'));
 alter table member modify memberRole default 'U';
+
+insert into grade values ('Silver', 0);
+insert into grade values ('Gold', 10);
+insert into grade values ('VIP', 30);
+
+alter table grade modify grade default 'Silver';
+alter table grade modify grade default null;
+alter table member modify grade default 'Silver';
+
+select * from member;

@@ -11,7 +11,7 @@
 			<tr>
 				<th>아이디<sup>*</sup></th>
 				<td>
-					<input type="text" placeholder="6글자이상" name="memberId" id="_memberId" required>
+					<input type="text" placeholder="6글자이상" name="memberId" id="_memberId">
 					<input type="button" value="아이디 중복확인" onclick="checkIdDuplicate();"/>
 					<input type="hidden" id="idValid" name="idValid" value="0"/>
 					<%-- 사용가능한 아이디인 경우 1, 이미 사용중인 아이디인 경우 0 --%>
@@ -20,37 +20,37 @@
 			<tr>
 				<th>패스워드<sup>*</sup></th>
 				<td>
-					<input type="password" name="password" id="_password" required><br>
+					<input type="password" name="password" id="_password" placeholder="8 ~ 12글자"><br>
 				</td>
 			</tr>
 			<tr>
 				<th>패스워드확인<sup>*</sup></th>
 				<td>	
-					<input type="password" id="passwordCheck" required><br>
+					<input type="password" id="passwordCheck"><br>
 				</td>
 			</tr>  
 			<tr>
 				<th>이름<sup>*</sup></th>
 				<td>	
-				<input type="text"  name="memberName" id="memberName" required><br>
+				<input type="text"  name="memberName" id="memberName"><br>
 				</td>
 			</tr>
 			<tr>
 				<th>생년월일</th>
 				<td>	
-				<input type="date" name="birthday" id="birthday" value="1997-03-22"><br/>
+				<input type="date" name="birthday" id="birthday"><br/>
 				</td>
 			</tr> 
 			<tr>
 				<th>이메일<sup>*</sup></th>
 				<td>	
-					<input type="email" placeholder="abc@xyz.com" name="email" id="email" required><br>
+					<input type="email" placeholder="abc@xyz.com" name="email" id="email"><br>
 				</td>
 			</tr>
 			<tr>
 				<th>휴대폰<sup>*</sup></th>
 				<td>	
-					<input type="tel" placeholder="-없이 입력" name="phone" id="phone" maxlength="11" required><br>
+					<input type="tel" placeholder="-없이 입력" name="phone" id="phone" maxlength="11"><br>
 				</td>
 			</tr>
 		</table>
