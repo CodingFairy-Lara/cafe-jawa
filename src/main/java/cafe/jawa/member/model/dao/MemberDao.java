@@ -4,10 +4,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
 import cafe.jawa.member.model.dto.Member;
+import cafe.jawa.member.model.dto.MemberRole;
+import cafe.jawa.member.model.dto.Withdrawal;
 import cafe.jawa.member.model.exception.MemberException;
 
 public class MemberDao {
@@ -40,6 +43,40 @@ public class MemberDao {
 			throw new MemberException("회원가입 오류!", e);
 		}
 		return result;
+	}
+
+	public Member selectOneMember(Connection conn, String memberId) {
+		String sql = prop.getProperty("selectOneMember");
+		Member member = null;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, memberId);
+			
+			try(ResultSet rset = pstmt.executeQuery()) {
+				while(rset.next()) {
+					member = handleMemberResultSet(rset);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return member;
+	}
+
+	private Member handleMemberResultSet(ResultSet rset) throws SQLException {
+		Member member = new Member();
+		member.setMemberId(rset.getString("id"));
+		member.setPassword(rset.getString("password"));
+		member.setMemberName(rset.getString("name"));
+		member.setMemberRole(MemberRole.valueOf(rset.getString("memberRole")));
+		member.setBirthday(rset.getDate("birthday"));
+		member.setEmail(rset.getString("email"));
+		member.setPhone(rset.getString("Phone"));
+		member.setEnrollDate(rset.getTimestamp("enroll_date"));
+		member.setOrderCount(rset.getInt("order_count"));
+		member.setWithdrawal(Withdrawal.valueOf(rset.getString("withdrawal")));
+		return member;
 	}
 
 }
