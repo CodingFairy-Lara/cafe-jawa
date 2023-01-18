@@ -22,13 +22,13 @@
 			<tr>
 				<th>생년월일</th>
 				<td>	
-				<input type="date" name="birthday" id="birthday" value="<%= loginMember.getBirthday() %>"><br>
+				<input type="date" name="birthday" id="birthday" value="<%= loginMember.getBirthday() != null ? loginMember.getBirthday() : "" %>"><br>
 				</td>
 			</tr> 
 			<tr>
 				<th>이메일</th>
 				<td>	
-					<input type="email" placeholder="abc@xyz.com" name="email" id="email" value="<%= loginMember.getEmail() != null ? loginMember.getEmail() : "" %>"><br>
+					<input type="email" placeholder="abc@xyz.com" name="email" id="email" value="<%= loginMember.getEmail()%>"><br>
 				</td>
 			</tr>
 			<tr>
@@ -44,9 +44,9 @@
 				</td>
 			</tr>
 			<tr>
-				<th>회원등급</th>>
+				<th>회원등급</th>
 				<td>
-					<input type="text" placeholder="" name="grade" id="grade" value"<%= %>" readonly><br>
+					<input type="text" placeholder="" name="grade" id="grade" value="<%= (loginMember.getOrderCount() < 10) ? "Silver" : (loginMember.getOrderCount() < 30) ? "Gold" : "VIP" %>" readonly><br>
 				</td>
 			</tr>
 		</table>

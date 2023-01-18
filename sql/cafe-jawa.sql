@@ -30,4 +30,4 @@ alter table grade modify grade default 'Silver';
 alter table grade modify grade default null;
 alter table member modify grade default 'Silver';
 
-select * from member;
+select * from grade;
