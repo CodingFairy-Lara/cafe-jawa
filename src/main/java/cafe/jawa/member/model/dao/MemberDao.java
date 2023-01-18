@@ -32,11 +32,11 @@ public class MemberDao {
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, member.getMemberId());
-			pstmt.setString(2, member.getPassword());
-			pstmt.setString(3, member.getMemberName());
-			pstmt.setDate(4, member.getBirthday());
-			pstmt.setString(5, member.getEmail());
-			pstmt.setString(6, member.getPhone());
+			pstmt.setString(2, member.getMemberName());
+			pstmt.setString(3, member.getPassword());
+			pstmt.setString(4, member.getEmail());
+			pstmt.setString(5, member.getPhone());
+			pstmt.setDate(6, member.getBirthday());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
