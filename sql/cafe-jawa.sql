@@ -16,3 +16,8 @@ grant connect, resource to cafejawa;
 -- jawa 계정
 --================================
 
+alter table member add constraint memberRole_check check (memberRole in ('U', 'A'));
+alter table member add constraint withdrawal_check check (withdrawal in ('Y', 'N'));
+alter table product add constraint enabled_check check (enabled in ('Y', 'N'));
+alter table inquiry add constraint is_answered_check check (is_answered in ('Y', 'N'));
+alter table member modify memberRole default 'U';
