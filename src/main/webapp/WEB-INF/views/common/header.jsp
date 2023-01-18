@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="cafe.jawa.member.model.dto.Member" %>
+<%
+	Member loginMember = (Member) session.getAttribute("loginMember");
+	String msg = (String) session.getAttribute("msg");
+	if(msg != null) session.removeAttribute("msg");
+%>
 <!doctype html>
 <html lang="en">
 <head>
