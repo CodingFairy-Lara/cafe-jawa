@@ -32,7 +32,7 @@
       <div class="sub-menu">
         <ul class="menu">
           <li>
-            <a href="/signin">Sign In</a>
+            <a href="<%= request.getContextPath() %>/member/memberEnroll">Sign In</a>
           </li>
           <li>
             <a href="javascript:viod(0)">My CAFE JAWA</a>
