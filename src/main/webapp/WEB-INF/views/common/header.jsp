@@ -30,17 +30,34 @@
       </a>
 
       <div class="sub-menu">
+      <% if(loginMember == null) { %>
         <ul class="menu">
           <li>
-            <a href="<%= request.getContextPath() %>/member/memberEnroll">Sign In</a>
+            <a href="<%= request.getContextPath() %>/member/memberEnroll">Sign Up</a>
           </li>
           <li>
-            <a href="javascript:viod(0)">My CAFE JAWA</a>
+          	<a href="<%= request.getContextPath() %>/member/login">Sign In</a>
+          </li>
+          <li>
+            <a href="">My CAFE JAWA</a>
           </li>
           <li>
             <a href="javascript:viod(0)">ADMIN</a>
           </li>
         </ul>
+      <% } else { %>
+      	<ul class="loginMenu">
+      	  <li>
+      		<a href="<%= request.getContextPath() %>/member/logout">Sign out</a>
+      	  </li>
+      	  <li>
+      	  	<a href="<%= request.getContextPath() %>/member/memberView">My CAFE JAWA</a>
+      	  </li>
+      	  <li>
+            <a href="javascript:viod(0)">ADMIN</a>
+          </li>
+      	 </ul>
+      <% } %>
       </div>
 
       <ul class="main-menu">
