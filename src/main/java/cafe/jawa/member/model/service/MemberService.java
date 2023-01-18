@@ -28,4 +28,13 @@ public class MemberService {
 		return result;
 	}
 
+	public Member selectOneMember(String memberId) {
+		Connection conn = getConnection();
+		
+		Member member = memberDao.selectOneMember(conn, memberId);
+		
+		close(conn);
+		return member;
+	}
+
 }
