@@ -39,7 +39,7 @@
           	<a href="<%= request.getContextPath() %>/member/login">Sign In</a>
           </li>
           <li>
-            <a href="">My CAFE JAWA</a>
+            <a href="<%= request.getContextPath() %>/member/login">My CAFE JAWA</a>
           </li>
           <li>
             <a href="javascript:viod(0)">ADMIN</a>
