@@ -27,7 +27,7 @@
 
           <!-- 로고 -->
           <a href="<%= request.getContextPath() %>/" class="logo">
-            <img src="./images/cafe_jawa_logo.png" alt="CAFE JAWA" style="width: 100px;  height: 100px;">
+            <img src="<%= request.getContextPath() %>/images/cafe_jawa_logo.png" alt="CAFE JAWA" style="width: 100px;  height: 100px;">
           </a>
 
       <div class="sub-menu">
@@ -96,7 +96,7 @@
               </li>
               <li class="item">
                 <div class="item__name">
-                      <a href="<%= request.getContextPath() %>/productMenu" class="logo">MENU</a>
+                      <a href="<%= request.getContextPath() %>/product/menu" class="logo">MENU</a>
                 </div>
                 <div class="item__contents">
                   <div class="contents__menu">
