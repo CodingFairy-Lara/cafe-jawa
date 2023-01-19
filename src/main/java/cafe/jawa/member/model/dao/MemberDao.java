@@ -98,4 +98,32 @@ public class MemberDao {
 		return result;
 	}
 
+	public int updatePassword(Connection conn, Member loginMember) {
+		int result = 0;
+		String sql = prop.getProperty("updatePassword");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, loginMember.getPassword());
+			pstmt.setString(2, loginMember.getMemberId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MemberException("비밀번호 수정 오류", e);
+		}
+		return result;
+	}
+
+	public int deleteMember(Connection conn, String memberId) {
+		int result = 0;
+		String sql = prop.getProperty("deleteMember");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MemberException("회원탈퇴 오류", e);
+		}
+		return result;
+	}
+
 }
