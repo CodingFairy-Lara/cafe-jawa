@@ -29,7 +29,7 @@ public class Member {
 	private String phone;
 	private Timestamp enrollDate;
 	private int orderCount;
-	private Withdrawal withdrawal;
+
 	
 	
 	
@@ -39,7 +39,7 @@ public class Member {
 	}
 
 	public Member(String memberId, String password, String memberName, MemberRole memberRole, Date birthday,
-			String email, String phone, Timestamp enrollDate, int orderCount, Withdrawal withdrawal) {
+			String email, String phone, Timestamp enrollDate, int orderCount) {
 		super();
 		this.memberId = memberId;
 		this.password = password;
@@ -50,7 +50,6 @@ public class Member {
 		this.phone = phone;
 		this.enrollDate = enrollDate;
 		this.orderCount = orderCount;
-		this.withdrawal = withdrawal;
 	}
 
 	public String getMemberId() {
@@ -125,25 +124,16 @@ public class Member {
 		this.orderCount = orderCount;
 	}
 
-	public Withdrawal getWithdrawal() {
-		return withdrawal;
-	}
-
-	public void setWithdrawal(Withdrawal withdrawal) {
-		this.withdrawal = withdrawal;
-	}
-
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", password=" + password + ", memberName=" + memberName
 				+ ", memberRole=" + memberRole + ", birthday=" + birthday + ", email=" + email + ", phone=" + phone
-				+ ", enrollDate=" + enrollDate + ", orderCount=" + orderCount + ", withdrawal=" + withdrawal + "]";
+				+ ", enrollDate=" + enrollDate + ", orderCount=" + orderCount + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(birthday, email, enrollDate, memberId, memberName, memberRole, orderCount, password, phone,
-				withdrawal);
+		return Objects.hash(birthday, email, enrollDate, memberId, memberName, memberRole, orderCount, password, phone);
 	}
 
 	@Override
@@ -159,10 +149,8 @@ public class Member {
 				&& Objects.equals(enrollDate, other.enrollDate) && Objects.equals(memberId, other.memberId)
 				&& Objects.equals(memberName, other.memberName) && memberRole == other.memberRole
 				&& orderCount == other.orderCount && Objects.equals(password, other.password)
-				&& Objects.equals(phone, other.phone) && withdrawal == other.withdrawal;
-	}
-
-	
+				&& Objects.equals(phone, other.phone);
+	}	
 	
 }
 

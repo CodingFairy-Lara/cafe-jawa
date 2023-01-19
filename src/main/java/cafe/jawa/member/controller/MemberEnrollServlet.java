@@ -39,7 +39,7 @@ public class MemberEnrollServlet extends HttpServlet {
 			
 			Date birthday = !"".equals(_birthday) ? Date.valueOf(_birthday) : null;
 			
-			Member member = new Member(memberId, password, memberName, null, birthday, email, phone, null, 0, null);
+			Member member = new Member(memberId, password, memberName, null, birthday, email, phone, null, 0);
 			
 			int result = memberService.insertMember(member);
 			
