@@ -10,7 +10,6 @@ import java.util.Properties;
 
 import cafe.jawa.member.model.dto.Member;
 import cafe.jawa.member.model.dto.MemberRole;
-import cafe.jawa.member.model.dto.Withdrawal;
 import cafe.jawa.member.model.exception.MemberException;
 
 public class MemberDao {
@@ -75,7 +74,6 @@ public class MemberDao {
 		member.setPhone(rset.getString("Phone"));
 		member.setEnrollDate(rset.getTimestamp("enroll_date"));
 		member.setOrderCount(rset.getInt("order_count"));
-		member.setWithdrawal(Withdrawal.valueOf(rset.getString("withdrawal")));
 		return member;
 	}
 

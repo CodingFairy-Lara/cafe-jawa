@@ -46,7 +46,7 @@
 			<tr>
 				<th>회원등급</th>
 				<td>
-					<input type="text" placeholder="" name="grade" id="grade" value="<%= (loginMember.getOrderCount() < 10) ? "Silver" : (loginMember.getOrderCount() < 30) ? "Gold" : "VIP" %>" readonly><br>
+					<input type="text" placeholder="" name="grade" id="grade" value="<%= (loginMember.getOrderCount() > 30) ? "VIP" : (loginMember.getOrderCount() > 10) ? "Gold" : "Silver" %>" readonly><br>
 				</td>
 			</tr>
 		</table>

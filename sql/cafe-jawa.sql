@@ -31,5 +31,15 @@ alter table grade modify grade default null;
 alter table member modify grade default 'Silver';
 
 select * from member;
+update member set order_count = 31 where id = 'abc123';
 
 select * from grade;
+
+alter table member drop column withdrawal;
+alter table store drop column url;
+
+select * from store;
+
+insert into store values('001', 'CAFE JAWA 잠실점', '서울 강남구 도곡로 457', '1522-3232');
+insert into store values('002', 'CAFE JAWA 인천점', '인천 남동구 인하로 556', '1522-3232');
+insert into store values('003', 'CAFE JAWA 동탄점', '경기 화성시 메타폴리스로 54', '1522-3232');

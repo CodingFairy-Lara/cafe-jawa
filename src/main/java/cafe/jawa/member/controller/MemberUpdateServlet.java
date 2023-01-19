@@ -38,7 +38,7 @@ public class MemberUpdateServlet extends HttpServlet {
 			
 			Date birthday = !"".equals(_birthday) ? Date.valueOf(_birthday) : null;
 			
-			Member member = new Member(memberId, null, memberName, null, birthday, email, phone, null, 0, null);
+			Member member = new Member(memberId, null, memberName, null, birthday, email, phone, null, 0);
 			
 			int result = memberService.updateMember(member);
 			if(result > 0) {
