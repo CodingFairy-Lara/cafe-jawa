@@ -79,4 +79,23 @@ public class MemberDao {
 		return member;
 	}
 
+	public int updateMember(Connection conn, Member member) {
+		String sql = prop.getProperty("updateMember");
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, member.getMemberName());
+			pstmt.setDate(2, member.getBirthday());
+			pstmt.setString(3, member.getEmail());
+			pstmt.setString(4, member.getPhone());
+			pstmt.setString(5, member.getMemberId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new MemberException("회원정보 수정 오류", e);
+		}
+		return result;
+	}
+
 }

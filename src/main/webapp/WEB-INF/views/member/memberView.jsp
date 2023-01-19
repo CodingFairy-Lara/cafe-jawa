@@ -8,13 +8,13 @@
 	<form name="memberUpdateFrm" method="post" action="<%= request.getContextPath() %>/member/memberUpdate">
 		<table>
 			<tr>
-				<th>아이디<sup>*</sup></th>
+				<th>아이디</th>
 				<td>
 					<input type="text" name="memberId" id="memberId" value="<%= loginMember.getMemberId() %>" readonly>
 				</td>
 			</tr>
 			<tr>
-				<th>이름<sup>*</sup></th>
+				<th>이름</th>
 				<td>	
 				<input type="text"  name="memberName" id="memberName" value="<%= loginMember.getMemberName() %>"  required><br>
 				</td>
@@ -32,9 +32,9 @@
 				</td>
 			</tr>
 			<tr>
-				<th>휴대폰<sup>*</sup></th>
+				<th>휴대폰</th>
 				<td>	
-					<input type="tel" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" value="<%= loginMember.getPhone() %>" required><br>
+					<input type="tel" placeholder="-없이입력" name="phone" id="phone" maxlength="11" value="<%= loginMember.getPhone() %>" required><br>
 				</td>
 			</tr>
 			<tr>
@@ -50,9 +50,9 @@
 				</td>
 			</tr>
 		</table>
-        <input type="submit" value="정보수정"/>
-        <input type="button" value="비밀번호변경" onclick="updatePassword();"/>
-        <input type="button" onclick="deleteMember();" value="탈퇴"/>
+        <input type="submit" value="회원 정보 변경"/>
+        <input type="button" value="비밀번호 변경" onclick="updatePassword();"/>
+        <input type="button" onclick="deleteMember();" value="회원 탈퇴"/>
 	</form>
 </section>
 
