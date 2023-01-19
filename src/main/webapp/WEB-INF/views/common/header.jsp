@@ -94,7 +94,9 @@
           </div>
         </li>
         <li class="item">
-          <div class="item__name">MENU</div>
+          <div class="item__name">
+                <a href="<%= request.getContextPath() %>/productMenu" class="logo">MENU</a>
+          </div>
           <div class="item__contents">
             <div class="contents__menu">
               <ul class="inner">
@@ -114,7 +116,6 @@
                     <li>베이커리</li>
                     <li>케익</li>
                     <li>샌드위치 &amp; 샐러드</li>
-                    <li>따뜻한 푸드</li>
                     <li>아이스크림</li>
                   </ul>
                 </li>
