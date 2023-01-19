@@ -94,7 +94,9 @@
           </div>
         </li>
         <li class="item">
-          <div class="item__name">MENU</div>
+          <div class="item__name">
+                <a href="<%= request.getContextPath() %>/productMenu" class="logo">MENU</a>
+          </div>
           <div class="item__contents">
             <div class="contents__menu">
               <ul class="inner">
