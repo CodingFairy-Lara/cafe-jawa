@@ -1,6 +1,13 @@
+<%@page import="cafe.jawa.product.model.dto.Product"%>
+<%@page import="cafe.jawa.product.model.dto.Attachment"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%
+	List<Product> productList = (List<Product>) request.getAttribute("productList");
+	List<Attachment> attachmentList = (List<Attachment>) request.getAttribute("attachmentList");
+%>
 <section id=product-container>
     <div class="inner">
 		<h1>메뉴</h1>
@@ -62,26 +69,27 @@
 					</dt>
 					<dd style="display: block;">
 						<ul class="product_cold_brew">
+		<% 
+			for(Product product : productList){
+				if(product.getSubCategory().equals("CBR  ")) {
+		%>
 							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
 								<dl>
 									<dt>
-										<a href="javascript:void(0)" class="goDrinkView" prod="9200000000479">
-											<img src="https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000000479]_20210426091843897.jpg" alt="나이트로 콜드 브루">
+										<a href="<%= request.getContextPath() %>/product/view?=no<%= product.getProductId()%>" class="goDrinkView" prod="9200000000479">
+		<% 
+			for(Attachment attachment : attachmentList){
+				if(attachment.getProductId() == product.getProductId()) {
+		%>
+											<img src="<%= request.getContextPath() %>/images/<%=attachment.getOriginalFilename()%>" alt="콜드 브루 음료 이미지">
+		<% 	}}	%>						
 										</a>
 									</dt>
-									<dd>나이트로 콜드 브루</dd>
+									<dd><%= product.getProductName() %></dd>
 								</dl>
 							</li>
+		<% }}	%>
 							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
-								<dl>
-									<dt>
-										<a href="javascript:void(0)" class="goDrinkView" prod="9200000002081">
-											<img src="https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002081]_20210415133656839.jpg" alt="돌체 콜드 브루">
-										</a>
-									</dt>
-									<dd>돌체 콜드 브루</dd>
-								</dl>
-							</li><li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
 								<dl>
 									<dt>
 										<a href="javascript:void(0)" class="goDrinkView" prod="9200000004312">
@@ -149,16 +157,26 @@
 					</dt>
 					<dd style="display: block;">
 						<ul class="product_espresso">
-							<li class="menuDataSet" new="N" sell="0" recomm="0" sold="N">
+		<% 
+			for(Product product : productList){
+				if(product.getSubCategory().equals("ESP  ")) {
+		%>
+							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
 								<dl>
 									<dt>
-										<a href="javascript:void(0)" class="goDrinkView" prod="110563">
-											<img src="https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[110563]_20210426095937808.jpg" alt="아이스 카페 아메리카노">
+										<a href="<%= request.getContextPath() %>/product/view?=no<%= product.getProductId()%>" class="goDrinkView" prod="9200000000479">
+		<% 
+			for(Attachment attachment : attachmentList){
+				if(attachment.getProductId() == product.getProductId()) {
+		%>
+											<img src="<%= request.getContextPath() %>/images/<%=attachment.getOriginalFilename()%>" alt="에스프레소 음료 이미지">
+		<% 	}}	%>						
 										</a>
 									</dt>
-									<dd>아이스 카페 아메리카노</dd>
+									<dd><%= product.getProductName() %></dd>
 								</dl>
 							</li>
+		<% }}	%>
 							<li class="menuDataSet" new="N" sell="0" recomm="0" sold="N">
 								<dl>
 									<dt>
