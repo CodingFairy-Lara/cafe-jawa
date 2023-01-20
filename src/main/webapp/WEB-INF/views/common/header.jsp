@@ -77,7 +77,7 @@
                       <li>
                         <h4>공지사항</h4>
                         <ul>
-                          <li>공지사항 게시판</li>
+                          <li class="notice_1"><a href="<%=request.getContextPath() %>/notice/noticeList">공지사항 게시판</a></li>
                           <li>공지사항 게시판2</li>
                           <li>공지사항 게시판3</li>
                         </ul>
