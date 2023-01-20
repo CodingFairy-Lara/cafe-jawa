@@ -96,7 +96,7 @@
               </li>
               <li class="item">
                 <div class="item__name">
-                      <a href="<%= request.getContextPath() %>/product/menu" class="logo">MENU</a>
+                      <h4 onclick="location.href='<%= request.getContextPath() %>/product/menu';">MENU</h4>
                 </div>
                 <div class="item__contents">
                   <div class="contents__menu">
