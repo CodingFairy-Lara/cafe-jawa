@@ -35,7 +35,7 @@ hr {
 
 li{list-style:none}
 
-a { text-decoration: none; color: black;font-size:14px; }
+a { text-decoration: none; color: black; font-size:14px; }
 a:visited { text-decoration: none; }
 a:hover { text-decoration: none; }
 a:focus { text-decoration: none; }
@@ -100,7 +100,7 @@ header .main-menu .item .item__name, .sub-menu {
   cursor: pointer;
 }
 
-header .main-menu .item:hover .item__name {
+header .main-menu .item:hover .item__name, .main-menu a:hover .item__name {
   background-color: #494645;
   color: #a1aed9;
   border-radius: 6px 6px 0 0;

@@ -17,7 +17,7 @@
 				<hr>
 				<dl class="product_kind_tab">
 					<dt class="dt1"><a href="javascript:void(0)" id="categoryTab" class="selected" role="button">음료</a></dt>
-					<dd>
+					<dd style="display: none;">
 						<div class="product_drink_select">
 							<form method="post">
 								<fieldset>
@@ -37,7 +37,7 @@
 						</div>
 					</dd>
 					<dt class="dt2"><a href="javascript:void(0)" id="themeTab" title="푸드 카테고리 보기">푸드</a></dt>
-					<dd  style="display: none;">
+					<dd style="display: block;">
 						<div class="product_food_select">
 							<form method="post">
 								<fieldset>
@@ -62,7 +62,7 @@
 		<div id="menu-container">
 			<div class="product_list">
 				<!-- 음료메뉴 시작 -->
-				<dl>
+				<dl style="display: none;">
 					<!-- 콜드 브루 커피 -->
 					<dt style="display: block;">
 						<a href="javascript:void(0);">콜드 브루 커피</a>
@@ -209,7 +209,126 @@
 					</dd>
 				</dl>
 				<!-- 음료메뉴 끝 -->
+				
+				<!-- 푸드메뉴 시작 -->
+				<dl style="display: block;">
+					<!-- 브레드 -->
+					<dt style="display: block;">
+						<a href="javascript:void(0);">브레드</a>
+					</dt>
+					<dd style="display: block;">
+						<ul class="product_cold_brew">
+		<% 
+			for(Product product : productList){
+				if(product.getSubCategory().equals("BRD  ")) {
+		%>
+							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
+								<dl>
+									<dt>
+										<a href="<%= request.getContextPath() %>/product/view?=no<%= product.getProductId()%>" class="goDrinkView" prod="9200000000479">
+		<% 
+			for(Attachment attachment : attachmentList){
+				if(attachment.getProductId() == product.getProductId()) {
+		%>
+											<img src="<%= request.getContextPath() %>/images/<%=attachment.getOriginalFilename()%>" alt="브레드 이미지">
+		<% 	}}	%>						
+										</a>
+									</dt>
+									<dd><%= product.getProductName() %></dd>
+								</dl>
+							</li>
+		<% }}	%>
+						</ul>
+					</dd>
 
+					<!-- 케이크 -->
+					<dt style="display: block;">
+						<a href="javascript:void(0)">케이크</a>
+					</dt>
+					<dd style="display: block;">
+						<ul class="product_espresso">
+		<% 
+			for(Product product : productList){
+				if(product.getSubCategory().equals("CKE  ")) {
+		%>
+							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
+								<dl>
+									<dt>
+										<a href="<%= request.getContextPath() %>/product/view?=no<%= product.getProductId()%>" class="goDrinkView" prod="9200000000479">
+		<% 
+			for(Attachment attachment : attachmentList){
+				if(attachment.getProductId() == product.getProductId()) {
+		%>
+											<img src="<%= request.getContextPath() %>/images/<%=attachment.getOriginalFilename()%>" alt="케이크 이미지">
+		<% 	}}	%>						
+										</a>
+									</dt>
+									<dd><%= product.getProductName() %></dd>
+								</dl>
+							</li>
+		<% }}	%>
+						</ul>
+					</dd>
+
+					<!-- 샌드위치 & 샐러드 -->
+					<dt style="display: block;">
+						<a href="javascript:void(0)">샌드위치 & 샐러드</a>
+					</dt>
+					<dd style="display: block;">
+						<ul class="product_frappuccino">
+		<% 
+			for(Product product : productList){
+				if(product.getSubCategory().equals("SND  ")) {
+		%>
+							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
+								<dl>
+									<dt>
+										<a href="<%= request.getContextPath() %>/product/view?=no<%= product.getProductId()%>" class="goDrinkView" prod="9200000000479">
+		<% 
+			for(Attachment attachment : attachmentList){
+				if(attachment.getProductId() == product.getProductId()) {
+		%>
+											<img src="<%= request.getContextPath() %>/images/<%=attachment.getOriginalFilename()%>" alt="샌드위치 & 샐러드 이미지">
+		<% 	}}	%>						
+										</a>
+									</dt>
+									<dd><%= product.getProductName() %></dd>
+								</dl>
+							</li>
+		<% }}	%>
+						</ul>
+					</dd>
+
+					<!-- 아이스크림 -->
+					<dt style="display: block;">
+						<a href="javascript:void(0)">아이스크림</a>
+					</dt>
+					<dd style="display: block;">
+						<ul class="product_blended">
+		<% 
+			for(Product product : productList){
+				if(product.getSubCategory().equals("ICR  ")) {
+		%>
+							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
+								<dl>
+									<dt>
+										<a href="<%= request.getContextPath() %>/product/view?=no<%= product.getProductId()%>" class="goDrinkView" prod="9200000000479">
+		<% 
+			for(Attachment attachment : attachmentList){
+				if(attachment.getProductId() == product.getProductId()) {
+		%>
+											<img src="<%= request.getContextPath() %>/images/<%=attachment.getOriginalFilename()%>" alt="아이스크림 이미지">
+		<% 	}}	%>						
+										</a>
+									</dt>
+									<dd><%= product.getProductName() %></dd>
+								</dl>
+							</li>
+		<% }}	%>
+						</ul>
+					</dd>
+				</dl>
+				<!-- 음료메뉴 끝 -->
 			</div>
 		</div>
 		    
