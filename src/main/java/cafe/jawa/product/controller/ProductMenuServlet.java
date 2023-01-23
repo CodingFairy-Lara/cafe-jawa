@@ -35,11 +35,9 @@ public class ProductMenuServlet extends HttpServlet {
 		List<Product> productList = productService.selectProductList();
 		System.out.println(productList);
 		
-		// 상품 이미지 Attachment 가져오기
+		// 상품 이미지 AttachmentList 가져오기
 		List<Attachment> attachmentList = productService.selectAttachmentList();
 		System.out.println(attachmentList);
-		
-		String url = request.getRequestURI(); // /jawa/product/menu
 		
 		// 3. view단 위임.
 		request.setAttribute("productList", productList);

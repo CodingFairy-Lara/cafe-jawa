@@ -97,5 +97,27 @@ public class ProductDao {
 		attach.setEnrollDate(rset.getDate("enroll_date"));
 		return attach;
 	}
+
+	public Product selectOneProduct(Connection conn, int id) {
+		String sql = prop.getProperty("selectOneProduct"); // select * from product where product_id = ?
+		Product product = new Product();
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, id);
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					product = handleProductResultSet(rset);
+				}
+			}
+		} catch (Exception e) {
+			throw new ProductException("상품 정보 조회 오류!", e);
+		}
+		return product;
+	}
+	
+	
+	
+	
+	
+	
 	
 }

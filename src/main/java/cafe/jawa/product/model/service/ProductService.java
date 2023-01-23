@@ -29,6 +29,13 @@ public class ProductService {
 		return attachments;
 	}
 
+	public Product selectOneProduct(int id) {
+		Connection conn = getConnection();
+		Product product = productDao.selectOneProduct(conn, id);
+		close(conn);
+		return product;
+}
+
 	
 	
 }
