@@ -51,6 +51,7 @@ public class ProductDao {
 		product.setDescription(rset.getString("describe"));
 		product.setPrice(rset.getInt("unit_price"));
 		product.setEnrollDate(rset.getTimestamp("enroll_date"));
+		product.setFactor(rset.getString("factor"));
 		return product;
 	}
 

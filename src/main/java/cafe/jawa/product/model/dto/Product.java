@@ -22,11 +22,11 @@ public class Product extends ProductEntity{
 	}
 
 	public Product(int productId, String subCategory, String productName, String description, int price,
-			Timestamp enrollDate, Activaion activation) {
-		super(productId, subCategory, productName, description, price, enrollDate, activation);
+			Timestamp enrollDate, Activation activation, String factor) {
+		super(productId, subCategory, productName, description, price, enrollDate, activation, factor);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public Product(int attachCnt, List<cafe.jawa.product.model.dto.Attachment> attachments) {
 		super();
 		this.attachCnt = attachCnt;

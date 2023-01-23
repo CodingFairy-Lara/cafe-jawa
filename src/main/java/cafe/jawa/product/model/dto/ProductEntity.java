@@ -26,14 +26,16 @@ public class ProductEntity {
 	private String description;
 	private int price;
 	private Timestamp enrollDate;
-	private Activaion activation; // Y, N
+	private Activation activation; // Y, N
+	private String factor;
 	
 	public ProductEntity() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public ProductEntity(int productId, String subCategory, String productName, String description, int price,
-			Timestamp enrollDate, Activaion activation) {
+			Timestamp enrollDate, Activation activation, String factor) {
 		super();
 		this.productId = productId;
 		this.subCategory = subCategory;
@@ -42,6 +44,7 @@ public class ProductEntity {
 		this.price = price;
 		this.enrollDate = enrollDate;
 		this.activation = activation;
+		this.factor = factor;
 	}
 
 	public int getProductId() {
@@ -92,20 +95,49 @@ public class ProductEntity {
 		this.enrollDate = enrollDate;
 	}
 
-	public Activaion getActivation() {
+	public Activation getActivation() {
 		return activation;
 	}
 
-	public void setActivation(Activaion activation) {
+	public void setActivation(Activation activation) {
 		this.activation = activation;
+	}
+
+	public String getFactor() {
+		return factor;
+	}
+
+	public void setFactor(String factor) {
+		this.factor = factor;
 	}
 
 	@Override
 	public String toString() {
-		return "Product [productId=" + productId + ", subCategory=" + subCategory + ", productName=" + productName
+		return "ProductEntity [productId=" + productId + ", subCategory=" + subCategory + ", productName=" + productName
 				+ ", description=" + description + ", price=" + price + ", enrollDate=" + enrollDate + ", activation="
-				+ activation + "]";
+				+ activation + ", factor=" + factor + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(activation, description, enrollDate, factor, price, productId, productName, subCategory);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProductEntity other = (ProductEntity) obj;
+		return activation == other.activation && Objects.equals(description, other.description)
+				&& Objects.equals(enrollDate, other.enrollDate) && Objects.equals(factor, other.factor)
+				&& price == other.price && productId == other.productId
+				&& Objects.equals(productName, other.productName) && Objects.equals(subCategory, other.subCategory);
+	}
+	
 	
 }
 

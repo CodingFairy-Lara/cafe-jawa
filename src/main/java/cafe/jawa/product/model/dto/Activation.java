@@ -1,5 +1,5 @@
 package cafe.jawa.product.model.dto;
 
-public enum Activaion {
+public enum Activation {
 	Y, N;
 }
