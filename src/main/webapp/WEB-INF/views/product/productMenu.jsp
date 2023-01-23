@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+
 <%
 	List<Product> productList = (List<Product>) request.getAttribute("productList");
 	List<Attachment> attachmentList = (List<Attachment>) request.getAttribute("attachmentList");
@@ -62,7 +63,7 @@
 		<div id="menu-container">
 			<div class="product_list">
 				<!-- 음료메뉴 시작 -->
-				<dl style="display: none;">
+				<dl style="display: block;">
 					<!-- 콜드 브루 커피 -->
 					<dt style="display: block;">
 						<a href="javascript:void(0);">콜드 브루 커피</a>
@@ -76,12 +77,12 @@
 							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
 								<dl>
 									<dt>
-										<a href="<%= request.getContextPath() %>/product/view?=no<%= product.getProductId()%>" class="goDrinkView" prod="9200000000479">
+										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
 		<% 
 			for(Attachment attachment : attachmentList){
 				if(attachment.getProductId() == product.getProductId()) {
 		%>
-											<img src="<%= request.getContextPath() %>/images/<%=attachment.getOriginalFilename()%>" alt="콜드 브루 음료 이미지">
+											<img src="<%= request.getContextPath() %>/images/drink/<%=attachment.getOriginalFilename()%>" alt="콜드 브루 음료 이미지">
 		<% 	}}	%>						
 										</a>
 									</dt>
@@ -105,12 +106,12 @@
 							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
 								<dl>
 									<dt>
-										<a href="<%= request.getContextPath() %>/product/view?=no<%= product.getProductId()%>" class="goDrinkView" prod="9200000000479">
+										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
 		<% 
 			for(Attachment attachment : attachmentList){
 				if(attachment.getProductId() == product.getProductId()) {
 		%>
-											<img src="<%= request.getContextPath() %>/images/<%=attachment.getOriginalFilename()%>" alt="에스프레소 음료 이미지">
+											<img src="<%= request.getContextPath() %>/images/drink/<%=attachment.getOriginalFilename()%>" alt="에스프레소 음료 이미지">
 		<% 	}}	%>						
 										</a>
 									</dt>
@@ -134,12 +135,12 @@
 							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
 								<dl>
 									<dt>
-										<a href="<%= request.getContextPath() %>/product/view?=no<%= product.getProductId()%>" class="goDrinkView" prod="9200000000479">
+										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
 		<% 
 			for(Attachment attachment : attachmentList){
 				if(attachment.getProductId() == product.getProductId()) {
 		%>
-											<img src="<%= request.getContextPath() %>/images/<%=attachment.getOriginalFilename()%>" alt="프라푸치노 음료 이미지">
+											<img src="<%= request.getContextPath() %>/images/drink/<%=attachment.getOriginalFilename()%>" alt="프라푸치노 음료 이미지">
 		<% 	}}	%>						
 										</a>
 									</dt>
@@ -163,12 +164,12 @@
 							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
 								<dl>
 									<dt>
-										<a href="<%= request.getContextPath() %>/product/view?=no<%= product.getProductId()%>" class="goDrinkView" prod="9200000000479">
+										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
 		<% 
 			for(Attachment attachment : attachmentList){
 				if(attachment.getProductId() == product.getProductId()) {
 		%>
-											<img src="<%= request.getContextPath() %>/images/<%=attachment.getOriginalFilename()%>" alt="블랜디드 음료 이미지">
+											<img src="<%= request.getContextPath() %>/images/drink/<%=attachment.getOriginalFilename()%>" alt="블랜디드 음료 이미지">
 		<% 	}}	%>						
 										</a>
 									</dt>
@@ -192,12 +193,12 @@
 							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
 								<dl>
 									<dt>
-										<a href="<%= request.getContextPath() %>/product/view?=no<%= product.getProductId()%>" class="goDrinkView" prod="9200000000479">
+										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
 		<% 
 			for(Attachment attachment : attachmentList){
 				if(attachment.getProductId() == product.getProductId()) {
 		%>
-											<img src="<%= request.getContextPath() %>/images/<%=attachment.getOriginalFilename()%>" alt="티 음료 이미지">
+											<img src="<%= request.getContextPath() %>/images/drink/<%=attachment.getOriginalFilename()%>" alt="티 음료 이미지">
 		<% 	}}	%>						
 										</a>
 									</dt>
@@ -225,12 +226,12 @@
 							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
 								<dl>
 									<dt>
-										<a href="<%= request.getContextPath() %>/product/view?=no<%= product.getProductId()%>" class="goDrinkView" prod="9200000000479">
+										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
 		<% 
 			for(Attachment attachment : attachmentList){
 				if(attachment.getProductId() == product.getProductId()) {
 		%>
-											<img src="<%= request.getContextPath() %>/images/<%=attachment.getOriginalFilename()%>" alt="브레드 이미지">
+											<img src="<%= request.getContextPath() %>/images/food/<%=attachment.getOriginalFilename()%>" alt="브레드 이미지">
 		<% 	}}	%>						
 										</a>
 									</dt>
@@ -254,12 +255,12 @@
 							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
 								<dl>
 									<dt>
-										<a href="<%= request.getContextPath() %>/product/view?=no<%= product.getProductId()%>" class="goDrinkView" prod="9200000000479">
+										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
 		<% 
 			for(Attachment attachment : attachmentList){
 				if(attachment.getProductId() == product.getProductId()) {
 		%>
-											<img src="<%= request.getContextPath() %>/images/<%=attachment.getOriginalFilename()%>" alt="케이크 이미지">
+											<img src="<%= request.getContextPath() %>/images/food/<%=attachment.getOriginalFilename()%>" alt="케이크 이미지">
 		<% 	}}	%>						
 										</a>
 									</dt>
@@ -283,12 +284,12 @@
 							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
 								<dl>
 									<dt>
-										<a href="<%= request.getContextPath() %>/product/view?=no<%= product.getProductId()%>" class="goDrinkView" prod="9200000000479">
+										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
 		<% 
 			for(Attachment attachment : attachmentList){
 				if(attachment.getProductId() == product.getProductId()) {
 		%>
-											<img src="<%= request.getContextPath() %>/images/<%=attachment.getOriginalFilename()%>" alt="샌드위치 & 샐러드 이미지">
+											<img src="<%= request.getContextPath() %>/images/food/<%=attachment.getOriginalFilename()%>" alt="샌드위치 & 샐러드 이미지">
 		<% 	}}	%>						
 										</a>
 									</dt>
@@ -312,12 +313,12 @@
 							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
 								<dl>
 									<dt>
-										<a href="<%= request.getContextPath() %>/product/view?=no<%= product.getProductId()%>" class="goDrinkView" prod="9200000000479">
+										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
 		<% 
 			for(Attachment attachment : attachmentList){
 				if(attachment.getProductId() == product.getProductId()) {
 		%>
-											<img src="<%= request.getContextPath() %>/images/<%=attachment.getOriginalFilename()%>" alt="아이스크림 이미지">
+											<img src="<%= request.getContextPath() %>/images/food/<%=attachment.getOriginalFilename()%>" alt="아이스크림 이미지">
 		<% 	}}	%>						
 										</a>
 									</dt>

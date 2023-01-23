@@ -19,6 +19,8 @@
 	<!-- 폰트(나눔고딕) -->
 	<link rel="preconnect" href="https://fonts.gstatic.com" />
 	<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet" />
+  <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery.elevatezoom.js"></script>
 </head>
 <body>
 	<div id="container">

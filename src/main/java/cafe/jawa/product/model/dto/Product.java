@@ -51,12 +51,6 @@ public class Product extends ProductEntity{
 		this.attachments = attachments;
 	}
 
-	@Override
-	public String toString() {
-		return "Attachment [attachCnt=" + attachCnt + ", attachments=" + attachments + ", toString()=" + super.toString()
-				+ "]";
-	}
-
 	/**
 	 * boar객체 생성시 초기화된 attachment에 Attachment객체를 추가하는 메소드
 	 * 
