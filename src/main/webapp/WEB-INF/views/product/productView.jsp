@@ -111,14 +111,14 @@
                                     </li>
                                 </ul>
                             </div>
+        <% } %>
                             <div class="product_factor">
-                                <p>알레르기 유발요인 : 우유</p>
+                                <p>알레르기 유발요인 : <%= product.getFactor() %></p>
                             </div>
 
                         </div>
                     </fieldset>
                 </form>
-        <% } %>
             </div>
         </div>
         <% 	}}	%>
