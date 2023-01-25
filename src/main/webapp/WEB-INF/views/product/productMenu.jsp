@@ -17,39 +17,43 @@
 				<h2>분류보기</h2>
 				<hr>
 				<dl class="product_kind_tab">
-					<dt class="dt1"><a href="javascript:void(0)" id="categoryTab" class="selected" role="button">음료</a></dt>
-					<dd style="display: none;">
+					<dt class="dt1">
+						<a href="javascript:void(0)" id="drinkTab" class="selected">음료</a>
+					</dt>
+					<dd>
 						<div class="product_drink_select">
 							<form method="post">
 								<fieldset>
 									<!-- 음료 카테고리 별 분류 보기 -->
 									<div id="drink_menu_container" class="product_menu">
 										<ul class="drink_menu">
-											<li><input type="checkbox" name="product_all" id="product_all"> <label for="product_all">전체 상품보기</label></li>
-											<li><input type="checkbox" name="product_cold_brew" id="product_cold_brew"> <label for="product_cold_brew">콜드 브루 커피</label></li>
-											<li><input type="checkbox" name="product_espresso" id="product_espresso"> <label for="product_espresso">에스프레소</label></li>
-											<li><input type="checkbox" name="product_frappuccino" id="product_frappuccino"> <label for="product_frappuccino">프라푸치노</label></li>
-											<li><input type="checkbox" name="product_blended" id="product_blended"> <label for="product_blended">블렌디드</label></li>
-											<li><input type="checkbox" name="product_tea" id="product_tea"> <label for="product_tea">티</label></li>
+											<li><input type="checkbox" name="product_all_drink" id="product_all_drink" checked="checked"> <label for="product_all_drink">전체 상품보기</label></li>
+											<li><input type="checkbox" name="product_drink" id="product_cold_brew" checked="checked"> <label for="product_cold_brew">콜드 브루 커피</label></li>
+											<li><input type="checkbox" name="product_drink" id="product_espresso" checked="checked"> <label for="product_espresso">에스프레소</label></li>
+											<li><input type="checkbox" name="product_drink" id="product_frappuccino" checked="checked"> <label for="product_frappuccino">프라푸치노</label></li>
+											<li><input type="checkbox" name="product_drink" id="product_blended" checked="checked"> <label for="product_blended">블렌디드</label></li>
+											<li><input type="checkbox" name="product_drink" id="product_tea" checked="checked"> <label for="product_tea">티</label></li>
 										</ul>
 									</div>
 								</fieldset>
 							</form>
 						</div>
 					</dd>
-					<dt class="dt2"><a href="javascript:void(0)" id="themeTab" title="푸드 카테고리 보기">푸드</a></dt>
-					<dd style="display: block;">
-						<div class="product_food_select">
+					<dt class="dt2">
+						<a href="javascript:void(0)" id="foodTab">푸드</a>
+					</dt>
+					<dd>
+						<div class="product_food_select" style="display: none;">
 							<form method="post">
 								<fieldset>
 									<!-- 푸드 카테고리 별 분류 보기 -->
 									<div id="food_menu_container" class="product_menu" style="display: relative;">
 										<ul class="food_menu">
-											<li><input type="checkbox" name="product_all" id="product_all" checked="checked"> <label for="product_all">전체 상품보기</label></li>
-											<li><input type="checkbox" name="product_bakery" id="product_bakery"> <label for="product_bakery">브레드</label></li>
-											<li><input type="checkbox" name="product_cake" id="product_cake"> <label for="product_cake">케이크</label></li>
-											<li style="width: 190px;"><input type="checkbox" name="product_sandwich" id="product_sandwich"> <label for="product_sandwich">샌드위치 &amp; 샐러드</label></li>
-											<li><input type="checkbox" name="product_icecream" id="product_icecream"> <label for="product_icecream">아이스크림</label></li>
+											<li><input type="checkbox" name="product_all_food" id="product_all_food" checked="checked"> <label for="product_all_food">전체 상품보기</label></li>
+											<li><input type="checkbox" name="product_food" id="product_bakery" checked="checked"> <label for="product_bakery">브레드</label></li>
+											<li><input type="checkbox" name="product_food" id="product_cake" checked="checked"> <label for="product_cake">케이크</label></li>
+											<li style="width: 190px;"><input type="checkbox" name="product_food" id="product_sandwich" checked="checked" > <label for="product_sandwich">샌드위치 &amp; 샐러드</label></li>
+											<li><input type="checkbox" name="product_food" id="product_icecream" checked="checked"> <label for="product_icecream">아이스크림</label></li>
 										</ul>
 									</div>
 								</fieldset>
@@ -63,13 +67,13 @@
 		<div id="menu-container">
 			<div class="product_list">
 				<!-- 음료메뉴 시작 -->
-				<dl style="display: block;">
+				<dl class="product_list_drink">
 					<!-- 콜드 브루 커피 -->
-					<dt style="display: block;">
+					<dt id="menu_list_coldbrew">
 						<a href="javascript:void(0);">콜드 브루 커피</a>
 					</dt>
-					<dd style="display: block;">
-						<ul class="product_cold_brew">
+					<dd id="menu_list_coldbrew">
+						<ul>
 		<% 
 			for(Product product : productList){
 				if(product.getSubCategory().equals("CBR  ")) {
@@ -94,10 +98,10 @@
 					</dd>
 
 					<!-- 에스프레소 -->
-					<dt style="display: block;">
+					<dt id="menu_list_espresso">
 						<a href="javascript:void(0)">에스프레소</a>
 					</dt>
-					<dd style="display: block;">
+					<dd id="menu_list_espresso">
 						<ul class="product_espresso">
 		<% 
 			for(Product product : productList){
@@ -123,10 +127,10 @@
 					</dd>
 
 					<!-- 프라푸치노 -->
-					<dt style="display: block;">
+					<dt id="menu_list_frappuccino">
 						<a href="javascript:void(0)">프라푸치노</a>
 					</dt>
-					<dd style="display: block;">
+					<dd id="menu_list_frappuccino">
 						<ul class="product_frappuccino">
 		<% 
 			for(Product product : productList){
@@ -152,10 +156,10 @@
 					</dd>
 
 					<!-- 블렌디드 -->
-					<dt style="display: block;">
+					<dt id="menu_list_blended">
 						<a href="javascript:void(0)">블렌디드</a>
 					</dt>
-					<dd style="display: block;">
+					<dd id="menu_list_blended">
 						<ul class="product_blended">
 		<% 
 			for(Product product : productList){
@@ -181,10 +185,10 @@
 					</dd>
 
 					<!-- 티 -->
-					<dt style="display: block;">
+					<dt id="menu_list_tea">
 						<a href="javascript:void(0)">티</a>
 					</dt>
-					<dd style="display: block;">
+					<dd id="menu_list_tea">
 						<ul class="product_tea">
 		<% 
 			for(Product product : productList){
@@ -212,13 +216,13 @@
 				<!-- 음료메뉴 끝 -->
 				
 				<!-- 푸드메뉴 시작 -->
-				<dl style="display: block;">
+				<dl class="product_list_food" class="hide">
 					<!-- 브레드 -->
-					<dt style="display: block;">
+					<dt id="menu_list_bread">
 						<a href="javascript:void(0);">브레드</a>
 					</dt>
-					<dd style="display: block;">
-						<ul class="product_cold_brew">
+					<dd id="menu_list_bread">
+						<ul>
 		<% 
 			for(Product product : productList){
 				if(product.getSubCategory().equals("BRD  ")) {
@@ -243,11 +247,11 @@
 					</dd>
 
 					<!-- 케이크 -->
-					<dt style="display: block;">
+					<dt id="menu_list_cake">
 						<a href="javascript:void(0)">케이크</a>
 					</dt>
-					<dd style="display: block;">
-						<ul class="product_espresso">
+					<dd id="menu_list_cake">
+						<ul>
 		<% 
 			for(Product product : productList){
 				if(product.getSubCategory().equals("CKE  ")) {
@@ -272,11 +276,11 @@
 					</dd>
 
 					<!-- 샌드위치 & 샐러드 -->
-					<dt style="display: block;">
+					<dt id="menu_list_sandwich">
 						<a href="javascript:void(0)">샌드위치 & 샐러드</a>
 					</dt>
-					<dd style="display: block;">
-						<ul class="product_frappuccino">
+					<dd id="menu_list_sandwich">
+						<ul>
 		<% 
 			for(Product product : productList){
 				if(product.getSubCategory().equals("SND  ")) {
@@ -301,11 +305,11 @@
 					</dd>
 
 					<!-- 아이스크림 -->
-					<dt style="display: block;">
+					<dt id="menu_list_icecream">
 						<a href="javascript:void(0)">아이스크림</a>
 					</dt>
-					<dd style="display: block;">
-						<ul class="product_blended">
+					<dd id="menu_list_icecream">
+						<ul>
 		<% 
 			for(Product product : productList){
 				if(product.getSubCategory().equals("ICR  ")) {
@@ -329,14 +333,14 @@
 						</ul>
 					</dd>
 				</dl>
-				<!-- 음료메뉴 끝 -->
+				<!-- 푸드메뉴 끝 -->
 			</div>
 		</div>
 		    
 		    
     </div>
 </section>
-
+<script type="text/javascript" src="<%= request.getContextPath() %>/js/productMenu.js"></script>
 <script>
 
 </script>

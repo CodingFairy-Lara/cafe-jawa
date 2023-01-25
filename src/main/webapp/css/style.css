@@ -185,7 +185,7 @@ section #product-container {
   height: 250px;
   border-radius: 0.5rem;
   margin: 0 auto;
-  margin-bottom: 10px
+  margin-bottom: 40px
 }
 
 .product_kind_wrap {
@@ -202,6 +202,11 @@ dl.product_kind_tab dt a.selected {
   background: #3a5ed2;
   color: #fff;
 }
+dl.product_kind_tab dt a.unselected {
+  background: #f4f4f1;
+  color: #222;
+}
+
 dl.product_kind_tab dt a {
   display: block;
   width: 200px;
@@ -234,7 +239,14 @@ dl.product_kind_tab dt a {
 #menu-container {
   width: 1070px;
   margin: 0 auto;
+  padding-bottom: 90px;
 }
+
+/* checkbox */
+.inner .hide {
+  display: none;
+}
+
 
 /* product_menu */
 
