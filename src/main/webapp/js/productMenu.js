@@ -1,4 +1,4 @@
-
+// 메인 카테고리 분류(food / drink)
 $(document).on('click', "a#drinkTab", function () {
     if($(this).hasClass("selected") == true) {
         $("#product_all_drink").prop("checked", true);
@@ -177,6 +177,102 @@ $(document).ready(function(){
         }
     });
 
+    // menuView product_option_size
+    $(document).on('click', "#tall_size", function () {
+        if($(this).hasClass("selected") != true) {
+            $(this).addClass("selected");
+            $("#grande_size").removeClass("selected");
+            $("#venti_size").removeClass("selected");
+            $(".circle").hide();
+            $(this).children(".circle").show();
+        }
+    });
+    $(document).on('click', "#grande_size", function () {
+        if($(this).hasClass("selected") != true) {
+            $(this).addClass("selected");
+            $("#tall_size").removeClass("selected");
+            $("#venti_size").removeClass("selected");
+            $(".circle").hide();
+            $(this).children(".circle").show();
+        }
+    });
+    $(document).on('click', "#venti_size", function () {
+        if($(this).hasClass("selected") != true) {
+            $(this).addClass("selected");
+            $("#tall_size").removeClass("selected");
+            $("#grande_size").removeClass("selected");
+            $(".circle").hide();
+            $(this).children(".circle").show();
+        }
+    });
+
+
+    // menuView product_option_cup
+    $(document).on('click', "#n_togo_cup", function () {
+        if($(this).hasClass("selected") != true) {
+            $(this).addClass("selected");
+            $("#togo_cup").removeClass("selected");
+        }
+    });
+
+    $(document).on('click', "#togo_cup", function () {
+        if($(this).hasClass("selected") != true) {
+            $(this).addClass("selected");
+            $("#n_togo_cup").removeClass("selected");
+        }
+    });
+
 
 });
+    // menuView quantity_n_price_amount
+    Number.prototype.format = function(){
+        if(this==0) return 0;
+      
+        let reg = /(^[+-]?\d+)(\d{3})/;
+        let n = (this + '');
+      
+        while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+      
+        return n;
+      };
+       
+      
+      String.prototype.format = function(){
+        let num = parseFloat(this);
+        if( isNaN(num) ) return "0";
+      
+        return num.format();
+      };
+          
+      let basic_amount = parseInt($("#total_amount").text());
+      
+      function change_qty2(t){
+        //let min_qty = '수량버튼'*1;
+        let min_qty = 1;
+        let this_qty = $("#quantity").val()*1;
+        if(t=="m"){
+          this_qty -= 1;
+          if(this_qty<min_qty){
+            //alert("최소구매수량 이상만 구매할 수 있습니다.");
+            alert("수량은 1개 이상 입력해 주십시오.");
+            return;
+            }
+          }
+          else if(t=="p"){
+            this_qty += 1;
+          }
+      
+        let show_total_amount = basic_amount * this_qty;
+        //$("#ct_qty_txt").text(this_qty); 
+        $("#quantity").val(this_qty);
+        $("#it_pay").val(show_total_amount);
+        $("#total_amount").html(show_total_amount.format() + " 원");
+      }
 
+      function input_size(size) {
+        document.getElementById('cup_size').value = size;
+    }
+
+      function input_cup(cup) {
+        document.getElementById('cup_kind').value = cup;
+    }

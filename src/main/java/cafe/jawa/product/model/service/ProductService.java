@@ -1,13 +1,16 @@
 package cafe.jawa.product.model.service;
 
 import static cafe.jawa.common.JdbcTemplate.close;
+import static cafe.jawa.common.JdbcTemplate.commit;
 import static cafe.jawa.common.JdbcTemplate.getConnection;
+import static cafe.jawa.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
 
 import cafe.jawa.product.model.dao.ProductDao;
 import cafe.jawa.product.model.dto.Attachment;
+import cafe.jawa.product.model.dto.OrderedProduct;
 import cafe.jawa.product.model.dto.Product;
 
 public class ProductService {
@@ -35,6 +38,22 @@ public class ProductService {
 		close(conn);
 		return product;
 }
+
+    public int orderedProductEnroll(OrderedProduct orderedProduct) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = productDao.orderedProductEnroll(conn, orderedProduct);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
 
 	
 	
