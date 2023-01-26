@@ -117,14 +117,15 @@ public class ProductDao {
 	}
 
     public int orderedProductEnroll(Connection conn, OrderedProduct orderedProduct) {
-		String sql = prop.getProperty("orderedProductEnroll"); // insert into ordered_product values (seq_ordered_product_id.nextval, null, ?, ?, ?, ?)
+		String sql = prop.getProperty("orderedProductEnroll"); // insert into ordered_product values (seq_ordered_product_id.nextval, null, ?, ?, ?, ?, ?)
 		int result = 0;
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, orderedProduct.getProductId());
 			pstmt.setInt(2, orderedProduct.getQuantity());
-			pstmt.setString(4, orderedProduct.getCupSize());
-			pstmt.setString(3, orderedProduct.getCup());
+			pstmt.setString(3, orderedProduct.getCupSize());
+			pstmt.setString(4, orderedProduct.getCup());
+			pstmt.setString(5, orderedProduct.getMemberId());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -133,7 +134,16 @@ public class ProductDao {
 		return result;
 	}
 	
-	
+	private Product handleOrderedProductResultSet(ResultSet rset) throws SQLException {
+		OrderedProduct orderedProduct = new OrderedProduct();
+		orderedProduct.setOrderedProductId(rset.getInt("id"));
+		orderedProduct.setProductId(rset.getInt("product_id"));
+		orderedProduct.setQuantity(rset.getInt("quantity"));
+		orderedProduct.setCup(rset.getString("cup"));
+		orderedProduct.setCupSize(rset.getString("cup_size"));
+		orderedProduct.setMemberId(rset.getString("member_id"));
+		return orderedProduct;
+	}
 	
 	
 	

@@ -1,8 +1,14 @@
 package cafe.jawa.cart.model.dto;
 
+import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
-public class Cart {
+import cafe.jawa.product.model.dto.Activation;
+import cafe.jawa.product.model.dto.Attachment;
+import cafe.jawa.product.model.dto.OrderedProduct;
+
+public class Cart extends OrderedProduct{
 	
 	private int cartId;
 	private String memberId;
@@ -19,6 +25,24 @@ public class Cart {
 		this.memberId = memberId;
 		this.orderedProductId = orderedProductId;
 		this.quantity = quantity;
+	}
+	
+	public Cart(int orderedProductId, int orderId, int productId, int quantity, String cup, String cupSize,
+			String memberId) {
+		super(orderedProductId, orderId, productId, quantity, cup, cupSize, memberId);
+	}
+
+	public Cart(int productId, int quantity, String cup, String cupSize, String memberId) {
+		super(productId, quantity, cup, cupSize, memberId);
+	}
+
+	public Cart(int productId, int quantity, String memberId) {
+		super(productId, quantity, memberId);
+	}
+
+	public Cart(int productId, String subCategory, String productName, String description, int price,
+			Timestamp enrollDate, Activation activation, String factor) {
+		super(productId, subCategory, productName, description, price, enrollDate, activation, factor);
 	}
 
 	public int getCartId() {
@@ -61,14 +85,17 @@ public class Cart {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cartId, memberId, orderedProductId, quantity);
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(cartId, memberId, orderedProductId, quantity);
+		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -76,7 +103,6 @@ public class Cart {
 		return cartId == other.cartId && Objects.equals(memberId, other.memberId)
 				&& orderedProductId == other.orderedProductId && quantity == other.quantity;
 	}
-	
-	
+
 	
 }

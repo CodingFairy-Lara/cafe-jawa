@@ -216,7 +216,7 @@
 				<!-- 음료메뉴 끝 -->
 				
 				<!-- 푸드메뉴 시작 -->
-				<dl class="product_list_food" class="hide">
+				<dl class="product_list_food" class="hide" style="display: none;">
 					<!-- 브레드 -->
 					<dt id="menu_list_bread">
 						<a href="javascript:void(0);">브레드</a>

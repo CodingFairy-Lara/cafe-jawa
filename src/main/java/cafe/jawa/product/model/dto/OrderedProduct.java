@@ -12,6 +12,7 @@ public class OrderedProduct extends Product{
 	private int quantity;
 	private String cup;
 	private String cupSize;
+	private String memberId;
 	
 	public OrderedProduct() {
 		super();
@@ -29,7 +30,9 @@ public class OrderedProduct extends Product{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public OrderedProduct(int orderedProductId, int orderId, int productId, int quantity, String cup, String cupSize) {
+	
+	public OrderedProduct(int orderedProductId, int orderId, int productId, int quantity, String cup, String cupSize,
+			String memberId) {
 		super();
 		this.orderedProductId = orderedProductId;
 		this.orderId = orderId;
@@ -37,22 +40,26 @@ public class OrderedProduct extends Product{
 		this.quantity = quantity;
 		this.cup = cup;
 		this.cupSize = cupSize;
+		this.memberId = memberId;
 	}
+
 	
 	// dirnk
-	public OrderedProduct(int productId, int quantity, String cup, String cupSize) {
+	public OrderedProduct(int productId, int quantity, String cup, String cupSize, String memberId) {
 		super();
 		this.productId = productId;
 		this.quantity = quantity;
 		this.cup = cup;
 		this.cupSize = cupSize;
+		this.memberId = memberId;
 	}
 	
 	// food
-	public OrderedProduct(int productId, int quantity) {
+	public OrderedProduct(int productId, int quantity, String memberId) {
 		super();
 		this.productId = productId;
 		this.quantity = quantity;
+		this.memberId = memberId;
 	}
 	
 	public int getOrderedProductId() {
@@ -91,13 +98,20 @@ public class OrderedProduct extends Product{
 	public void setCupSize(String cupSize) {
 		this.cupSize = cupSize;
 	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 	
 	@Override
 	public String toString() {
 		return "OrderedProduct [orderedProductId=" + orderedProductId + ", orderId=" + orderId + ", productId="
-				+ productId + ", quantity=" + quantity + ", cup=" + cup + ", cupSize=" + cupSize + "]";
+				+ productId + ", quantity=" + quantity + ", cup=" + cup + ", cupSize=" + cupSize + ", memberId="
+				+ memberId + "]";
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

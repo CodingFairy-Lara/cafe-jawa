@@ -20,9 +20,7 @@ import cafe.jawa.member.model.dto.Member;
  * Servlet Filter implementation class LoginFilter
  */
 @WebFilter({ 
-	"/member/memberView", "/member/memberUpdate", "/member/updatePassword", 
-	"/board/boardEnroll", "/board/boardUpdate", "/board/boardDelete" ,
-	"/chat/chat"
+	"/product/orderEnroll", "/member/memberView", "/member/memberUpdate", "/member/updatePassword"
 })
 public class LoginFilter extends HttpFilter implements Filter {
 
