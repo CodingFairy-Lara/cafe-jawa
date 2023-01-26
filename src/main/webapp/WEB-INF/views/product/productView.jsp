@@ -74,50 +74,99 @@
                 <form 
                 name="cartEnrollFrm" 
                 method="POST" 
-                action="<%= request.getContextPath() %>/product/cartEnroll">
+                action="<%= request.getContextPath() %>/product/orderEnroll">
                     <fieldset>
-                        <legend class="product_option">옵션</legend>
+                        <legend class="product_option">주문 옵션</legend>
                         <div class="product_view_info">
                             <div class="product_option_size">
                                 <p class="tit">사이즈</p>
                                 <div class="product_select_wrap2">
-                                    <!-- <div class="selectTxt2" id="product_info01">Tall(톨) / 355ml (12 fl oz)</div> -->
-                                    <div class="option_size_select">
-                                        <img src="<%= request.getContextPath() %>/images/size/tall.png" alt="">
-                                    </div>
-                                    <div class="option_size_select">
-                                        <img src="<%= request.getContextPath() %>/images/size/grande.png" alt="">
-                                    </div>
-                                    <div class="option_size_select">
-                                        <img src="<%= request.getContextPath() %>/images/size/venti.png" alt="">
-                                    </div>
+                                    <ul>
+                                        <li class="option_cup_select">
+                                            <div id="tall_size" class="option_size_select selected" onclick="input_size('Tall')">
+                                                <img src="<%= request.getContextPath() %>/images/size/tall.png" alt="">
+                                                <div class="circle"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li class="option_cup_select">
+                                            <div id="grande_size" class="option_size_select" onclick="input_size('Grande')">
+                                                <img src="<%= request.getContextPath() %>/images/size/grande.png" alt="">
+                                                <div class="circle" style="display:none;"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li class="option_cup_select">
+                                            <div id="venti_size" class="option_size_select" onclick="input_size('Venti')">
+                                                <img src="<%= request.getContextPath() %>/images/size/venti.png" alt="">
+                                                <div class="circle" style="display:none;"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <input type='hidden' id='cup_size' name="cup_size" value='tall'/>
                                 </div>
                             </div>
                             <div class="product_option_cup">
                                 <p class="tit">컵종류</p>
                                  <ul>
-                                    <li class="option_cup_select">
-                                        <div class="option_cup_select">
+                                    <li class="option_cup_select1" onclick="input_cup('매장컵')">
+                                        <div id="n_togo_cup" class="option_cup_select selected">
                                             매장컵
                                         </div>
                                     </li>
-                                    
                                 </ul>
                                 <ul>
-                                    <li class="option_cup_select">
-                                        <div class="option_cup_select">
+                                    <li class="option_cup_select2" onclick="input_cup('일회용컵')">
+                                        <div id="togo_cup" class="option_cup_select unselected">
                                             일회용컵
                                         </div>
                                     </li>
                                 </ul>
+                                <input type='hidden' id='cup_kind' name="cup_kind" value='매장컵'/>
                             </div>
+        <% } else { %>
+            <form 
+            name="cartEnrollFrm" 
+            method="POST" 
+            action="<%= request.getContextPath() %>/product/orderEnroll">
+                <fieldset>
+                    <div class="product_view_info">
         <% } %>
-                            <div class="product_factor">
-                                <p>알레르기 유발요인 : <%= product.getFactor() %></p>
-                            </div>
-
+                        <div class="product_factor">
+                            <p>알레르기 유발요인 : <%= product.getFactor() %></p>
                         </div>
+                    </div>
                     </fieldset>
+                    <input type="hidden" name="productId" id="productId" value="<%= product.getProductId() %>">
+                    <input type="hidden" name="subCategory" id="subCategory" value="<%= product.getSubCategory() %>">
+                    <div class="quantity_n_price_container">
+                        <div class="quantity_container">
+                            <div id="minus-sign" class="quantity">
+                                <a href="javascript:change_qty2('m')">
+                                    <img src="<%= request.getContextPath() %>/images/quantity/minus-sign.png" alt="">
+                                </a>
+                            </div>
+                            <div class="quantity_num">
+                                <input type="text" name="quantity" id="quantity" value="1" readonly="readonly">
+                            </div>
+                            <div id="plus-sign" class="quantity">
+                                <a href="javascript:change_qty2('p')">
+                                    <img src="<%= request.getContextPath() %>/images/quantity/plus-sign.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="price_container">
+                            <h2 id="total_amount" >
+                                <%= product.getPrice() %> 원
+                            </h2>
+                        </div>
+                    </div>
+                    <div id="" class="cart_container">
+                        <button>담기</button>
+                        <button>주문하기</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -125,6 +174,7 @@
     </div>
 
 </section>
+<script type="text/javascript" src="<%= request.getContextPath() %>/js/productMenu.js"></script>
 <script type="text/javascript">
 
     $(".zoomImg").elevateZoom({
@@ -136,15 +186,7 @@
         zoomWindowOffetx: 38,
         zoomWindowOffety: -1,
     });
-    // function zoom(element, type, custors) {
-    //     element.elevateZoom({
-    //         zoomType: type,
-    //         cursor: custors,
-    //         zoomWindowFadeIn: 500,
-    //         zoomWindowFadeOut: 750
-    //     });
-    // }
-    // zoom($('#zoomImg'), "lens", "default");
+
 </script>
 
 

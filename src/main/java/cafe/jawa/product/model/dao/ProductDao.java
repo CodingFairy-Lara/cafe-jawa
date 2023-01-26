@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Properties;
 
 import cafe.jawa.product.model.dto.Attachment;
+import cafe.jawa.product.model.dto.OrderedProduct;
 import cafe.jawa.product.model.dto.Product;
 import cafe.jawa.product.model.exception.ProductException;
 
@@ -113,6 +114,23 @@ public class ProductDao {
 			throw new ProductException("상품 정보 조회 오류!", e);
 		}
 		return product;
+	}
+
+    public int orderedProductEnroll(Connection conn, OrderedProduct orderedProduct) {
+		String sql = prop.getProperty("orderedProductEnroll"); // insert into ordered_product values (seq_ordered_product_id.nextval, null, ?, ?, ?, ?)
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, orderedProduct.getProductId());
+			pstmt.setInt(2, orderedProduct.getQuantity());
+			pstmt.setString(4, orderedProduct.getCupSize());
+			pstmt.setString(3, orderedProduct.getCup());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ProductException("상품주문 추가 오류!", e);
+		}
+		return result;
 	}
 	
 	
