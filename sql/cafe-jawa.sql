@@ -340,6 +340,15 @@ REFERENCES product (
 	id
 );
 
+ALTER TABLE ordered_product ADD CONSTRAINT FK_member_TO_ordered_product_1 FOREIGN KEY (
+	member_id
+)
+REFERENCES member (
+	id
+);
+
+
+
 create sequence seq_product_id;
 create sequence seq_product_images;
 
