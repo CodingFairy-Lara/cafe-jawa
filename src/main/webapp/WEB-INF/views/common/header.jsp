@@ -21,12 +21,13 @@
 	<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet" />
   <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-1.8.3.min.js"></script>
   <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery.elevatezoom.js"></script>
+  <script type="text/javascript" src="<%= request.getContextPath() %>/js/productMenu.js"></script>
   <script>
-window.addEventListener('load', () => {
-	<% if(msg != null) { %>
-		alert("<%= msg %>"); 
-	<% } %>
-});
+  window.addEventListener('load', () => {
+    <% if(msg != null) { %>
+      alert("<%= msg %>"); 
+    <% } %>
+  });
 
 </script>
 </head>
@@ -97,7 +98,7 @@ window.addEventListener('load', () => {
                   <div class="contents__texture">
                     <div class="inner">
                       <h4>나와 어울리는 커피 찾기</h4>
-                      <p>스타벅스가 여러분에게 어울리는 커피를 찾아드립니다.</p>
+                      <p>CAFE JAWA가 여러분에게 어울리는 커피를 찾아드립니다.</p>
                       <h4>최상의 커피를 즐기는 법</h4>
                       <p>여러가지 방법을 통해 다양한 풍미의 커피를 즐겨보세요.</p>
                     </div>
@@ -114,27 +115,27 @@ window.addEventListener('load', () => {
                       <li>
                         <h4>음료</h4>
                         <ul>
-                          <li>콜드 브루</li>
-                          <li>에스프레소</li>
-                          <li>프라푸치노</li>
-                          <li>블렌디드 음료</li>
-                          <li>티</li>
+                          <li onclick="location.href='<%= request.getContextPath() %>/product/menu?sub_cate=product_cold_brew';">콜드 브루</li>
+                          <li onclick="location.href='<%= request.getContextPath() %>/product/menu?sub_cate=product_espresso';">에스프레소</li>
+                          <li onclick="location.href='<%= request.getContextPath() %>/product/menu?sub_cate=product_frappuccino';">프라푸치노</li>
+                          <li onclick="location.href='<%= request.getContextPath() %>/product/menu?sub_cate=product_blended';">블렌디드 음료</li>
+                          <li onclick="location.href='<%= request.getContextPath() %>/product/menu?sub_cate=product_tea';">티</li>
                         </ul>
                       </li>
                       <li>
                         <h4>푸드</h4>
                         <ul>
-                          <li>베이커리</li>
-                          <li>케익</li>
-                          <li>샌드위치 &amp; 샐러드</li>
-                          <li>아이스크림</li>
+                          <li onclick="location.href='<%= request.getContextPath() %>/product/menu?sub_cate=product_bakery';">베이커리</li>
+                          <li onclick="location.href='<%= request.getContextPath() %>/product/menu?sub_cate=product_cake';">케이크</li>
+                          <li onclick="location.href='<%= request.getContextPath() %>/product/menu?sub_cate=product_sandwich';">샌드위치 &amp; 샐러드</li>
+                          <li onclick="location.href='<%= request.getContextPath() %>/product/menu?sub_cate=product_icecream';">아이스크림</li>
                         </ul>
                       </li>
                     </ul>
                   </div>
                   <div class="contents__texture">
                     <div class="inner">
-                      <h4 class="new">스타벅스 티바나</h4>
+                      <h4 class="new">CAFE JAWA 티바나</h4>
                       <p>다양한 찻잎과 향신료 등 개성있는 재료로 새로운 맛과 향의 티를 선보입니다.</p>
                     </div>
                   </div>
@@ -167,7 +168,7 @@ window.addEventListener('load', () => {
                       <h4>매장 찾기</h4>
                       <p>보다 빠르게 매장을 찾아보세요.</p>
                       <h4 class="new">청담스타</h4>
-                      <p>스타벅스 1,000호점인 청담스타점을 만나보세요.</p>
+                      <p>CAFE JAWA 1,000호점인 청담스타점을 만나보세요.</p>
                     </div>
                   </div>
                 </div>
@@ -195,7 +196,7 @@ window.addEventListener('load', () => {
                   <div class="contents__texture">
                     <div class="inner">
                       <h4>커피원두 재활용</h4>
-                      <p>스타벅스 커피 원두를 재활용 해보세요.</p>
+                      <p>CAFE JAWA 커피 원두를 재활용 해보세요.</p>
                     </div>
                   </div>
                 </div>

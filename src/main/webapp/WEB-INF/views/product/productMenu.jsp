@@ -8,7 +8,17 @@
 <%
 	List<Product> productList = (List<Product>) request.getAttribute("productList");
 	List<Attachment> attachmentList = (List<Attachment>) request.getAttribute("attachmentList");
+	String sub_cate = (String) request.getAttribute("sub_cate");
 %>
+<!-- sub_category 메뉴 클릭해서 들어왔을때 발생 -->
+<% if(sub_cate != null) { %>
+	<script>
+		$(document).ready(function(){
+			go_to_sub_cate("<%= sub_cate %>"); 
+		});
+	</script>
+<% } %>
+
 <section id=product-container>
     <div class="inner">
 		<h1>메뉴</h1>
@@ -62,7 +72,6 @@
 					</dd>
 				</dl>
 			</div>
-		
 		</div>
 		<div id="menu-container">
 			<div class="product_list">
@@ -340,7 +349,6 @@
 		    
     </div>
 </section>
-<script type="text/javascript" src="<%= request.getContextPath() %>/js/productMenu.js"></script>
 <script>
 
 </script>
