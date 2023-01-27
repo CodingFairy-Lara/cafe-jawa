@@ -153,7 +153,7 @@
                                 </a>
                             </div>
                             <div class="quantity_num">
-                                <input type="text" name="quantity" id="quantity" value="1" readonly="readonly">
+                                <input type="text" name="quantity" id="quantity_pv" value="1" readonly="readonly">
                             </div>
                             <div id="plus-sign" class="quantity">
                                 <a href="javascript:change_qty2('p')">
@@ -162,15 +162,16 @@
                             </div>
                         </div>
                         <div class="price_container">
-                            <h2 id="total_amount" >
+                            <input type="hidden" name="pv_price" id="pv_price" class="pv_price" value="<%= product.getPrice() %>">
+                            <h2 id="total_amount_pv" >
                                 <%= product.getPrice() %> 원
                             </h2>
                         </div>
                     </div>
                     <div id="" class="cart_container">
                         <!-- <button onclick="javascript:add_cart('<%= product.getProductId() %>');"">담기</button> -->
-                        <button onclick='return cartEnrollSubmit(this.form);'>담기</button>
-                        <button>주문하기</button>
+                        <button onclick='return cartEnrollSubmit(this.form);'>장바구니 담기</button>
+                        <button class="order_btn">주문하기</button>
                     </div>
                 </form>
             </div>
@@ -193,7 +194,6 @@
 </section>
 
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/productMenu.js"></script>
-<script type="text/javascript" src="<%= request.getContextPath() %>/js/productOrder.js"></script>
 <script type="text/javascript">
 
     $(".zoomImg").elevateZoom({

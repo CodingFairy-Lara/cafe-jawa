@@ -29,6 +29,8 @@ public class ProductMenuServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 사용자입력값 처리
+		String sub_cate = request.getParameter("sub_cate");
+		System.out.println("sub_cate = " + sub_cate);
 		
 		// 2. 업무로직
 		// db에서 상품 목록 조회
@@ -42,6 +44,7 @@ public class ProductMenuServlet extends HttpServlet {
 		// 3. view단 위임.
 		request.setAttribute("productList", productList);
 		request.setAttribute("attachmentList", attachmentList);
+		request.setAttribute("sub_cate", sub_cate);
 		request.getRequestDispatcher("/WEB-INF/views/product/productMenu.jsp").forward(request, response);
 		
 	}
