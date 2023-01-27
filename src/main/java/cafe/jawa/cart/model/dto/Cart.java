@@ -39,6 +39,10 @@ public class Cart extends OrderedProduct{
 	public Cart(int productId, int quantity, String memberId) {
 		super(productId, quantity, memberId);
 	}
+	
+	public Cart(String memberId, int orderedProductId, int quantity) {
+		super(memberId, orderedProductId, quantity);
+	}
 
 	public Cart(int productId, String subCategory, String productName, String description, int price,
 			Timestamp enrollDate, Activation activation, String factor) {

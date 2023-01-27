@@ -1,5 +1,6 @@
 <%@page import="cafe.jawa.product.model.dto.Product"%>
 <%@page import="cafe.jawa.product.model.dto.Attachment"%>
+<%@page import="cafe.jawa.product.model.dto.OrderedProduct"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -7,6 +8,9 @@
 <%
 	Product product = (Product) request.getAttribute("product");
 	List<Attachment> attachmentList = (List<Attachment>) request.getAttribute("attachmentList");
+    if(request.getAttribute("orderedProduct") != null) {
+        OrderedProduct orderedProduct = (OrderedProduct) request.getAttribute("orderedProduct");
+    }
 %>
 
 <section id=product-view-container>
@@ -67,7 +71,7 @@
                     <h4><%= product.getProductName() %><br><span><%=attachment.getRenamedFilename()%></span></h4>
                     <p class="t1"><%= product.getDescription() %></p>
                     <div class="myDrink">
-                        <a href="javascript:void(0)" role="button" title="장바구니 열기">장바구니 열기</a>
+                        <a href="<%=request.getContextPath() %>/cart/cartView" role="button" title="장바구니 열기">장바구니 열기</a>
                     </div>
                 </div>
         <% if (product.getSubCategory().equals("CBR  ") || product.getSubCategory().equals("ESP  ") || product.getSubCategory().equals("FRP  ") || product.getSubCategory().equals("BLD  ") || product.getSubCategory().equals("TEA  ")) { %>
@@ -145,7 +149,7 @@
                         <div class="quantity_container">
                             <div id="minus-sign" class="quantity">
                                 <a href="javascript:change_qty2('m')">
-                                    <img src="<%= request.getContextPath() %>/images/quantity/minus-sign.png" alt="">
+                                    <img src="<%= request.getContextPath() %>/images/quantity/minus-sign.png" alt="" class="quantity_updown">
                                 </a>
                             </div>
                             <div class="quantity_num">
@@ -153,7 +157,7 @@
                             </div>
                             <div id="plus-sign" class="quantity">
                                 <a href="javascript:change_qty2('p')">
-                                    <img src="<%= request.getContextPath() %>/images/quantity/plus-sign.png" alt="">
+                                    <img src="<%= request.getContextPath() %>/images/quantity/plus-sign.png" alt="" class="quantity_updown">
                                 </a>
                             </div>
                         </div>
@@ -164,7 +168,8 @@
                         </div>
                     </div>
                     <div id="" class="cart_container">
-                        <button>담기</button>
+                        <!-- <button onclick="javascript:add_cart('<%= product.getProductId() %>');"">담기</button> -->
+                        <button onclick='return cartEnrollSubmit(this.form);'>담기</button>
                         <button>주문하기</button>
                     </div>
                 </form>
@@ -172,9 +177,23 @@
         </div>
         <% 	}}	%>
     </div>
-
+    <!-- <div id="layer" style="visibility: hidden">
+		visibility:hidden 으로 설정하여 해당 div안의 모든것들을 가려둔다.
+		<div id="popup">
+			팝업창 닫기 버튼
+			<a href="javascript:" onClick="javascript:imagePopup('close', '.layer01');">
+                <img src="${contextPath}/resources/image/close.png" id="close" />
+			</a> <br />
+            <font size="12" id="contents">장바구니에 담았습니다.</font><br>
+            <form   action='${contextPath}/cart/myCartList.do'  >				
+                    <input  type="submit" value="장바구니 보기">
+            </form>		
+        </div>
+    </div> -->
 </section>
+
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/productMenu.js"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/js/productOrder.js"></script>
 <script type="text/javascript">
 
     $(".zoomImg").elevateZoom({
