@@ -134,7 +134,7 @@ public class ProductDao {
 		return result;
 	}
 	
-	private Product handleOrderedProductResultSet(ResultSet rset) throws SQLException {
+	private OrderedProduct handleOrderedProductResultSet(ResultSet rset) throws SQLException {
 		OrderedProduct orderedProduct = new OrderedProduct();
 		orderedProduct.setOrderedProductId(rset.getInt("id"));
 		orderedProduct.setProductId(rset.getInt("product_id"));
@@ -143,6 +143,41 @@ public class ProductDao {
 		orderedProduct.setCupSize(rset.getString("cup_size"));
 		orderedProduct.setMemberId(rset.getString("member_id"));
 		return orderedProduct;
+	}
+
+	public OrderedProduct selectOrderedProduct(Connection conn, int productId, int quantity, String memberId) {
+		String sql = prop.getProperty("selectOrderedProduct"); // select * from ordered_product where order_id is null and product_id = ? and quantity = ? and member_id = ?
+		OrderedProduct orderedProduct = new OrderedProduct();
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setInt(1, productId);
+			pstmt.setInt(2, quantity);
+			pstmt.setString(3, memberId);
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					orderedProduct = handleOrderedProductResultSet(rset);
+				}
+			}
+		} catch (Exception e) {
+			throw new ProductException("상품 정보 조회 오류!", e);
+		}
+		return orderedProduct;
+	}
+
+	public List<OrderedProduct> selectOrderedProductList(Connection conn) {
+		String sql = prop.getProperty("selectOrderedProductList");
+		List<OrderedProduct> orderedProductList = new ArrayList<>();
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					OrderedProduct orderedProduct = handleOrderedProductResultSet(rset);
+					orderedProductList.add(orderedProduct);					
+				}
+			}
+		} catch (SQLException e) {
+			throw new ProductException("주문상품 리스트 조회 오류!", e);
+		}
+		return orderedProductList;
 	}
 	
 	

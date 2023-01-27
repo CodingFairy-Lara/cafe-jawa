@@ -33,11 +33,11 @@ public class ProductMenuServlet extends HttpServlet {
 		// 2. 업무로직
 		// db에서 상품 목록 조회
 		List<Product> productList = productService.selectProductList();
-		System.out.println(productList);
+		// System.out.println(productList);
 		
 		// 상품 이미지 AttachmentList 가져오기
 		List<Attachment> attachmentList = productService.selectAttachmentList();
-		System.out.println(attachmentList);
+		// System.out.println(attachmentList);
 		
 		// 3. view단 위임.
 		request.setAttribute("productList", productList);

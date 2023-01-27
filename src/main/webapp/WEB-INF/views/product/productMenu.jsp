@@ -78,7 +78,7 @@
 			for(Product product : productList){
 				if(product.getSubCategory().equals("CBR  ")) {
 		%>
-							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
+							<li class="menuDataSet">
 								<dl>
 									<dt>
 										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
@@ -107,7 +107,7 @@
 			for(Product product : productList){
 				if(product.getSubCategory().equals("ESP  ")) {
 		%>
-							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
+							<li class="menuDataSet">
 								<dl>
 									<dt>
 										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
@@ -136,7 +136,7 @@
 			for(Product product : productList){
 				if(product.getSubCategory().equals("FRP  ")) {
 		%>
-							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
+							<li class="menuDataSet">
 								<dl>
 									<dt>
 										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
@@ -165,7 +165,7 @@
 			for(Product product : productList){
 				if(product.getSubCategory().equals("BLD  ")) {
 		%>
-							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
+							<li class="menuDataSet">
 								<dl>
 									<dt>
 										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
@@ -194,7 +194,7 @@
 			for(Product product : productList){
 				if(product.getSubCategory().equals("TEA  ")) {
 		%>
-							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
+							<li class="menuDataSet">
 								<dl>
 									<dt>
 										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
@@ -227,7 +227,7 @@
 			for(Product product : productList){
 				if(product.getSubCategory().equals("BRD  ")) {
 		%>
-							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
+							<li class="menuDataSet">
 								<dl>
 									<dt>
 										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
@@ -256,7 +256,7 @@
 			for(Product product : productList){
 				if(product.getSubCategory().equals("CKE  ")) {
 		%>
-							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
+							<li class="menuDataSet">
 								<dl>
 									<dt>
 										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
@@ -285,7 +285,7 @@
 			for(Product product : productList){
 				if(product.getSubCategory().equals("SND  ")) {
 		%>
-							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
+							<li class="menuDataSet">
 								<dl>
 									<dt>
 										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
@@ -314,7 +314,7 @@
 			for(Product product : productList){
 				if(product.getSubCategory().equals("ICR  ")) {
 		%>
-							<li class="menuDataSet" new="N" sell="" recomm="0" sold="N">
+							<li class="menuDataSet">
 								<dl>
 									<dt>
 										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">

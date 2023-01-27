@@ -387,8 +387,15 @@ select * from product_images;
 
 create sequence seq_ordered_product_id;
 create sequence seq_order_id;
+create sequence seq_cart_id;
 
 insert into ordered_product values (seq_ordered_product_id.nextval, null, 202, 2, 'venti', '일회용컵');
 --insert into ordered_product values (seq_ordered_product_id.nextval, null, ?, ?, ?, ?)
 
 select * from ordered_product;
+
+select * from ordered_product where order_id is null and product_id = 403 and quantity = 3 and member_id = 'abcd12345';
+insert into cart values (seq_cart_id.nextval, 'abcd12345', 10, 3);
+select * from cart where member_id = 'abcd12345';
+
+select * from cart;

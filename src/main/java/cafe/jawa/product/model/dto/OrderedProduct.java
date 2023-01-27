@@ -16,18 +16,15 @@ public class OrderedProduct extends Product{
 	
 	public OrderedProduct() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public OrderedProduct(int attachCnt, List<Attachment> attachments) {
 		super(attachCnt, attachments);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public OrderedProduct(int productId, String subCategory, String productName, String description, int price,
 			Timestamp enrollDate, Activation activation, String factor) {
 		super(productId, subCategory, productName, description, price, enrollDate, activation, factor);
-		// TODO Auto-generated constructor stub
 	}
 	
 	
@@ -43,6 +40,11 @@ public class OrderedProduct extends Product{
 		this.memberId = memberId;
 	}
 
+	public OrderedProduct(String memberId, int orderedProductId, int quantity) {
+		super();
+		this.memberId = memberId;
+		this.quantity = quantity;
+	}
 	
 	// dirnk
 	public OrderedProduct(int productId, int quantity, String cup, String cupSize, String memberId) {

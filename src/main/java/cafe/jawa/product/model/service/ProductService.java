@@ -54,7 +54,19 @@ public class ProductService {
 		return result;
 	}
 
+	public OrderedProduct selectOrderedProduct(int productId, int quantity, String memberId) {
+		Connection conn = getConnection();
+		OrderedProduct orderedProduct = productDao.selectOrderedProduct(conn, productId, quantity, memberId);
+		close(conn);
+		return orderedProduct;
+	}
 
-	
+	public List<OrderedProduct> selectOrderedProductList() {
+		Connection conn = getConnection();
+		List<OrderedProduct> orderedProductList = productDao.selectOrderedProductList(conn);
+		
+		close(conn);
+		return orderedProductList;
+	}
 	
 }

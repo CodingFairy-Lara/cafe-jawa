@@ -237,16 +237,17 @@ $(document).ready(function(){
       };
        
       
-      String.prototype.format = function(){
-        let num = parseFloat(this);
-        if( isNaN(num) ) return "0";
-      
-        return num.format();
-      };
+    String.prototype.format = function(){
+    let num = parseFloat(this);
+    if( isNaN(num) ) return "0";
+    
+    return num.format();
+    };
           
-      let basic_amount = parseInt($("#total_amount").text());
-      
-      function change_qty2(t){
+
+    let basic_amount = parseInt($("#total_amount").text());
+    
+    function change_qty2(t){
         //let min_qty = '수량버튼'*1;
         let min_qty = 1;
         let this_qty = $("#quantity").val()*1;
@@ -267,7 +268,7 @@ $(document).ready(function(){
         $("#quantity").val(this_qty);
         $("#it_pay").val(show_total_amount);
         $("#total_amount").html(show_total_amount.format() + " 원");
-      }
+    }
 
       function input_size(size) {
         document.getElementById('cup_size').value = size;
