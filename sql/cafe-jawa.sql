@@ -391,11 +391,13 @@ create sequence seq_cart_id;
 
 insert into ordered_product values (seq_ordered_product_id.nextval, null, 202, 2, 'venti', '일회용컵');
 --insert into ordered_product values (seq_ordered_product_id.nextval, null, ?, ?, ?, ?)
+--select * from ordered_product where order_id is null and product_id = 403 and quantity = 3 and member_id = 'abcd12345';
+--insert into cart values (seq_cart_id.nextval, 'abcd12345', 10, 3);
+--select * from cart where member_id = 'abcd12345';
+--delete from cart where cart_id = 23;
+--delete from ordered_product where id = 43;
+--delete from cart where member_id = 'abcd12345';
+--UPDATE cart SET quantity = 3 WHERE cart_id = 22;
 
 select * from ordered_product;
-
-select * from ordered_product where order_id is null and product_id = 403 and quantity = 3 and member_id = 'abcd12345';
-insert into cart values (seq_cart_id.nextval, 'abcd12345', 10, 3);
-select * from cart where member_id = 'abcd12345';
-
 select * from cart;

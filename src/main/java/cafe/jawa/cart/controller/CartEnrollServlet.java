@@ -35,11 +35,12 @@ public class CartEnrollServlet extends HttpServlet {
 		try {
 			Member loginMember = (Member) session.getAttribute("loginMember");
 			String memberId = loginMember.getMemberId();
+			
 			productId = Integer.parseInt(request.getParameter("productId"));
 			int quantity = Integer.parseInt(request.getParameter("quantity"));
 			String subCategory = request.getParameter("subCategory");
 
-			if (subCategory.equals("CBR  ") || subCategory.equals("ESP  ") || subCategory.equals("FRA  ") || subCategory.equals("BLD  ") || subCategory.equals("TEA  ")) {
+			if (subCategory.equals("CBR  ") || subCategory.equals("ESP  ") || subCategory.equals("FRP  ") || subCategory.equals("BLD  ") || subCategory.equals("TEA  ")) {
 				String size = request.getParameter("cup_size");
 				String cup = request.getParameter("cup_kind");
 				orderedProduct = new OrderedProduct(productId, quantity, size, cup, memberId);			

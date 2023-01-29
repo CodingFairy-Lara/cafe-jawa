@@ -71,6 +71,93 @@ public class CartDao {
 		return cart;
 	}
 
+	public int deleteOneCart(Connection conn, int cartId) {
+		String sql = prop.getProperty("deleteOneCart"); // delete from cart where cart_id = ?
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, cartId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ProductException("장바구니 삭제 오류!", e);
+		}
+		return result;
+	}
+
+	public int deleteOneOp(Connection conn, int opId) {
+		String sql = prop.getProperty("deleteOneOp"); // delete from ordered_product where id = ?
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, opId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ProductException("주문상품 삭제 오류!", e);
+		}
+		return result;
+	}
+
+	public int deleteAllCart(Connection conn, String memberId) {
+		String sql = prop.getProperty("deleteAllCart"); // delete from cart where member_id = ?
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ProductException("장바구니 전체 삭제 오류!", e);
+		}
+		return result;
+	}
+
+	public int deleteAllOp(Connection conn, String memberId) {
+		String sql = prop.getProperty("deleteAllOP"); // delete from ordered_product where member_id = ?
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ProductException("주문상품 전체 삭제 오류!", e);
+		}
+		return result;
+	}
+
+	public int modifyCartQty(Connection conn, int cartId, int quantity) {
+		String sql = prop.getProperty("modifyCartQty"); // UPDATE cart SET quantity = ? WHERE cart_id = ?
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, quantity);
+			pstmt.setInt(2, cartId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ProductException("장바구니 수량 변경 오류!", e);
+		}
+		return result;
+	}
+
+
+	public int modifyOpQty(Connection conn, int opId, int quantity) {
+		String sql = prop.getProperty("modifyOpQty"); // UPDATE ordered_product SET quantity = ? WHERE id = ?
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, quantity);
+			pstmt.setInt(2, opId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ProductException("주문상품 수량 변경 오류!", e);
+		}
+		return result;
+	}
+
 
 	
 	

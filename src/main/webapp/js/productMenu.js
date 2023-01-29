@@ -244,7 +244,7 @@ $(document).on('click', "a#foodTab", function () {
             $("#togo_cup").removeClass("selected");
         }
     });
-
+    
     $(document).on('click', "#togo_cup", function () {
         if($(this).hasClass("selected") != true) {
             $(this).addClass("selected");
@@ -252,6 +252,13 @@ $(document).on('click', "a#foodTab", function () {
         }
     });
 
+    // 페이지 price값이 load 됐을때 value를 Number로 형변환하여 3자리 , 찍고 '원' 붙여서 html출력
+    // function cart_price_init(div) {
+    //     let price_val = Number(div.attr("value"));
+    //     console.log('price_val :>> ', price_val);
+    //     $(div).html(price_val + " 원");
+    //     // $(div).removeAttr("init");
+    // }
 
     // menuView quantity_n_price_amount
     Number.prototype.format = function(){

@@ -3,8 +3,7 @@
 		</section>
 
 		<footer>
-			<hr>
-			<p>&lt;Copyright 2023 <strong>제제야 사이렌 자바조</strong>. All rights reserved.&gt;</p>
+			<p id="footer">&lt;Copyright 2023 제제야 사이렌 자바조. All rights reserved.&gt;</p>
 		</footer>
 	</div>
 </body>
