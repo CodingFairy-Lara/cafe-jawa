@@ -161,10 +161,10 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="price_container">
+                        <div class="price_container"  name="price_init" init="false" value="<%= product.getPrice() %>">
                             <input type="hidden" name="pv_price" id="pv_price" class="pv_price" value="<%= product.getPrice() %>">
-                            <h2 id="total_amount_pv" >
-                                <%= product.getPrice() %> 원
+                            <h2 id="total_amount_pv">
+                                 원
                             </h2>
                         </div>
                     </div>
@@ -195,6 +195,19 @@
 
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/productMenu.js"></script>
 <script type="text/javascript">
+
+  window.addEventListener('load', () => {
+      if ($("div[name=price_init]").attr("init") == "false") {
+          cart_price_init($("div[name=price_init]"));
+      }
+
+        function cart_price_init(div) {
+        let price_val = Number(div.attr("value"));
+        console.log('price_val :>> ', price_val);
+        $("#total_amount_pv").html(price_val.format() + " 원");
+        $(div).removeAttr("init");
+    }
+  });
 
     $(".zoomImg").elevateZoom({
         zoomType: "inner",

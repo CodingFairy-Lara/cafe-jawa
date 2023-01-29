@@ -38,4 +38,94 @@ public class CartService {
 		return cartList;
 	}
 
+	public int deleteOneCart(int cartId) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = cartDao.deleteOneCart(conn, cartId);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int deleteOneOp(int opId) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = cartDao.deleteOneOp(conn, opId);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int deleteAllCart(String memberId) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = cartDao.deleteAllCart(conn, memberId);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int deleteAllOp(String memberId) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = cartDao.deleteAllOp(conn, memberId);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int modifyCartQty(int cartId, int quantity) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = cartDao.modifyCartQty(conn, cartId, quantity);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int modifyOpQty(int opId, int quantity) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = cartDao.modifyOpQty(conn, opId, quantity);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
 }
