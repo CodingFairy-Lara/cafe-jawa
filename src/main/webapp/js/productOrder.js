@@ -20,6 +20,8 @@ function change_qty_cart(t, id){
     $("#total_amount_"+id).html(show_total_amount.format() + " 원");
 
     $("#checkbox_cartList_"+id).attr("value", show_total_amount);
+    $("#get_totalPrice_"+id).attr("value", show_total_amount);
+    $("#get_quantity_"+id).attr("value", this_qty);
     calcTotalPrice();
 };
 
@@ -105,6 +107,22 @@ function cart_deleteSelected(cart_id, op_id){
 }
 
 
+function order_findSelected() {
+    let cartList = $("input[name=checked_cart_product]").length;
+    let cart_id = 0;
+    let op_id = 0;
+    
+    for (let i = 0; i < cartList; i++) {
+        if ($("input[name=checked_cart_product]")[i].checked == true) {
+            cart_id = parseInt($("input[name=get_cart_id]")[i].value);
+            op_id = parseInt($("input[name=get_op_id]")[i].value);
+            console.log(cart_id, op_id);
+            order_selectedList(cart_id, op_id);
+        }
+    }
+}
+
+
 function modify_cart_qty(cartId,opId,quantity){
     let cart_id = Number(cartId);
 	let op_id = Number(opId);
@@ -163,10 +181,28 @@ function calcTotalPrice(){
     }
     for (let i = 0; i < cartList; i++) {
         if ($("input[name=checked_cart_product]")[i].checked == true) {
-            final_total_price += parseInt($("input[name=checked_cart_product]")[i].value);
+            final_total_price += parseInt($(".individual_tot_price_input")[i].value);
         }
     }
     $("#sum_total_num").html("선택 상품 수량 : " + final_quantity_price.format() + " 개");
     $("#sum_total_price").html("합계 금액 : " + final_total_price.format() + " 원");
+}
 
+function calcTotalPrice_order(){
+    let cartList = $("input[name=checked_cart_product]").length;
+    let final_quantity_price = 0;
+    let final_total_price = 0;
+ 
+    for (let i = 0; i < cartList; i++) {
+        if ($("input[name=checked_cart_product]")[i].checked == true) {
+            final_quantity_price += parseInt($("input[name=quantity]")[i].value);
+        }
+    }
+    for (let i = 0; i < cartList; i++) {
+        if ($("input[name=checked_cart_product]")[i].checked == true) {
+            final_total_price += parseInt($(".individual_tot_price_input")[i].value);
+        }
+    }
+    $("#sum_total_num").html("선택 상품 수량 : " + final_quantity_price.format() + " 개");
+    $("#sum_total_price").html("합계 금액 : " + final_total_price.format() + " 원");
 }
