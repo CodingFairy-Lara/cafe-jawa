@@ -109,7 +109,7 @@
                                             </div>
                                         </li>
                                     </ul>
-                                    <input type='hidden' id='cup_size' name="cup_size" value='tall'/>
+                                    <input type='hidden' id='cup_size' name="cup_size" value='Tall'/>
                                 </div>
                             </div>
                             <div class="product_option_cup">

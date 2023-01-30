@@ -134,7 +134,7 @@ public class ProductDao {
 		return result;
 	}
 	
-	private OrderedProduct handleOrderedProductResultSet(ResultSet rset) throws SQLException {
+	public OrderedProduct handleOrderedProductResultSet(ResultSet rset) throws SQLException {
 		OrderedProduct orderedProduct = new OrderedProduct();
 		orderedProduct.setOrderedProductId(rset.getInt("id"));
 		orderedProduct.setProductId(rset.getInt("product_id"));

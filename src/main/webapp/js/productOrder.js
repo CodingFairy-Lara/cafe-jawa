@@ -18,6 +18,9 @@ function change_qty_cart(t, id){
     let show_total_amount = basic_amount * this_qty;
     $("#quantity_"+id).val(this_qty);
     $("#total_amount_"+id).html(show_total_amount.format() + " 원");
+
+    $("#checkbox_cartList_"+id).attr("value", show_total_amount);
+    calcTotalPrice();
 };
 
     function input_size(size) {
@@ -63,6 +66,45 @@ function cart_deleteAll(memberId){
     formObj.submit();
 }
 
+function cart_findSelected() {
+    let cartList = $("input[name=checked_cart_product]").length;
+    let cart_id = 0;
+    let op_id = 0;
+    
+    for (let i = 0; i < cartList; i++) {
+        if ($("input[name=checked_cart_product]")[i].checked == true) {
+            cart_id = parseInt($("input[name=get_cart_id]")[i].value);
+            op_id = parseInt($("input[name=get_op_id]")[i].value);
+            console.log(cart_id, op_id);
+            cart_deleteSelected(cart_id, op_id);
+        }
+    }
+}
+
+function cart_deleteSelected(cart_id, op_id){
+    let cartId = Number(cart_id);
+	let opId = Number(op_id);
+
+    $.ajax({
+        type : "post",
+        async : false, //false인 경우 동기식으로 처리한다.
+        url : "../cart/deleteSelected"
+        + "?cart_id=" + encodeURIComponent(cartId) + "&op_id=" + encodeURIComponent(opId),
+        
+        success : function(data) {
+            if(data.trim()!='1'){
+                alert("장바구니 선택삭제 실패! 다시 시도해 주세요.");	
+            }
+        },
+        error : function(data) {
+            alert("에러가 발생했습니다.["+data+"]");
+        },
+        done : function(data) {
+        }
+    }); //end ajax	
+}
+
+
 function modify_cart_qty(cartId,opId,quantity){
     let cart_id = Number(cartId);
 	let op_id = Number(opId);
@@ -82,6 +124,8 @@ function modify_cart_qty(cartId,opId,quantity){
 		error : function(data) {
 			alert("에러가 발생했습니다.["+data+"]");
 		},
+        done : function(data) {
+        }
 	}); //end ajax	
 }
 
@@ -95,6 +139,7 @@ $(document).on("change", "#cartList_selectAll", function(){
         $("input[name=checked_cart_product]").prop("checked", false);
         $("input[name=checked_cart_product]").change();
     }
+    calcTotalPrice();
 });
 
 $(document).on("change", "input[name=checked_cart_product]", function(){
@@ -105,3 +150,23 @@ $(document).on("change", "input[name=checked_cart_product]", function(){
     else $("#cartList_selectAll").prop("checked", true); 
 });
 
+function calcTotalPrice(){
+    let cartList = $("input[name=checked_cart_product]").length;
+    let checked_cart_product = $("input[name=checked_cart_product]:checked").length;
+    let final_quantity_price = 0;
+    let final_total_price = 0;
+ 
+    for (let i = 0; i < cartList; i++) {
+        if ($("input[name=checked_cart_product]")[i].checked == true) {
+            final_quantity_price += parseInt($("input[name=quantity]")[i].value);
+        }
+    }
+    for (let i = 0; i < cartList; i++) {
+        if ($("input[name=checked_cart_product]")[i].checked == true) {
+            final_total_price += parseInt($("input[name=checked_cart_product]")[i].value);
+        }
+    }
+    $("#sum_total_num").html("선택 상품 수량 : " + final_quantity_price.format() + " 개");
+    $("#sum_total_price").html("합계 금액 : " + final_total_price.format() + " 원");
+
+}

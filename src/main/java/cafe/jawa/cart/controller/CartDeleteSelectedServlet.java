@@ -8,15 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import cafe.jawa.cart.model.dto.Cart;
 import cafe.jawa.cart.model.service.CartService;
 import cafe.jawa.product.model.service.ProductService;
 
 /**
- * Servlet implementation class CartEditQuantityServlet
+ * Servlet implementation class CartDeleteSelectedServlet
  */
-@WebServlet("/cart/modifyQty")
-public class CartModifyQtyServlet extends HttpServlet {
+@WebServlet("/cart/deleteSelected")
+public class CartDeleteSelectedServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductService productService = new ProductService();
 	private CartService cartservice = new CartService();
@@ -26,20 +25,18 @@ public class CartModifyQtyServlet extends HttpServlet {
 		
 		int cartId = Integer.parseInt(request.getParameter("cart_id"));
 		int opId = Integer.parseInt(request.getParameter("op_id"));
-		int quantity = Integer.parseInt(request.getParameter("quantity"));
 		System.out.println("cart_id = " + cartId);
 		System.out.println("op_id = " + opId);
-		System.out.println("quantity = " + quantity);
 		
-		response.getWriter().write(modifyCartQty(cartId, opId, quantity)+"");
+		response.getWriter().write(deleteSelected(cartId, opId)+"");
 	}
 	
-	public int modifyCartQty(int cartId, int opId, int quantity) {
+	public int deleteSelected(int cartId, int opId) {
 		int result2 = 0;
 		try {
-			int result = cartservice.modifyCartQty(cartId, quantity);
+			int result = cartservice.deleteCartSelected(cartId);
 			if(result > 0) {
-				result2 = cartservice.modifyOpQty(opId, quantity);
+				result2 = cartservice.deleteOpSelected(opId);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();

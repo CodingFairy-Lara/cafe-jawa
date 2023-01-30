@@ -33,10 +33,10 @@
             <h2>주문 메뉴</h2>
             <div class="cart_list_header_container">
                 <ul class="cart_checkbox">
-                    <li><input type="checkbox" name="cartList_selectAll" id="cartList_selectAll" checked ><label for="cartList_selectAll">전체 선택</label></li>
+                    <li><input type="checkbox" name="cartList_selectAll" id="cartList_selectAll" checked onClick="javascript:calcTotalPrice();" ><label for="cartList_selectAll">전체 선택</label></li>
                 </ul>
                 <div class="cart_select_container">
-                    <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택 상품 삭제</a>
+                    <a href="javascript:void(0)" class="abutton" onclick="javascript:cart_findSelected(); location.reload();">선택 상품 삭제</a>
                     <a href="javascript:void(0)" class="abutton" onclick="javascript:cart_deleteAll('<%= loginMember.getMemberId() %>');">장바구니 비우기</a>
                 </div>
             </div>
@@ -62,11 +62,13 @@
                     <!-- drink 메뉴 -->
                     <div class="row data">
                         <div class="subdiv">
-                            <div class="check"><input type="checkbox" name="checked_cart_product" checked  value="<%= cart.getCartId() %>"  onClick="">&nbsp;</div>
             <% for(Attachment attachment : attachmentList) {
                 if(attachment.getProductId() == orderedProduct.getProductId()) { %>
                     <% for(Product product : productList) {
                         if(product.getProductId() == orderedProduct.getProductId()) { %>
+                            <input type="hidden" name="get_cart_id" value="<%= cart.getCartId() %>">
+                            <input type="hidden" name="get_op_id" value="<%= orderedProduct.getOrderedProductId() %>">
+                            <div class="check"><input type="checkbox" id="checkbox_cartList_<%= cart.getCartId() %>" name="checked_cart_product" checked value="<%= product.getPrice() * cart.getQuantity() %>" onClick="javascript:calcTotalPrice();" cart_id="<%= cart.getCartId() %>" op_id="<%= orderedProduct.getOrderedProductId() %>">&nbsp;</div>
                             <div class="img">
                                 <img src="<%= request.getContextPath() %>/images/drink/<%= attachment.getOriginalFilename() %>" width="100" onClick="location.href='<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>'">
                             </div>
@@ -86,11 +88,11 @@
                             <div class="basketprice" id="amount_init_<%= cart.getCartId() %>" name="price_init" init="false" value="<%= product.getPrice() %>" cartId="<%= cart.getCartId() %>"><input type="hidden" name="p_price_<%= cart.getCartId() %>" id="p_price_<%= cart.getCartId() %>" class="p_price" value="<%= product.getPrice() %>"><%= product.getPrice() %></div>
                             <div class="num">
                                 <div class="updown">
-                                    <span onclick="javascript:change_qty_cart('m', '<%= cart.getCartId() %>'); modify_cart_qty('<%= cart.getCartId() %>', '<%= orderedProduct.getOrderedProductId() %>', $('#quantity_'+'<%= cart.getCartId() %>').val());"">
+                                    <span onclick="javascript:change_qty_cart('m', '<%= cart.getCartId() %>'); modify_cart_qty('<%= cart.getCartId() %>', '<%= orderedProduct.getOrderedProductId() %>', $('#quantity_'+'<%= cart.getCartId() %>').val()); calcTotalPrice();">
                                         <img src="<%= request.getContextPath() %>/images/quantity/minus-sign.png" alt="-" class="quantity_cart">
                                     </span>
                                     <input type="text" name="quantity" id="quantity_<%= cart.getCartId() %>" class="cart_quantity" value="<%= cart.getQuantity() %>" readonly="readonly">
-                                    <span onclick="javascript:change_qty_cart('p', '<%= cart.getCartId() %>'); modify_cart_qty('<%= cart.getCartId() %>', '<%= orderedProduct.getOrderedProductId() %>', $('#quantity_'+'<%= cart.getCartId() %>').val());"">
+                                    <span onclick="javascript:change_qty_cart('p', '<%= cart.getCartId() %>'); modify_cart_qty('<%= cart.getCartId() %>', '<%= orderedProduct.getOrderedProductId() %>', $('#quantity_'+'<%= cart.getCartId() %>').val()); calcTotalPrice();">
                                         <img src="<%= request.getContextPath() %>/images/quantity/plus-sign.png" alt="+" class="quantity_cart">
                                     </span>
                                 </div>
@@ -105,11 +107,13 @@
                         <!-- food 메뉴 -->
                         <div class="row data">
                             <div class="subdiv">
-                                <div class="check"><input type="checkbox" name="checked_cart_product" checked  value="<%= cart.getCartId() %>"  onClick="">&nbsp;</div>
-                <% for(Attachment attachment : attachmentList) {
-                    if(attachment.getProductId() == orderedProduct.getProductId()) { %>
-                        <% for(Product product : productList) {
-                            if(product.getProductId() == orderedProduct.getProductId()) { %>
+            <% for(Attachment attachment : attachmentList) {
+                if(attachment.getProductId() == orderedProduct.getProductId()) { %>
+                    <% for(Product product : productList) {
+                        if(product.getProductId() == orderedProduct.getProductId()) { %>
+                            <input type="hidden" name="get_cart_id" value="<%= cart.getCartId() %>">
+                            <input type="hidden" name="get_op_id" value="<%= orderedProduct.getOrderedProductId() %>">
+                                <div class="check"><input type="checkbox" id="checkbox_cartList_<%= cart.getCartId() %>" name="checked_cart_product" checked value="<%= product.getPrice() * cart.getQuantity() %>" onClick="javascript:calcTotalPrice();" cart_id="<%= cart.getCartId() %>" op_id="<%= orderedProduct.getOrderedProductId() %>">&nbsp;</div>
                                 <div class="img">
                                     <img src="<%= request.getContextPath() %>/images/food/<%= attachment.getOriginalFilename() %>" width="100" onClick="location.href='<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>'">
                                 </div>
@@ -124,11 +128,11 @@
                                 <div class="basketprice" id="amount_init_<%= cart.getCartId() %>" name="price_init" init="false" value="<%= product.getPrice() %>" cartId="<%= cart.getCartId() %>"><input type="hidden" name="p_price_<%= cart.getCartId() %>" id="p_price_<%= cart.getCartId() %>" class="p_price" value="<%= product.getPrice() %>"><%= product.getPrice() %></div>
                                 <div class="num">
                                     <div class="updown">
-                                        <span onclick="javascript:change_qty_cart('m', '<%= cart.getCartId() %>'); modify_cart_qty('<%= cart.getCartId() %>', '<%= orderedProduct.getOrderedProductId() %>', $('#quantity_'+'<%= cart.getCartId() %>').val());"">
+                                        <span onclick="javascript:change_qty_cart('m', '<%= cart.getCartId() %>'); modify_cart_qty('<%= cart.getCartId() %>', '<%= orderedProduct.getOrderedProductId() %>', $('#quantity_'+'<%= cart.getCartId() %>').val()); calcTotalPrice();">
                                             <img src="<%= request.getContextPath() %>/images/quantity/minus-sign.png" alt="-" class="quantity_cart">
                                         </span>
                                         <input type="text" name="quantity" id="quantity_<%= cart.getCartId() %>" class="cart_quantity" value="<%= cart.getQuantity() %>" readonly="readonly">
-                                        <span onclick="javascript:change_qty_cart('p', '<%= cart.getCartId() %>'); modify_cart_qty('<%= cart.getCartId() %>', '<%= orderedProduct.getOrderedProductId() %>', $('#quantity_'+'<%= cart.getCartId() %>').val());"">
+                                        <span onclick="javascript:change_qty_cart('p', '<%= cart.getCartId() %>'); modify_cart_qty('<%= cart.getCartId() %>', '<%= orderedProduct.getOrderedProductId() %>', $('#quantity_'+'<%= cart.getCartId() %>').val()); calcTotalPrice();">
                                             <img src="<%= request.getContextPath() %>/images/quantity/plus-sign.png" alt="+" class="quantity_cart">
                                         </span>
                                     </div>
@@ -143,7 +147,7 @@
             
                 </div>
                 <div class="cart_select_container">
-                    <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택 상품 삭제</a>
+                    <a href="javascript:void(0)" class="abutton" onclick="javascript:cart_findSelected(); location.reload();">선택 상품 삭제</a>
                     <a href="javascript:void(0)" class="abutton" onclick="javascript:cart_deleteAll('<%= loginMember.getMemberId() %>');">장바구니 비우기</a>
                 </div>
                 
@@ -155,8 +159,8 @@
                         </div>
                     </div>
                     <div class="total_quantity_n_price">
-                        <div class="bigtext right-align sumcount" id="sum_p_num">상품갯수: 4개</div>
-                        <div class="bigtext right-align box blue summoney" id="sum_p_price">합계금액: 74,200원</div>
+                        <div class="sumcount" id="sum_total_num">상품갯수: 4개</div>
+                        <div class="summoney blue" id="sum_total_price">합계금액: 74,200원</div>
                     </div>
                 </div>
             </form>
@@ -216,8 +220,9 @@
         console.log('price_val :>> ', price_val_init);
         $("#total_amount_"+cartId).html(price_val_init.format() + " 원");
     }
-
-  });
+    
+    calcTotalPrice();   
+});
 
 
 </script>

@@ -401,3 +401,5 @@ insert into ordered_product values (seq_ordered_product_id.nextval, null, 202, 2
 
 select * from ordered_product;
 select * from cart;
+
+--select * from ordered_product where member_id = ? and product_id = ? and cup = ? and cup_size = ?

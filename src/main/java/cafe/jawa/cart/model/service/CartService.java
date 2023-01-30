@@ -11,6 +11,7 @@ import java.util.List;
 import cafe.jawa.cart.model.dao.CartDao;
 import cafe.jawa.cart.model.dto.Cart;
 import cafe.jawa.product.model.dto.OrderedProduct;
+import cafe.jawa.product.model.dto.Product;
 
 public class CartService {
 	private CartDao cartDao = new CartDao();
@@ -118,6 +119,50 @@ public class CartService {
 		Connection conn = getConnection();
 		try {
 			result = cartDao.modifyOpQty(conn, opId, quantity);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public OrderedProduct checkDupCart(int productId, String memberId, String size, String cup) {
+		Connection conn = getConnection();
+		OrderedProduct orderedProduct = cartDao.checkDupCart(conn, productId, memberId, size, cup);
+		close(conn);
+		return orderedProduct;
+	}
+
+	public OrderedProduct checkDupCart(int productId, String memberId) {
+		Connection conn = getConnection();
+		OrderedProduct orderedProduct = cartDao.checkDupCart(conn, productId, memberId);
+		close(conn);
+		return orderedProduct;
+	}
+
+	public int deleteCartSelected(int cartId) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = cartDao.deleteCartSelected(conn, cartId);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int deleteOpSelected(int opId) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = cartDao.deleteOpSelected(conn, opId);
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
