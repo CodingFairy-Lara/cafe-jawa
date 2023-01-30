@@ -12,7 +12,6 @@ public class Order {
 	// view단에서 받아올 값
     private int op_id;
     private int quantity;
-    private int tot_price;
     // DB로부터 받을 값
 	private int orderId;
 	private String memberId;
@@ -26,12 +25,11 @@ public class Order {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Order(int op_id, int quantity, int tot_price, int orderId, String memberId, String storeId, int status,
+	public Order(int op_id, int quantity, int orderId, String memberId, String storeId, int status,
 			Date orderDate, int totalPrice) {
 		super();
 		this.op_id = op_id;
 		this.quantity = quantity;
-		this.tot_price = tot_price;
 		this.orderId = orderId;
 		this.memberId = memberId;
 		this.storeId = storeId;
@@ -54,14 +52,6 @@ public class Order {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
-	}
-
-	public int getTot_price() {
-		return tot_price;
-	}
-
-	public void setTot_price(int tot_price) {
-		this.tot_price = tot_price;
 	}
 
 	public int getOrderId() {
@@ -114,14 +104,14 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [op_id=" + op_id + ", quantity=" + quantity + ", tot_price=" + tot_price + ", orderId=" + orderId
+		return "Order [op_id=" + op_id + ", quantity=" + quantity + ", orderId=" + orderId
 				+ ", memberId=" + memberId + ", storeId=" + storeId + ", status=" + status + ", orderDate=" + orderDate
 				+ ", totalPrice=" + totalPrice + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(memberId, op_id, orderDate, orderId, quantity, status, storeId, tot_price, totalPrice);
+		return Objects.hash(memberId, op_id, orderDate, orderId, quantity, status, storeId, totalPrice);
 	}
 
 	@Override
@@ -135,8 +125,7 @@ public class Order {
 		Order other = (Order) obj;
 		return Objects.equals(memberId, other.memberId) && op_id == other.op_id
 				&& Objects.equals(orderDate, other.orderDate) && orderId == other.orderId && quantity == other.quantity
-				&& status == other.status && Objects.equals(storeId, other.storeId) && tot_price == other.tot_price
-				&& totalPrice == other.totalPrice;
+				&& status == other.status && Objects.equals(storeId, other.storeId) && totalPrice == other.totalPrice;
 	}
 
 	

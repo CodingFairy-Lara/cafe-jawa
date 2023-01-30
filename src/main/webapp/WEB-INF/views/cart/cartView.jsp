@@ -15,7 +15,7 @@
 
 <section id=cart-view-container>
     <form 
-    name="orderEnrollFrm" 
+    name="orderViewFrm" 
     method="POST" 
     action="<%= request.getContextPath() %>/order/view">
     <!-- 장바구니 헤더 -->
@@ -254,7 +254,6 @@
                 i--; 
             }
         }
-        alert(count);
 
         if (count < 1) {
             alert("주문할 상품을 1개 이상 선택해야 합니다.");
