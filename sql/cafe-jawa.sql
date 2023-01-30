@@ -403,3 +403,4 @@ select * from ordered_product;
 select * from cart;
 
 --select * from ordered_product where member_id = ? and product_id = ? and cup = ? and cup_size = ?
+select * from store;

@@ -6,7 +6,8 @@
 			<% } else { %>
 			<h2 align="center" style="margin-top:200px;">안녕하세요, 카페 자와 입니다.</h2>
 			<p align="center"> <%= loginMember.getMemberName() %> 님의 회원등급은 <%= (loginMember.getOrderCount() > 30) ? "VIP" : (loginMember.getOrderCount() > 10) ? "Gold" : "Silver" %> 입니다 </p>
-			<div id ="map" style="width:500px; height:400px;"></div>
+			<br><br><br>
+			<div id ="map" style="width:60%; height:400px; left:20%;" ></div>
 			<script type"text/javascrpit" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b73e3975751cfe6ba538745c6cf799e0&libraries=services"></script>
 			<script>
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
