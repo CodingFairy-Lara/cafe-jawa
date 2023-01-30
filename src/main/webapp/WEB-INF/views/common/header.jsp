@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="cafe.jawa.member.model.dto.Member" %>
+<%@ page import="cafe.jawa.member.model.dto.MemberRole" %>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
 	String msg = (String) session.getAttribute("msg");
 	if(msg != null) session.removeAttribute("msg");
+	MemberRole user = MemberRole.valueOf("U");
+	MemberRole admin = MemberRole.valueOf("A");
 %>
 <!doctype html>
 <html lang="en">
@@ -54,7 +57,7 @@
             <a href="<%= request.getContextPath() %>/member/login">My CAFE JAWA</a>
           </li>
         </ul>
-      <% } else { %>
+      <% } else if(loginMember.getMemberRole() == user){ %>
       	<ul class="loginMenu">
       	  <li>
       		<a href="<%= request.getContextPath() %>/member/logout">Sign out</a>
@@ -69,7 +72,19 @@
             <a href="<%= request.getContextPath() %>/cart/cartView">My Cart</a>
           </li>
       	 </ul>
-      <% } %>
+      <% } else if(loginMember.getMemberRole() == admin) {%>
+    	<ul class="loginMenu">
+    	  <li>
+    		<a href="<%= request.getContextPath() %>/member/logout">Sign out</a>
+    	  </li>
+    	  <li>
+    	  	<a href="<%= request.getContextPath() %>/member/memberView">My CAFE JAWA</a>
+    	  </li>
+    	  <li>
+          <a href="<%= request.getContextPath() %>/member/admin">ADMIN</a>
+        	</li>
+    	 </ul>
+	<% } %>
       </div>
 
           <ul class="main-menu">
@@ -156,9 +171,15 @@
                       <li>
                         <h4>매장 이야기</h4>
                         <ul>
-                          <li>CAFE JAWA 잠실점</li>
-                          <li>CAFE JAWA 인천점</li>
-                          <li>CAFE JAWA 동탄점</li>
+                          	<li>
+								<a href="<%= request.getContextPath() %>/store/jamsil">CAFE JAWA 잠실점</a>
+							</li>
+							<li>
+                          		<a href="<%= request.getContextPath() %>/store/incheon">CAFE JAWA 인천점</a>
+							</li>
+							<li>
+								<a href="<%= request.getContextPath() %>/store/dongtan">CAFE JAWA 동탄점</a>
+							</li>
                         </ul>
                       </li>
                     </ul>
