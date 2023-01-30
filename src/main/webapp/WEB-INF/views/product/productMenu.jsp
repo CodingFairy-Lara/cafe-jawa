@@ -89,7 +89,10 @@
 		%>
 							<li class="menuDataSet">
 								<dl>
-									<dt>
+									<dt class="goDrinkView">
+										<a href="javascript:void(0);" class="add_to_cart">
+											<img src="<%= request.getContextPath() %>/images/add_to_cart.png" alt="장바구니 추가" onclick="javascript:testEncoding('<%= product.getProductId()%>', '<%= product.getSubCategory()%>');">
+										</a>
 										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
 		<% 
 			for(Attachment attachment : attachmentList){
@@ -118,7 +121,10 @@
 		%>
 							<li class="menuDataSet">
 								<dl>
-									<dt>
+									<dt class="goDrinkView">
+										<a href="javascript:void(0);" class="add_to_cart">
+											<img src="<%= request.getContextPath() %>/images/add_to_cart.png" alt="장바구니 추가" onclick="javascript:testEncoding('<%= product.getProductId()%>', '<%= product.getSubCategory()%>');">
+										</a>
 										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
 		<% 
 			for(Attachment attachment : attachmentList){
@@ -147,7 +153,10 @@
 		%>
 							<li class="menuDataSet">
 								<dl>
-									<dt>
+									<dt class="goDrinkView">
+										<a href="javascript:void(0);" class="add_to_cart">
+											<img src="<%= request.getContextPath() %>/images/add_to_cart.png" alt="장바구니 추가" onclick="javascript:testEncoding('<%= product.getProductId()%>', '<%= product.getSubCategory()%>');">
+										</a>
 										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
 		<% 
 			for(Attachment attachment : attachmentList){
@@ -176,7 +185,10 @@
 		%>
 							<li class="menuDataSet">
 								<dl>
-									<dt>
+									<dt class="goDrinkView">
+										<a href="javascript:void(0);" class="add_to_cart">
+											<img src="<%= request.getContextPath() %>/images/add_to_cart.png" alt="장바구니 추가" onclick="javascript:testEncoding('<%= product.getProductId()%>', '<%= product.getSubCategory()%>');">
+										</a>
 										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
 		<% 
 			for(Attachment attachment : attachmentList){
@@ -205,7 +217,10 @@
 		%>
 							<li class="menuDataSet">
 								<dl>
-									<dt>
+									<dt class="goDrinkView">
+										<a href="javascript:void(0);" class="add_to_cart">
+											<img src="<%= request.getContextPath() %>/images/add_to_cart.png" alt="장바구니 추가" onclick="javascript:testEncoding('<%= product.getProductId()%>', '<%= product.getSubCategory()%>');">
+										</a>
 										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
 		<% 
 			for(Attachment attachment : attachmentList){
@@ -238,7 +253,10 @@
 		%>
 							<li class="menuDataSet">
 								<dl>
-									<dt>
+									<dt class="goDrinkView">
+										<a href="javascript:void(0);" class="add_to_cart">
+											<img src="<%= request.getContextPath() %>/images/add_to_cart.png" alt="장바구니 추가" onclick="javascript:testEncoding('<%= product.getProductId()%>', '<%= product.getSubCategory()%>');">
+										</a>
 										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
 		<% 
 			for(Attachment attachment : attachmentList){
@@ -267,7 +285,10 @@
 		%>
 							<li class="menuDataSet">
 								<dl>
-									<dt>
+									<dt class="goDrinkView">
+										<a href="javascript:void(0);" class="add_to_cart">
+											<img src="<%= request.getContextPath() %>/images/add_to_cart.png" alt="장바구니 추가" onclick="javascript:testEncoding('<%= product.getProductId()%>', '<%= product.getSubCategory()%>');">
+										</a>
 										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
 		<% 
 			for(Attachment attachment : attachmentList){
@@ -296,7 +317,10 @@
 		%>
 							<li class="menuDataSet">
 								<dl>
-									<dt>
+									<dt class="goDrinkView">
+										<a href="javascript:void(0);" class="add_to_cart">
+											<img src="<%= request.getContextPath() %>/images/add_to_cart.png" alt="장바구니 추가" onclick="javascript:testEncoding('<%= product.getProductId()%>', '<%= product.getSubCategory()%>');">
+										</a>
 										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
 		<% 
 			for(Attachment attachment : attachmentList){
@@ -325,7 +349,10 @@
 		%>
 							<li class="menuDataSet">
 								<dl>
-									<dt>
+									<dt class="goDrinkView">
+										<a href="javascript:void(0);" class="add_to_cart">
+											<img src="<%= request.getContextPath() %>/images/add_to_cart.png" alt="장바구니 추가" onclick="javascript:testEncoding('<%= product.getProductId()%>', '<%= product.getSubCategory()%>');">
+										</a>
 										<a href="<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>" class="goDrinkView" name="<%= product.getProductId() %>">
 		<% 
 			for(Attachment attachment : attachmentList){

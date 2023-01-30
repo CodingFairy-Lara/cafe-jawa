@@ -11,11 +11,13 @@ import java.util.List;
 import java.util.Properties;
 
 import cafe.jawa.cart.model.dto.Cart;
+import cafe.jawa.product.model.dao.ProductDao;
 import cafe.jawa.product.model.dto.OrderedProduct;
 import cafe.jawa.product.model.exception.ProductException;
 
 public class CartDao {
 
+	private ProductDao productdao = new ProductDao();
 	private Properties prop = new Properties();
 	
 	public CartDao() {
@@ -154,6 +156,72 @@ public class CartDao {
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new ProductException("주문상품 수량 변경 오류!", e);
+		}
+		return result;
+	}
+
+	public OrderedProduct checkDupCart(Connection conn, int productId, String memberId, String size, String cup) {
+		String sql = prop.getProperty("checkDupCart1"); // select * from ordered_product where member_id = ? and product_id = ? and cup = ? and cup_size = ?
+		OrderedProduct orderedProduct = new OrderedProduct();
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, productId);
+			pstmt.setString(3, cup);
+			pstmt.setString(4, size);
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					orderedProduct = productdao.handleOrderedProductResultSet(rset);
+					return orderedProduct;
+				}
+			}
+		} catch (Exception e) {
+			throw new ProductException("장바구니 중복체크 오류!", e);
+		}
+		return null;
+	}
+
+	public OrderedProduct checkDupCart(Connection conn, int productId, String memberId) {
+		String sql = prop.getProperty("checkDupCart2"); // select * from ordered_product where member_id = ? and product_id = ?
+		OrderedProduct orderedProduct = new OrderedProduct();
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, productId);
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					orderedProduct = productdao.handleOrderedProductResultSet(rset);
+					return orderedProduct;
+				}
+			}
+		} catch (Exception e) {
+			throw new ProductException("장바구니 중복체크 오류!", e);
+		}
+		return null;
+	}
+
+	public int deleteCartSelected(Connection conn, int cartId) {
+		String sql = prop.getProperty("deleteCartSelected"); // delete from cart where cart_id = ?
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, cartId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ProductException("장바구니 선택 삭제 오류!", e);
+		}
+		return result;
+	}
+
+	public int deleteOpSelected(Connection conn, int opId) {
+		String sql = prop.getProperty("deleteOpSelected"); // delete from ordered_product where id = ?
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, opId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ProductException("장바구니 선택 삭제 오류!", e);
 		}
 		return result;
 	}

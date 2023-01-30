@@ -38,11 +38,11 @@ public class CartDeleteAllServlet extends HttpServlet {
 			if(result > 0) {
 				int result2 = cartservice.deleteAllOp(memberId);
 				if (result2 > 0) 
-					session.setAttribute("msg", "장바구니에서 상품을 삭제하였습니다.");
+					session.setAttribute("msg", "장바구니의 모든 상품을 비웠습니다.");
 			}
 			
 		} catch(Exception e) {
-			session.setAttribute("msg", "장바구니 삭제에 실패하였습니다.");
+			session.setAttribute("msg", "장바구니 비우기에 실패하였습니다.");
 			e.printStackTrace();
 		}
 		response.sendRedirect(request.getContextPath() + "/cart/cartView");

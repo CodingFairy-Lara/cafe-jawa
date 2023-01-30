@@ -324,5 +324,17 @@ $(document).on('click', "a#foodTab", function () {
         frm.submit(); 
         return true; 
       } 
-    
+
+    function testEncoding(productId, subCategory){
+        productId+"";
+        subCategory+"";
+        let cup = '매장컵';
+
+        if (subCategory == "BRD  " || subCategory == "CKE  " || subCategory == "SND  " || subCategory == "ICR  ") {
+            window.location = "../cart/cartEnroll?productId="+productId+"&quantity=1&subCategory="+subCategory;
+        }else {
+            window.location = "../cart/cartEnroll?productId="+productId+"&quantity=1&subCategory="+subCategory+"&cup_size=Tall&cup_kind="+encodeURIComponent(cup);
+        }
+    }
+       
 
