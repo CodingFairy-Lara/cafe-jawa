@@ -399,8 +399,13 @@ insert into ordered_product values (seq_ordered_product_id.nextval, null, 202, 2
 --delete from cart where member_id = 'abcd12345';
 --UPDATE cart SET quantity = 3 WHERE cart_id = 22;
 
+--select * from ordered_product where member_id = ? and product_id = ? and cup = ? and cup_size = ?
+select * from store;
+
 select * from ordered_product;
 select * from cart;
+select * from order_tb;
 
+UPDATE ordered_product SET order_id = 022 WHERE id = 19;
 --select * from ordered_product where member_id = ? and product_id = ? and cup = ? and cup_size = ?
 select * from store;

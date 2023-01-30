@@ -1329,6 +1329,10 @@ div.cart_select_container{
   width: 290px;
 }
 
+div.payment_method_container, div.payment_payment_totPrice_info_container{
+  margin-top: 35px;
+}
+
 /*  order_list */
 
 div#order_list_container {
@@ -1615,6 +1619,484 @@ div#empty_cart {
   text-align: center;
   padding: 80px 0px;
 }
+
+  /* ! orderView */
+
+  .orderdiv .row>.store_info.subdiv:nth-child(1) {
+    width: 10%;
+}
+  .orderdiv .row>.store_info.subdiv:nth-child(2) {
+      width: 80%;
+      text-align: center;
+  }
+  .orderdiv .row>.store_info.subdiv:nth-child(3) {
+      width: 10%;
+  }
+
+  #go_back_to_cart {
+    padding: 10px 9px;
+    font-size: 16px;
+    right: 225px;
+    position: relative;
+    width: 136px;
+    height: 45px;
+    display: block;
+    bottom: -45px;
+  }
+
+  #order_info_cmd {
+    position: absolute;
+    right: 400;
+    bottom: 27%;
+    right: 60%;
+  }
+
+  #total_quantity_n_price_order {
+    float: right;
+    margin: 15px;
+    width: 390px;
+    margin-bottom: 110px;
+  }
+
+  /* ! orderPayment */
+  #payment-view-container {
+    background-color: white;
+    height: 1300px;
+  }
+
+  div.payment_method_header, div.payment_totPrice_info {
+    padding: 25px 25px;
+    position: relative;
+    box-shadow: 0px 10px 16px -13px #ddd;
+    display: flex;
+    color: #444;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+/* payment form - credit */
+
+  div#credit_card_form_div {
+    width: 440px;
+    margin: 0 auto;
+    margin-top: 60px;
+  }
+
+  body.credit_card_form {
+    font-family: sans-serif;
+    font-weight: 500;
+    margin: 20px 10px 0 10px;
+  }
+
+  button.credit_card_form {
+    background-color: black;
+    border: 1px solid #ccc;
+    color: #eee;
+    cursor: pointer;
+    display: block;
+    font-size: 20px;
+    font-size: var(--large-mobile-font-size);
+    font-weight: 400;
+    margin: 0 auto;
+    padding: 18px 100px;
+    border-radius: 6px;
+  }
+
+  button:disabled.credit_card_form {
+    color: #888;
+    cursor: default;
+  }
+
+  button:not(:disabled):hover.credit_card_form {
+    background-color: #333;
+    color: white;
+  }
+
+  div.explanation.credit_card_form {
+    font-size: 14px;
+    margin: 10px 0 0 0;
+  }
+
+  section#cc-exp-csc div:not(:last-child).credit_card_form {
+    margin: 0 10px 0 0;
+  }
+
+  h1.credit_card_form {
+    border-bottom: 1px solid #ccc;
+    font-size: 28px;
+    font-weight: 300;
+    margin: 0 0 30px 0;
+    padding: 0 0 10px 0;
+  }
+
+  input.credit_card_form {
+    border: 1px solid #ccc;
+    font-size: 22px; /* fallback */
+    font-size: var(--large-mobile-font-size);
+    padding: 15px;
+    width: 90%; /* fallback */
+    width: calc(100% - 30px); /* full width minus padding */
+  }
+
+  input:not(:focus):invalid.credit_card_form,
+  input:not(:focus):invalid.credit_card_form {
+    color: red;
+    outline-color: red;
+  }
+
+  label.credit_card_form {
+    display: block;
+    font-size: 20px;
+    font-size: var(--large-mobile-font-size);
+    font-weight: 400;
+    margin: 0 0 8px 0;
+  }
+
+  main.credit_card_form {
+    margin: 0 auto;
+    max-width: 500px;
+  }
+
+  p.credit_card_form {
+    font-size: 19px;
+    font-weight: 400;
+  }
+
+  form section.credit_card_form {
+    margin: 0 0 15px 0;
+    position: relative;
+  }
+
+  form section:last-of-type.credit_card_form {
+      margin: 0 0 25px 0;
+  }
+
+  section#cc-exp-csc.credit_card_form {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  section#exp-csc.credit_card_form select#cc-exp-month.credit_card_form {
+    margin: 0 10px 0 0;
+    width: 67px;
+  }
+
+  section#exp-csc.credit_card_form select#cc-exp-year.credit_card_form {
+    width: 99px;
+  }
+
+  select.credit_card_form {
+    background-color: white;
+    border: 1px solid #ccc;
+    font-size: var(--mobile-font-size);
+    padding: 15px 15px 15px 11px;
+    width: 100%; /* don't need to account for padding :/ */
+  }
+
+  @media (min-width: 400px) {
+    body.credit_card_form {
+      margin: 40px 20px 0 20px;
+    }
+    button.credit_card_form {
+      font-size: 20px; /* fallback */
+      font-size: var(--large-mobile-font-size);
+    }
+    div.explanation.credit_card_form {
+      font-size: 14px;
+    }
+    h1.credit_card_form {
+      font-size: 36px;
+      font-weight: 500;
+      margin: 0 0 60px 0;
+    }
+    input.credit_card_form {
+      font-size: 22px; /* fallback */
+      font-size: var(--large-mobile-font-size);
+    }
+    label.credit_card_form {
+      font-size: 22px; /* fallback */
+      font-size: var(--large-mobile-font-size);
+      margin: 0 0 10px 0;
+    }
+    p.credit_card_form {
+      font-weight: 300;
+    }
+    form section.credit_card_form {
+      margin: 0 0 40px 0;
+    }
+    form section:last-of-type.credit_card_form {
+      margin: 0 0 60px 0;
+    }
+  }
+
+  @media (min-width: 500px) {
+    body.credit_card_form {
+      margin: 70px 70px 0 70px;
+    }
+    button.credit_card_form {
+      font-size: 18px; /* fallback */
+      font-size: var(--desktop-font-size);
+    }
+    section#cc-exp-csc div:not(:last-child).credit_card_form {
+      margin: 0 20px 0 0;
+    }
+    h1.credit_card_form {
+      font-size: 30px;
+      font-weight: 100;
+    }
+    input.credit_card_form {
+      font-size: 18px; /* fallback */
+      font-size: var(--desktop-font-size);
+    }
+    label.credit_card_form {
+      font-size: 18px; /* fallback */
+      font-size: var(--desktop-font-size);
+      margin: 0 0 10px 0;
+    }
+    form section.credit_card_form {
+        margin: 0 0 35px 0;   
+    }
+  }
+
+  /* payment form - mobile */
+
+  div#mobile_check_form_div {
+    width: 440px;
+    margin: 0 auto;
+    margin-top: 60px;
+  }
+
+  body.mobile_check_form {
+    font-family: sans-serif;
+    font-weight: 500;
+    margin: 20px 10px 0 10px;
+  }
+
+  button.mobile_check_form {
+    background-color: black;
+    border: 1px solid #ccc;
+    color: #eee;
+    cursor: pointer;
+    display: block;
+    font-size: 20px;
+    font-size: var(--large-mobile-font-size);
+    font-weight: 400;
+    margin: 0 auto;
+    padding: 18px 100px;
+    border-radius: 6px;
+  }
+
+  button:disabled.mobile_check_form {
+    color: #888;
+    cursor: default;
+  }
+
+  button:not(:disabled):hover.mobile_check_form {
+    background-color: #333;
+    color: white;
+  }
+
+  div.explanation.mobile_check_form {
+    font-size: 14px;
+    margin: 10px 0 0 0;
+  }
+
+  section#mobile-exp-csc div:not(:last-child).mobile_check_form {
+    margin: 0 10px 0 0;
+  }
+
+  h1.mobile_check_form {
+    border-bottom: 1px solid #ccc;
+    font-size: 28px;
+    font-weight: 300;
+    margin: 0 0 30px 0;
+    padding: 0 0 10px 0;
+  }
+
+  input.mobile_check_form {
+    border: 1px solid #ccc;
+    font-size: 22px; /* fallback */
+    font-size: var(--large-mobile-font-size);
+    padding: 15px;
+    width: 90%; /* fallback */
+    width: calc(100% - 30px); /* full width minus padding */
+  }
+
+  input:not(:focus):invalid.mobile_check_form,
+  input:not(:focus):invalid.mobile_check_form {
+    color: red;
+    outline-color: red;
+  }
+
+  label.mobile_check_form {
+    display: block;
+    font-size: 20px;
+    font-size: var(--large-mobile-font-size);
+    font-weight: 400;
+    margin: 0 0 8px 0;
+  }
+
+  main.mobile_check_form {
+    margin: 0 auto;
+    max-width: 500px;
+  }
+
+  p.mobile_check_form {
+    font-size: 19px;
+    font-weight: 400;
+  }
+
+  form section.mobile_check_form {
+    margin: 0 0 15px 0;
+    position: relative;
+  }
+
+  form section:last-of-type.mobile_check_form {
+      margin: 0 0 25px 0;
+  }
+
+  section#mobile-exp-csc.mobile_check_form {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  section#exp-csc.mobile_check_form select#mobile-exp-month.mobile_check_form {
+    margin: 0 10px 0 0;
+    width: 67px;
+  }
+
+  section#exp-csc.mobile_check_form select#mobile-exp-year.mobile_check_form {
+    width: 99px;
+  }
+
+  select.mobile_check_form {
+    background-color: white;
+    border: 1px solid #ccc;
+    font-size: var(--mobile-font-size);
+    padding: 15px 15px 15px 11px;
+    width: 100%; /* don't need to account for padding :/ */
+  }
+
+  @media (min-width: 400px) {
+    body.mobile_check_form {
+      margin: 40px 20px 0 20px;
+    }
+    button.mobile_check_form {
+      font-size: 20px; /* fallback */
+      font-size: var(--large-mobile-font-size);
+    }
+    div.explanation.mobile_check_form {
+      font-size: 14px;
+    }
+    h1.mobile_check_form {
+      font-size: 36px;
+      font-weight: 500;
+      margin: 0 0 60px 0;
+    }
+    input.mobile_check_form {
+      font-size: 22px; /* fallback */
+      font-size: var(--large-mobile-font-size);
+    }
+    label.mobile_check_form {
+      font-size: 22px; /* fallback */
+      font-size: var(--large-mobile-font-size);
+      margin: 0 0 10px 0;
+    }
+    p.mobile_check_form {
+      font-weight: 300;
+    }
+    form section.mobile_check_form {
+      margin: 0 0 40px 0;
+    }
+    form section:last-of-type.mobile_check_form {
+      margin: 0 0 60px 0;
+    }
+  }
+
+  @media (min-width: 500px) {
+    body.mobile_check_form {
+      margin: 70px 70px 0 70px;
+    }
+    button.mobile_check_form {
+      font-size: 18px; /* fallback */
+      font-size: var(--desktop-font-size);
+    }
+    section#mobile-exp-csc div:not(:last-child).mobile_check_form {
+      margin: 0 20px 0 0;
+    }
+    h1.mobile_check_form {
+      font-size: 30px;
+      font-weight: 100;
+    }
+    input.mobile_check_form {
+      font-size: 18px; /* fallback */
+      font-size: var(--desktop-font-size);
+    }
+    label.mobile_check_form {
+      font-size: 18px; /* fallback */
+      font-size: var(--desktop-font-size);
+      margin: 0 0 10px 0;
+    }
+    form section.mobile_check_form {
+        margin: 0 0 35px 0;   
+    }
+  }
+
+  div.payment_option_div {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  div.payment_option {
+    border: 1px solid rgba(169, 169, 169, 0.412);
+    width: 250px;
+    height: 100px;
+    border-radius: 2rem;
+    margin: 35px 8.5px auto;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+  }
+
+  div.payment_option.selected {
+    background: #3a5ed2;
+    color: #fff;
+  }
+  
+  button#mobile_certifi_num_btn{
+    width: 148px;
+    height: 40px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    position: absolute;
+    right: 20px;
+    top: 30px;
+  }
+
+  div.payment_price_info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+  }
+
+  /* ! main index */
+  #main-view-container {
+    height: 1000px;
+    background-image:  url("../images/common/bg_img.jpg");
+     /* url("../images/common/dark_bg_img.png"); */
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+
   /* ! footer */
   footer {
     text-align: center;

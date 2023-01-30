@@ -206,3 +206,48 @@ function calcTotalPrice_order(){
     $("#sum_total_num").html("선택 상품 수량 : " + final_quantity_price.format() + " 개");
     $("#sum_total_price").html("합계 금액 : " + final_total_price.format() + " 원");
 }
+
+function getFinalPrice() {
+    let tot_price_input = document.getElementsByClassName("individual_tot_price_input");
+    let final_price = 0;
+
+    for (let i = 0; i < tot_price_input.length; i++) {
+        final_price += Number(tot_price_input[i].value);
+    }
+    Number(final_price);
+    console.log('final_price :>> ', final_price);
+    $("#final_totPrice").attr("value", final_price);
+
+}
+
+
+// 신용카드 결제폼
+const form = document.querySelector('form');
+const completePaymentButton = document.querySelector('button#complete-payment');
+
+form.addEventListener('submit', handleFormSubmission);                       
+
+function handleFormSubmission(event) {
+  event.preventDefault();
+  validate();
+  form.reportValidity();
+  if (form.checkValidity() === false) {
+    console.log('Invalid data found');
+    // Handle invalid form data.
+  } else {
+    // On a production site do form submission.
+    completePaymentButton.textContent = '결제 진행중...';
+    completePaymentButton.disabled = 'true';
+    setTimeout(() => {alert('결제완료!!');}, 500);
+  }
+}
+
+// Do form validation.
+function validate() {
+  // let message= '';
+  // if (!/someregex/.test(someField.value)) {
+  //   console.log(`Invalid value ${someField.value} for someField`);
+	// 	 message = 'Explain how to enter a valid value';
+  // }
+  // someInput.setCustomValidity(message);
+}

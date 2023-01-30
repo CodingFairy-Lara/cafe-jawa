@@ -16,7 +16,7 @@
 %>
 
 <section id=cart-view-container>
-    <!-- 장바구니 헤더 -->
+    <!-- 주문목록 헤더 -->
     <div class="order_header">
         <div class="inner">
             <h1 class="order_header">주문 정보 확인</h1>
@@ -30,16 +30,34 @@
             <div class="order_list_header_container">
             </div>
         </div>
-        <!-- 픽업지점 정보 끝 -->
+        <!-- 픽업지점 정보 헤더 끝 -->
         <!-- 픽업지점 정보 시작 -->
         <div id="order_list_container_store_info_div">
+        <% if (storeId.equals("001")) { %>
             <div class="orderdiv" id="basket">
                 <div class="row data">
-                    <div class="subdiv">&nbsp;</div>
-                    <div class="subdiv"><%= storeId %></div>
-                    <div class="subdiv">&nbsp;</div>
+                    <div class="subdiv store_info">&nbsp;</div>
+                    <div class="subdiv store_info">CAFE JAWA 잠실점</div>
+                    <div class="subdiv store_info">&nbsp;</div>
                 </div>
             </div>
+        <% } else if (storeId.equals("002")) { %>
+            <div class="orderdiv" id="basket">
+                <div class="row data">
+                    <div class="subdiv store_info">&nbsp;</div>
+                    <div class="subdiv store_info">CAFE JAWA 인천점</div>
+                    <div class="subdiv store_info">&nbsp;</div>
+                </div>
+            </div>
+        <% } else if (storeId.equals("003")) { %>
+            <div class="orderdiv" id="basket">
+                <div class="row data">
+                    <div class="subdiv store_info">&nbsp;</div>
+                    <div class="subdiv store_info">CAFE JAWA 동탄점</div>
+                    <div class="subdiv store_info">&nbsp;</div>
+                </div>
+            </div>
+        <% } %>
         </div>
         <!-- 수령지점 정보 끝 -->
         <!-- 주문목록 헤더 -->
@@ -51,7 +69,10 @@
         <!-- 주문목록 헤더 끝 -->
         <!-- 주문목록 시작 -->
         <div id="order_list_container">
-            <form name="orderform" id="orderform" method="post" class="orderform" action="/Page" onsubmit="return false;">
+            <form 
+            name="orderEnrollFrm" 
+            method="POST" 
+            action="<%= request.getContextPath() %>/order/enroll">
     
                 <input type="hidden" name="cmd" value="order">
                 <div class="orderdiv" id="basket">
@@ -158,19 +179,22 @@
                 <%}} }} }} }} }}%>
             
                 </div>
-                <div class="cart_select_container" style="display:none;">
-                    <a href="javascript:void(0)" class="abutton" onclick="javascript:cart_findSelected(); location.reload();">선택 상품 삭제</a>
-                    <a href="javascript:void(0)" class="abutton" onclick="javascript:cart_deleteAll('<%= loginMember.getMemberId() %>');">장바구니 비우기</a>
+                <div class="order_info_div" style="display:none;">
+                    <input type="hidden" name="store_id" value="<%= storeId %>">
+                    <input type="hidden" name="final_totPrice" id="final_totPrice" value="">
+                    <input type="hidden" name="opIdList" value="<%= selected_opList %>">
+                    <!-- <input type="hidden" name="store_id" value="<%= storeId %>"> -->
                 </div>
                 
                 <div class="order_footer">
-                    <div class="total_quantity_n_price">
+                    <div class="total_quantity_n_price" id="total_quantity_n_price_order">
                         <div class="sumcount" id="sum_total_num">상품 수량 : 개</div>
                         <div class="summoney blue" id="sum_total_price">합계 금액: 원</div>
                     </div>
                     <div id="goorder" class="">
                         <div class="clear"></div>
-                        <div class="cmd">
+                        <div class="cmd" id="order_info_cmd">
+                            <a href="<%= request.getContextPath() %>/cart/cartView" class="abutton" id="go_back_to_cart" onclick="">장바구니 가기</a>
                             <button type="submit" class="abutton" id="go_to_check" onclick="">결제하기</button>
                         </div>
                     </div>
@@ -234,6 +258,8 @@
     }
     
     calcTotalPrice_order();   
+    getFinalPrice();
+
 });
 
 
