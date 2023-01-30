@@ -39,9 +39,9 @@ public class StoreOpenServlet extends HttpServlet {
 			Store store = new Store(store_id, null, null, null, status);
 			
 			int result = storeService.storeOpen(store);
-			if(result > 0 && status.equals("O")) {
+			if(result > 0 && _status.equals("O")) {
 				session.setAttribute("msg", "매장을 오픈했습니다.");
-			} else {
+			} else if (result > 0 && _status.equals("C")){
 				session.setAttribute("msg", "매장을 닫았습니다.");
 			}
 		} catch (Exception e) {

@@ -66,9 +66,6 @@
       	  	<a href="<%= request.getContextPath() %>/member/memberView">My CAFE JAWA</a>
       	  </li>
       	  <li>
-            <a href="javascript:viod(0)">ADMIN</a>
-          </li>
-      	  <li>
             <a href="<%= request.getContextPath() %>/cart/cartView">My Cart</a>
           </li>
       	 </ul>
