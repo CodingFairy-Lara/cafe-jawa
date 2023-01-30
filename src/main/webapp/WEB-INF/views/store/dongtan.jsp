@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <h1>CAFE JAWA 동탄점</h1>
-<div id ="map" style="width:600px; height:400px; left:525px;" ></div>
+<div id ="map" style="width:600px; height:400px;" ></div>
 <div id ="address">주소 : 경기 화성시 메타폴리스로 54</div>
 <div id ="number">전화번호 : 1522-3232</div>			
 		<script type"text/javascrpit" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b73e3975751cfe6ba538745c6cf799e0&libraries=services"></script>

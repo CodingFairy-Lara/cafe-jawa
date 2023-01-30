@@ -69,4 +69,19 @@ public class ProductService {
 		return orderedProductList;
 	}
 
+	public int priceChange(Product product) {
+		Connection conn = getConnection();
+		int result = 0;
+		try {
+			result = productDao.priceChange(conn, product);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
 }

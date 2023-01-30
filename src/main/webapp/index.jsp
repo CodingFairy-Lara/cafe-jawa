@@ -12,7 +12,7 @@
 			<% } else { %>
 			<h1>안녕하세요, 카페 자와 입니다.</h1>
 			<p align="center"> <%= loginMember.getMemberName() %> 님의 회원등급은 <%= (loginMember.getOrderCount() > 30) ? "VIP" : (loginMember.getOrderCount() > 10) ? "Gold" : "Silver" %> 입니다 </p>
-			<div id ="map" style="width:500px; height:400px; display: none;"></div>
+			<div id ="map" style="width:60%; height:400px; display: none;"></div>
 			<% } %>
 
 

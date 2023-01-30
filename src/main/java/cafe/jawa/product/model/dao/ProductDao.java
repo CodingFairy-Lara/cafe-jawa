@@ -179,6 +179,20 @@ public class ProductDao {
 		}
 		return orderedProductList;
 	}
+
+	public int priceChange(Connection conn, Product product) {
+		int result = 0;
+		String sql = prop.getProperty("priceChange");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, Integer.toString(product.getPrice()));
+			pstmt.setString(2, product.getProductName());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ProductException("가격 변경 오류!", e);
+		}
+		return result;
+	}
 	
 	
 	

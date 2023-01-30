@@ -66,10 +66,14 @@
       	  	<a href="<%= request.getContextPath() %>/member/memberView">My CAFE JAWA</a>
       	  </li>
       	  <li>
+<<<<<<< HEAD
             <a href="javascript:viod(0)">ADMIN</a>
           </li>
       	  <li>
             <a href="<%= request.getContextPath() %>/cart/cartView">My Cart 🛒</a>
+=======
+            <a href="<%= request.getContextPath() %>/cart/cartView">My Cart</a>
+>>>>>>> branch 'master' of https://github.com/CodingFairy-Lara/cafe-jawa.git
           </li>
       	 </ul>
       <% } else if(loginMember.getMemberRole() == admin) {%>

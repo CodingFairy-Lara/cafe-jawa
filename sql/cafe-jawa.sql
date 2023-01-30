@@ -400,11 +400,12 @@ insert into ordered_product values (seq_ordered_product_id.nextval, null, 202, 2
 --UPDATE cart SET quantity = 3 WHERE cart_id = 22;
 
 --select * from ordered_product where member_id = ? and product_id = ? and cup = ? and cup_size = ?
---insert into order_tb values (seq_order_id.nextval, ?, ?, default, default, ?);
---select id from order_tb where member_id = ? and store_id = ? and order_status = 1 and total_price = ?;
+select * from store;
 
 select * from ordered_product;
 select * from cart;
 select * from order_tb;
 
 UPDATE ordered_product SET order_id = 022 WHERE id = 19;
+--select * from ordered_product where member_id = ? and product_id = ? and cup = ? and cup_size = ?
+select * from store;
