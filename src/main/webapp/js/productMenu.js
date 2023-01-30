@@ -338,3 +338,21 @@ $(document).on('click', "a#foodTab", function () {
     }
        
 
+
+    $(document).on('click', "div#option_credit_card", function () {
+        if($(this).hasClass("selected") != true) {
+            $(this).addClass("selected");
+            $("div#option_mobile_check").removeClass("selected");
+            $("div.mobile_check_div").hide();
+            $("div.credit_card_div").show();
+        }
+    });
+    $(document).on('click', "div#option_mobile_check", function () {
+        if($(this).hasClass("selected") != true) {
+            $(this).addClass("selected");
+            $("div#option_credit_card").removeClass("selected");
+            $("div.credit_card_div").hide();
+            $("div.mobile_check_div").show();
+        }
+    });
+    
