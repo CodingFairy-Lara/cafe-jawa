@@ -2,15 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-<section id=enroll-container>
+<section class=pw>
 	<h2>비밀번호 변경</h2>
+	<div class="pw_card">
 	<form 
 		name="passwordUpdateFrm" 
 		method="post" >
 		<table>
 			<tr>
 				<th>현재 비밀번호</th>
-				<td><input type="password" name="oldPassword" id="oldPassword" required></td>
+				<td style= width:330px;><input type="password" name="oldPassword" id="oldPassword" required></td>
 			</tr>
 			<tr>
 				<th>변경할 비밀번호</th>
@@ -28,12 +29,15 @@
 				<td colspan="2" style="text-align: center;">
 					<input type="submit"  value="변경" />
 				</td>
+			</tr>
+			<tr>
 				<td colspan="2" style="text-align: center;">
-					<input type="button" value="취소" onclick="history.go(-1)" />
+					<input type="reset" value="취소" />
 				</td>
 			</tr>
 		</table>
 	</form>
+	</div>
 </section>
 <script>
 const oldPassword = document.querySelector("#oldPassword");

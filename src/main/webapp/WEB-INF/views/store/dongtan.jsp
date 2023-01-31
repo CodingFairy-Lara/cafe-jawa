@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<section>
 <h1>CAFE JAWA 동탄점</h1>
 <div id ="map" style="width:600px; height:400px;" ></div>
-<div id ="address">주소 : 경기 화성시 메타폴리스로 54</div>
-<div id ="number">전화번호 : 1522-3232</div>			
+<div class ="address">주소 : 경기 화성시 메타폴리스로 54</div>
+<div class ="number">전화번호 : 1522-3232</div>			
+<div class = "road"><p>오시는 길 : 동탄 홈플러스에서 토지주택공사 방향으로 도보 3분</p></div>
+</section>
 		<script type"text/javascrpit" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b73e3975751cfe6ba538745c6cf799e0&libraries=services"></script>
 			
 			<script>
