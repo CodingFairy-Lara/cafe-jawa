@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<section class = "JAWA_incheon">
 <h1>CAFE JAWA 인천점</h1>
 <div id ="map" style="width:600px; height:400px;"></div>
-<div id ="address">주소 : 인천 남동구 인하로 556</div>
-<div id ="number">전화번호 : 1522-3232</div>				
+<div class ="address">주소 : 인천 남동구 인하로 556</div>
+<div class ="number">전화번호 : 1522-3232</div>
+<div class = "road"><p>오시는 길 : 남동세무서 버스정류장 하차 도보1분</p></div>	
+</section>			
 			<script type"text/javascrpit" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b73e3975751cfe6ba538745c6cf799e0&libraries=services"></script>
 			
 			<script>

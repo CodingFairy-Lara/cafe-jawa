@@ -1,10 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<section class="JAWA_jamsil">
 <h1>CAFE JAWA 잠실점</h1>
 <div id ="map" style="width:600px; height:400px;" ></div>
-<div id ="address">주소 : 서울시 강남구 도곡로 457</div>
-<div id ="number">전화번호 : 1522-3232</div>				
+<div class ="address">주소 : 서울시 강남구 도곡로 457</div>
+<div class ="number">전화번호 : 1522-3232</div>
+<div class ="road">
+<p>
+오시는길 : 대치역 2번 출구에서 한티근린공원방면으로 좌회전 후 직진(546m). 은마아파트입구사거리 좌측에 위치.<br>
+　　　　　수인분분당선 한티역 2번 출구에서 직진하여 도보로 5분 거리에 위치.<br>
+　　　　　*버스 이용 시 간선버스: 333,340,420,461 은마아파트입구사거리역 하차 지선버스: 4412 은마아파트입구사거리역 하차
+</p>
+</div>
+</section>
 			<script type"text/javascrpit" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b73e3975751cfe6ba538745c6cf799e0&libraries=services"></script>
 			
 			<script>
