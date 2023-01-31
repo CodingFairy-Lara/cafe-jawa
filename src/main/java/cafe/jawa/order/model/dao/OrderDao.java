@@ -26,24 +26,10 @@ public class OrderDao {
 		}
 	}
 
-	public int orderEnroll(Connection conn, Order order) {
+	public Order orderEnroll(Connection conn, Order order) {
 		String sql = prop.getProperty("orderEnroll"); // insert into order_tb values (seq_order_id.nextval, ?, ?, default, default, ?)
+		String sql2 = prop.getProperty("getOrderInfo"); // select * from order_tb where member_id = ? and store_id = ? and order_status = 1 and total_price = ?
 		int result = 0;
-		
-		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, order.getMemberId());
-			pstmt.setString(2, order.getStoreId());
-			pstmt.setInt(3, order.getTotalPrice());
-			
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			throw new ProductException("주문 생성 오류!", e);
-		}
-		return result;
-	}
-
-	public Order getOrderInfo(Connection conn, Order order) {
-		String sql = prop.getProperty("getOrderInfo"); // select * from order_tb where member_id = ? and store_id = ? and order_status = 1 and total_price = ?
 		Order order_ = null;
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -51,13 +37,25 @@ public class OrderDao {
 			pstmt.setString(2, order.getStoreId());
 			pstmt.setInt(3, order.getTotalPrice());
 			
-			try(ResultSet rset = pstmt.executeQuery()){
-				while(rset.next()) {
-					order_ = handleOrderResultSet(rset);
+			result = pstmt.executeUpdate();
+			if (result > 0) {
+				// 주문정보 업데이트
+				try(PreparedStatement pstmt2 = conn.prepareStatement(sql2)) {
+					pstmt2.setString(1, order.getMemberId());
+					pstmt2.setString(2, order.getStoreId());
+					pstmt2.setInt(3, order.getTotalPrice());
+					
+					try(ResultSet rset = pstmt2.executeQuery()){
+						while(rset.next()) {
+							order_ = handleOrderResultSet(rset);
+						}
+					}
+				} catch (SQLException e) {
+					throw new ProductException("주문정보 조회 오류!", e);
 				}
 			}
 		} catch (SQLException e) {
-			throw new ProductException("주문정보 조회 오류!", e);
+			throw new ProductException("주문 생성 오류!", e);
 		}
 		return order_;
 	}
@@ -73,27 +71,27 @@ public class OrderDao {
 		return order;
 	}
 
-	public int updateOpTb(Connection conn, Order order_, String op_Id) {
+	public int updateOpTb(Connection conn, Order order_, int op_id) {
 		String sql = prop.getProperty("updateOpTb"); // UPDATE ordered_product SET order_id = ? WHERE id = ?
 		int result = 0;
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, order_.getOrderId());
-			pstmt.setInt(2, Integer.parseInt(op_Id));
+			pstmt.setInt(2, op_id);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			throw new ProductException("주문상품 목록 업데이트 오류!", e);
+			throw new ProductException("주문 목록 업데이트 오류!", e);
 		}
 		return result;
 	}
 
-	public int deleteCart(Connection conn, String op_Id) {
+	public int deleteCart(Connection conn, int op_id) {
 		String sql = prop.getProperty("deleteCart"); // delete from cart where od_product_id = ?
 		int result = 0;
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, Integer.parseInt(op_Id));
+			pstmt.setInt(1, op_id);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

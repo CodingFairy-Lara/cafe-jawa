@@ -15,36 +15,32 @@ public class OrderService {
 
 	private OrderDao orderDao = new OrderDao();
 
-	public int orderEnroll(Order order, String[] opIdList) {
+	public int orderEnroll(Order order, int op_id) {
 		int result = 0;
-		int result2 = 0;
 		Connection conn = getConnection();
 		try {
-			result = orderDao.orderEnroll(conn, order);
+			Order order_ = orderDao.orderEnroll(conn, order);
 			commit(conn);
-			if (result > 0 ) {
-				Order order_ = orderDao.getOrderInfo(conn, order);
-				if(order_ != null) {
-					for (int i = 0; i < opIdList.length; i++) {
-						String op_Id = opIdList[i];
-						result2 = orderDao.updateOpTb(conn, order_, op_Id);
-					}
-				}
+			
+			// op table에 생성된 order_id 부여하기
+			if(order_ != null) {
+				result = orderDao.updateOpTb(conn, order_, op_id);
 			}
+			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
 			throw e;
 		} finally {
 			close(conn);
 		}
-		return result2;
+		return result;
 	}
 
-	public int deleteCart(String op_Id) {
+	public int deleteCart(int op_id) {
 		int result = 0;
 		Connection conn = getConnection();
 		try {
-			result = orderDao.deleteCart(conn, op_Id);
+			result = orderDao.deleteCart(conn, op_id);
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);

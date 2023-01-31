@@ -70,9 +70,9 @@
         <!-- 주문목록 시작 -->
         <div id="order_list_container">
             <form 
-            name="orderEnrollFrm" 
+            name="goPaymentForm" 
             method="POST" 
-            action="<%= request.getContextPath() %>/order/enroll">
+            action="<%= request.getContextPath() %>/order/payment">
     
                 <input type="hidden" name="cmd" value="order">
                 <div class="orderdiv" id="basket">
@@ -91,12 +91,12 @@
                 if(attachment.getProductId() == orderedProduct.getProductId()) { %>
                     <% for(Product product : productList) {
                         if(product.getProductId() == orderedProduct.getProductId()) { %>
-                            <div class="check cart_info_div">
-                                <input type="checkbox" style="display:none;" id="checkbox_cartList_<%= cart.getCartId() %>" name="checked_cart_product" checked value="<%= orderedProduct.getOrderedProductId() %>" onClick="javascript:calcTotalPrice();" cart_id="<%= cart.getCartId() %>" op_id="<%= orderedProduct.getOrderedProductId() %>">&nbsp;
-                                    <input type="hidden" name="get_cart_id" class="individual_cart_id_input" value="<%= cart.getCartId() %>">
-                                    <input type="hidden" name="get_op_id" class="individual_op_id_input" value="<%= orderedProduct.getOrderedProductId() %>">
-                                    <input type="hidden" name="get_quantity_<%= cart.getCartId() %>" class="individual_quantity_input" value="<%= cart.getQuantity() %>">
-                                    <input type="hidden" name="get_totalPrice_<%= cart.getCartId() %>" class="individual_tot_price_input" value="<%= product.getPrice() * cart.getQuantity() %>">
+                            <div class="check cart_info_div" style="visibility: hidden;">
+                                <input type="checkbox" style="display: hidden;" checked id="checkbox_cartList_<%= cart.getCartId() %>" name="checked_cart_product" checked value="<%= orderedProduct.getOrderedProductId() %>" onClick="javascript:calcTotalPrice();" cart_id="<%= cart.getCartId() %>" op_id="<%= orderedProduct.getOrderedProductId() %>">&nbsp;
+                                <input type="hidden" name="get_cart_id" class="individual_cart_id_input" value="<%= cart.getCartId() %>">
+                                <input type="hidden" name="get_op_id" class="individual_op_id_input" value="<%= orderedProduct.getOrderedProductId() %>">
+                                <input type="hidden" name="get_quantity" class="individual_quantity_input get_quantity_<%= cart.getCartId() %>" value="<%= cart.getQuantity() %>">
+                                <input type="hidden" name="get_totalPrice" class="individual_tot_price_input get_totalPrice_<%= cart.getCartId() %>" value="<%= product.getPrice() * cart.getQuantity() %>">
                             </div>
                             <div class="img">
                                 <img src="<%= request.getContextPath() %>/images/drink/<%= attachment.getOriginalFilename() %>" width="100" onClick="location.href='<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>'">
@@ -140,12 +140,12 @@
                 if(attachment.getProductId() == orderedProduct.getProductId()) { %>
                     <% for(Product product : productList) {
                         if(product.getProductId() == orderedProduct.getProductId()) { %>
-                            <div class="check cart_info_div">
-                                <input type="checkbox" style="display:none;" id="checkbox_cartList_<%= cart.getCartId() %>" name="checked_cart_product" checked value="<%= orderedProduct.getOrderedProductId() %>" onClick="javascript:calcTotalPrice();" cart_id="<%= cart.getCartId() %>" op_id="<%= orderedProduct.getOrderedProductId() %>">&nbsp;
+                            <div class="check cart_info_div" style="visibility: hidden;">
+                                <input type="checkbox" checked id="checkbox_cartList_<%= cart.getCartId() %>" name="checked_cart_product" checked value="<%= orderedProduct.getOrderedProductId() %>" onClick="javascript:calcTotalPrice();" cart_id="<%= cart.getCartId() %>" op_id="<%= orderedProduct.getOrderedProductId() %>">&nbsp;
                                     <input type="hidden" name="get_cart_id" class="individual_cart_id_input" value="<%= cart.getCartId() %>">
                                     <input type="hidden" name="get_op_id" class="individual_op_id_input" value="<%= orderedProduct.getOrderedProductId() %>">
-                                    <input type="hidden" name="get_quantity_<%= cart.getCartId() %>" class="individual_quantity_input" value="<%= cart.getQuantity() %>">
-                                    <input type="hidden" name="get_totalPrice_<%= cart.getCartId() %>" class="individual_tot_price_input" value="<%= product.getPrice() * cart.getQuantity() %>">
+                                    <input type="hidden" name="get_quantity" class="individual_quantity_input get_quantity_<%= cart.getCartId() %>" value="<%= cart.getQuantity() %>">
+                                    <input type="hidden" name="get_totalPrice" class="individual_tot_price_input get_totalPrice_<%= cart.getCartId() %>" value="<%= product.getPrice() * cart.getQuantity() %>">
                             </div>
                                 <div class="img">
                                     <img src="<%= request.getContextPath() %>/images/food/<%= attachment.getOriginalFilename() %>" width="100" onClick="location.href='<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>'">
@@ -183,13 +183,14 @@
                     <input type="hidden" name="store_id" value="<%= storeId %>">
                     <input type="hidden" name="final_totPrice" id="final_totPrice" value="">
                     <input type="hidden" name="opIdList" value="<%= selected_opList %>">
+                    <input type="hidden" name="storeId" value="<%= storeId %>">
                     <!-- <input type="hidden" name="store_id" value="<%= storeId %>"> -->
                 </div>
                 
                 <div class="order_footer">
                     <div class="total_quantity_n_price" id="total_quantity_n_price_order">
-                        <div class="sumcount" id="sum_total_num">상품 수량 : 개</div>
-                        <div class="summoney blue" id="sum_total_price">합계 금액: 원</div>
+                        <div class="sumcount" id="sum_total_num_order">상품 수량 : 개</div>
+                        <div class="summoney blue" id="sum_total_price_order">합계 금액: 원</div>
                     </div>
                     <div id="goorder" class="">
                         <div class="clear"></div>

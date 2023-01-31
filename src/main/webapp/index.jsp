@@ -6,7 +6,7 @@
 <section id="main-view-container">
 	<div class="inner main">
 		
-		
+
 			<% if(loginMember == null) { %>	
 			<h1>안녕하세요, 카페 자와 입니다.</h1>
 			<% } else { %>

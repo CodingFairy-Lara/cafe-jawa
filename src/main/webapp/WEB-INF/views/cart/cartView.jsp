@@ -72,8 +72,8 @@
                                 <input type="checkbox" id="checkbox_cartList_<%= cart.getCartId() %>" name="checked_cart_product" checked value="<%= orderedProduct.getOrderedProductId() %>" onClick="javascript:calcTotalPrice();" cart_id="<%= cart.getCartId() %>" op_id="<%= orderedProduct.getOrderedProductId() %>">&nbsp;
                                     <input type="hidden" name="get_cart_id" class="individual_cart_id_input" value="<%= cart.getCartId() %>">
                                     <input type="hidden" name="get_op_id" class="individual_op_id_input" value="<%= orderedProduct.getOrderedProductId() %>">
-                                    <input type="hidden" name="get_quantity_<%= cart.getCartId() %>" class="individual_quantity_input" value="<%= cart.getQuantity() %>">
-                                    <input type="hidden" name="get_totalPrice_<%= cart.getCartId() %>" class="individual_tot_price_input" value="<%= product.getPrice() * cart.getQuantity() %>">
+                                    <input type="hidden" name="get_quantity" class="individual_quantity_input get_quantity_<%= cart.getCartId() %>" value="<%= cart.getQuantity() %>">
+                                    <input type="hidden" name="get_totalPrice" class="individual_tot_price_input get_totalPrice_<%= cart.getCartId() %>" value="<%= product.getPrice() * cart.getQuantity() %>">
                             </div>
                             <div class="img">
                                 <img src="<%= request.getContextPath() %>/images/drink/<%= attachment.getOriginalFilename() %>" width="100" onClick="location.href='<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>'">
@@ -84,7 +84,7 @@
                             <div class="eng_name" onClick="location.href='<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>'">
                                 <span><%= attachment.getRenamedFilename() %></span>
                             </div>
-            <%      if(attachment.getRenamedFilename().contains("Ice") || product.getSubCategory().equals("CBR  ") ||product.getSubCategory().equals("FRP  ") || product.getSubCategory().equals("BLD  ")) { %>
+            <%      if(attachment.getRenamedFilename().contains("Ice") || attachment.getRenamedFilename().contains("Affogato") || product.getSubCategory().equals("CBR  ") ||product.getSubCategory().equals("FRP  ") || product.getSubCategory().equals("BLD  ")) { %>
                             <div class="cup_info"><span>ICED | <%= orderedProduct.getCupSize() %> | <%= orderedProduct.getCup() %></span></div>
             <% } else { %>
                             <div class="cup_info"><span>HOT | <%= orderedProduct.getCupSize() %> | <%= orderedProduct.getCup() %></span></div>
@@ -121,8 +121,8 @@
                                 <input type="checkbox" id="checkbox_cartList_<%= cart.getCartId() %>" name="checked_cart_product" checked value="<%= orderedProduct.getOrderedProductId() %>" onClick="javascript:calcTotalPrice();" cart_id="<%= cart.getCartId() %>" op_id="<%= orderedProduct.getOrderedProductId() %>">&nbsp;
                                     <input type="hidden" name="get_cart_id" class="individual_cart_id_input" value="<%= cart.getCartId() %>">
                                     <input type="hidden" name="get_op_id" class="individual_op_id_input" value="<%= orderedProduct.getOrderedProductId() %>">
-                                    <input type="hidden" name="get_quantity_<%= cart.getCartId() %>" class="individual_quantity_input" value="<%= cart.getQuantity() %>">
-                                    <input type="hidden" name="get_totalPrice_<%= cart.getCartId() %>" class="individual_tot_price_input" value="<%= product.getPrice() * cart.getQuantity() %>">
+                                    <input type="hidden" name="get_quantity" class="individual_quantity_input get_quantity_<%= cart.getCartId() %>" value="<%= cart.getQuantity() %>">
+                                    <input type="hidden" name="get_totalPrice" class="individual_tot_price_input get_totalPrice_<%= cart.getCartId() %>" value="<%= product.getPrice() * cart.getQuantity() %>">
                             </div>
                                 <div class="img">
                                     <img src="<%= request.getContextPath() %>/images/food/<%= attachment.getOriginalFilename() %>" width="100" onClick="location.href='<%= request.getContextPath() %>/product/view?productId=<%= product.getProductId()%>'">

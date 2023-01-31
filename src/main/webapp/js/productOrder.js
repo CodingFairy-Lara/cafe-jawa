@@ -19,9 +19,9 @@ function change_qty_cart(t, id){
     $("#quantity_"+id).val(this_qty);
     $("#total_amount_"+id).html(show_total_amount.format() + " 원");
 
-    $("#checkbox_cartList_"+id).attr("value", show_total_amount);
-    $("#get_totalPrice_"+id).attr("value", show_total_amount);
-    $("#get_quantity_"+id).attr("value", this_qty);
+    // $("#checkbox_cartList_"+id).attr("value", show_total_amount);
+    $(".get_totalPrice_"+id).attr("value", show_total_amount);
+    $(".get_quantity_"+id).attr("value", this_qty);
     calcTotalPrice();
 };
 
@@ -89,7 +89,7 @@ function cart_deleteSelected(cart_id, op_id){
 
     $.ajax({
         type : "post",
-        async : false, //false인 경우 동기식으로 처리한다.
+        async : true, //false인 경우 동기식으로 처리한다.
         url : "../cart/deleteSelected"
         + "?cart_id=" + encodeURIComponent(cartId) + "&op_id=" + encodeURIComponent(opId),
         
@@ -170,7 +170,6 @@ $(document).on("change", "input[name=checked_cart_product]", function(){
 
 function calcTotalPrice(){
     let cartList = $("input[name=checked_cart_product]").length;
-    let checked_cart_product = $("input[name=checked_cart_product]:checked").length;
     let final_quantity_price = 0;
     let final_total_price = 0;
  
@@ -181,7 +180,7 @@ function calcTotalPrice(){
     }
     for (let i = 0; i < cartList; i++) {
         if ($("input[name=checked_cart_product]")[i].checked == true) {
-            final_total_price += parseInt($(".individual_tot_price_input")[i].value);
+            final_total_price += parseInt($("input[name=get_totalPrice]")[i].value);
         }
     }
     $("#sum_total_num").html("선택 상품 수량 : " + final_quantity_price.format() + " 개");
@@ -200,15 +199,15 @@ function calcTotalPrice_order(){
     }
     for (let i = 0; i < cartList; i++) {
         if ($("input[name=checked_cart_product]")[i].checked == true) {
-            final_total_price += parseInt($(".individual_tot_price_input")[i].value);
+            final_total_price += parseInt($("input[name=get_totalPrice]")[i].value);
         }
     }
-    $("#sum_total_num").html("선택 상품 수량 : " + final_quantity_price.format() + " 개");
-    $("#sum_total_price").html("합계 금액 : " + final_total_price.format() + " 원");
+    $("#sum_total_num_order").html("선택 상품 수량 : " + final_quantity_price.format() + " 개");
+    $("#sum_total_price_order").html("합계 금액 : " + final_total_price.format() + " 원");
 }
 
 function getFinalPrice() {
-    let tot_price_input = document.getElementsByClassName("individual_tot_price_input");
+    let tot_price_input = $("input[name=get_totalPrice]");
     let final_price = 0;
 
     for (let i = 0; i < tot_price_input.length; i++) {
@@ -221,24 +220,53 @@ function getFinalPrice() {
 }
 
 
-// 신용카드 결제폼
-const form = document.querySelector('form');
-const completePaymentButton = document.querySelector('button#complete-payment');
+// 신용카드 결제 폼
+const ccform = document.querySelector('form.credit_card_form');
+const completeccPaymentButton = document.querySelector('button#complete-payment_cc');
 
-form.addEventListener('submit', handleFormSubmission);                       
+ccform.addEventListener('submit', handleccFormSubmission);                       
 
-function handleFormSubmission(event) {
+function handleccFormSubmission(event) {
   event.preventDefault();
   validate();
-  form.reportValidity();
-  if (form.checkValidity() === false) {
-    console.log('Invalid data found');
+  ccform.reportValidity();
+  if (ccform.checkValidity() === false) {
+    alert('Invalid data foun유효하지 않은 데이터입니다.');
+    // Handle invalid form data.
+  } else {
+      completeccPaymentButton.textContent = '결제 진행중...';
+      completeccPaymentButton.disabled = 'true';
+      orderEnroll_cc();
+        setTimeout(() => {
+        alert('[ '+ Number($("input#totalPrice").val()).format() +' ] 원 결제완료!!');
+        event.preventDefault();
+        ccform.submit();},
+        5000);
+  }
+}
+
+// 모바일 결제 폼
+const mbform = document.querySelector('form.mobile_check_form');
+const completembPaymentButton = document.querySelector('button#complete-payment_mb');
+mbform.addEventListener('submit', handlembFormSubmission);                       
+
+function handlembFormSubmission(event) {
+  event.preventDefault();
+  validate();
+  mbform.reportValidity();
+  if (mbform.checkValidity() === false) {
+    alert('유효하지 않은 데이터입니다.');
     // Handle invalid form data.
   } else {
     // On a production site do form submission.
-    completePaymentButton.textContent = '결제 진행중...';
-    completePaymentButton.disabled = 'true';
-    setTimeout(() => {alert('결제완료!!');}, 500);
+    completembPaymentButton.textContent = '결제 진행중...';
+    completembPaymentButton.disabled = 'true';
+    orderEnroll_mb();
+        setTimeout(() => {
+        alert('[ '+ Number($("input#totalPrice").val()).format() +' ] 원 결제완료!!');
+        event.preventDefault();
+        mbform.submit();},
+        5000);
   }
 }
 
@@ -250,4 +278,85 @@ function validate() {
 	// 	 message = 'Explain how to enter a valid value';
   // }
   // someInput.setCustomValidity(message);
+}
+
+// 전화번호 입력시 자동으로 하이픈 추가
+const hypenTel = (target) => {
+    target.value = target.value
+    .replace(/[^0-9]/g, '')
+    .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+}
+
+// 금액 3자리수 콤마찍기위해 가격값을 Number로 전환
+function changeIntoNumber() {
+    let price = $("input#totalPrice").val();
+    console.log('price :>> ', price);
+    price = Number(price);
+    $("h3#total_price").html("주문 금액 : " + price.format() + " 원");
+    $("h2#total_price_final").html("주문 금액 : " + price.format() + " 원");
+}
+
+function orderEnroll_cc(){
+    let memberId = $("input[name=memberId].credit_card_form").val();
+    let payment_totPrice = Number($("input[name=payment_totPrice].credit_card_form").val());
+    let payment_type = $("input[name=payment_type].credit_card_form").val();
+    let storeId = $("input[name=storeId].credit_card_form").val();
+    let opIdList = [];
+    $("input[name=opIdList].credit_card_form").each(function(i){//체크된 리스트 저장
+        opIdList.push($(this).val());
+    });
+
+    $.ajax({
+        type : "post",
+        async : false, //false인 경우 동기식으로 처리한다.
+        url : "../order/enroll"
+        + "?memberId=" + encodeURIComponent(memberId) 
+        +  "&payment_totPrice=" + encodeURIComponent(payment_totPrice) 
+        +  "&payment_type=" + encodeURIComponent(payment_type) 
+        +  "&storeId=" + encodeURIComponent(storeId) 
+        +  "&opIdList=" + encodeURIComponent(opIdList),
+        success : function(data) {
+            if(data.trim()!='1'){
+                alert("상품주문 실패! 다시 시도해 주세요.");	
+            }
+        },
+        error : function(data) {
+            alert("에러가 발생했습니다.["+data+"]");
+        },
+        done : function(data) {
+        }
+    }); //end ajax	
+}
+
+function orderEnroll_mb(){
+    let memberId = $("input[name=memberId].mobile_check_form").val();
+    let payment_totPrice = Number($("input[name=payment_totPrice].mobile_check_form").val());
+    let payment_type = $("input[name=payment_type].mobile_check_form").val();
+    let storeId = $("input[name=storeId].mobile_check_form").val();
+    let opIdList = [];
+    $("input[name=opIdList].mobile_check_form").each(function(i){//체크된 리스트 저장
+        opIdList.push($(this).val());
+    });
+
+
+    $.ajax({
+        type : "post",
+        async : true, //false인 경우 동기식으로 처리한다.
+        url : "../order/enroll"
+        + "?memberId=" + encodeURIComponent(memberId) 
+        +  "&payment_totPrice=" + encodeURIComponent(payment_totPrice) 
+        +  "&payment_type=" + encodeURIComponent(payment_type) 
+        +  "&storeId=" + encodeURIComponent(storeId) 
+        +  "&opIdList=" + encodeURIComponent(opIdList),
+        success : function(data) {
+            if(data.trim()!='1'){
+                alert("상품주문 실패! 다시 시도해 주세요.");	
+            }
+        },
+        error : function(data) {
+            alert("에러가 발생했습니다.["+data+"]");
+        },
+        done : function(data) {
+        }
+    }); //end ajax	
 }
