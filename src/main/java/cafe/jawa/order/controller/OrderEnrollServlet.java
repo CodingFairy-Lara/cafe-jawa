@@ -71,6 +71,7 @@ public class OrderEnrollServlet extends HttpServlet {
 			order.setTotalPrice(totPrice);
 			
 			int orderNum = orderService.selectLastOrderNo();
+			orderNum ++;
 			order.setOrderNum(orderNum);
 			
 			for(int i = 0; i < opIdList.length; i++ ) {

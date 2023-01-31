@@ -51,7 +51,7 @@
 					<!-- 신용카드 결제 폼 -->
 					<div id="credit_card_div" class="credit_card_div">
 						<div class="subdiv credit_card_form" id="credit_card_form_div">
-							<form action="<%= request.getContextPath() %>" method="post" class="credit_card_form">
+							<form action="<%= request.getContextPath() %>/order/control" method="post" class="credit_card_form">
 								<h1 class="credit_card_form">신용카드</h1>
 								<section class="credit_card_form">        
 								  <label for="cc-number" class="credit_card_form">카드 번호</label>
@@ -91,7 +91,7 @@
 					<!-- 모바일 결제 폼 -->
 					<div id="mobile_check_div" class="mobile_check_div" style="display: none;">
 						<div class="subdiv mobile_check_form" id="mobile_check_form_div">
-							<form action="<%= request.getContextPath() %>" method="post" class="mobile_check_form">
+							<form action="<%= request.getContextPath() %>/order/control" method="post" class="mobile_check_form">
 								<h1 class="mobile_check_form">모바일 결제</h1>
 								<section class="mobile_check_form">        
 								  <label for="mobile-number" class="mobile_check_form">전화 번호</label>

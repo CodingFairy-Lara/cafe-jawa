@@ -6,10 +6,12 @@ import static cafe.jawa.common.JdbcTemplate.getConnection;
 import static cafe.jawa.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import cafe.jawa.cart.model.dto.Cart;
 import cafe.jawa.order.model.dao.OrderDao;
 import cafe.jawa.order.model.dto.Order;
+import cafe.jawa.order.model.dto.Payment;
 
 public class OrderService {
 
@@ -56,11 +58,27 @@ public class OrderService {
 		return result;
 	}
 
-	public Order getOrderStatus(String memberId) {
-		Order order = null;
+	public List<Order> getOrderList(String memberId) {
+		Connection conn = getConnection();
+		List<Order> orderList = null;
+		orderList = orderDao.getOrderList(conn, memberId);
+		close(conn);
+		return orderList;
+	}
+
+	public int selectLastOrderNo() {
+		Connection conn = getConnection();
+		int orderNo = orderDao.selectLastOrderNo(conn);
+		System.out.println("orderNo = " + orderNo);
+		close(conn);
+		return orderNo;
+	}
+
+	public int enrollPayment(Payment payment) {
+		int result = 0;
 		Connection conn = getConnection();
 		try {
-			order = orderDao.getOrderStatus(conn, memberId);
+			result = orderDao.enrollPayment(conn, payment);
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
@@ -68,24 +86,15 @@ public class OrderService {
 		} finally {
 			close(conn);
 		}
-		return order;
+		return result;
 	}
 
-	public int selectLastOrderNo() {
-		int result = 0;
+	public Payment getPaymentList(int orderNum) {
 		Connection conn = getConnection();
-		try {
-			int orderNo = orderDao.selectLastOrderNo(conn);
-			System.out.println("orderNo = " + orderNo);
-			orderNo ++;
-			result = orderNo;
-		} catch (Exception e) {
-			rollback(conn);
-			throw e;
-		} finally {
-			close(conn);
-		}
-		return result;
+		Payment payment = null;
+		payment = orderDao.getPaymentList(conn, orderNum);
+		close(conn);
+		return payment;
 	}
 
 

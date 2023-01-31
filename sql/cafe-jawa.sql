@@ -389,6 +389,7 @@ create sequence seq_ordered_product_id;
 create sequence seq_order_id;
 create sequence seq_order_num;
 create sequence seq_cart_id;
+create sequence seq_payment_id;
 
 SELECT seq_order_id.CURRVAL FROM DUAL; 
 
@@ -408,10 +409,12 @@ select * from store;
 
 select * from ordered_product;
 select * from cart;
+select * from payment;
 select * from order_tb;
 select * from ordered_product where order_id is not null;
 
-SELECT id FROM order_tb where member_ID = 'abcd12345' and order_status = 1;
+select * from payment where order_num = 10010;
+SELECT * FROM order_tb where member_ID = 'abcd12345';
 
 UPDATE ordered_product SET order_id = 30 WHERE id = 19;
 --select * from ordered_product where member_id = ? and product_id = ? and cup = ? and cup_size = ?
