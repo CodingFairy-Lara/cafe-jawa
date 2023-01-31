@@ -50,7 +50,7 @@ body {
 #content {
   width: 100vw;
   background-color: white;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .inner {
@@ -2346,6 +2346,7 @@ div#empty_cart {
   /* ! orderInfo */
   #orderInfo_container {
     background-color: white;
+    overflow: hidden;
   }
 
 

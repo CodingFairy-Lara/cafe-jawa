@@ -14,12 +14,12 @@
 %>
 
 <section id=cart-view-container>
-    <form 
-    name="orderViewFrm" 
-    method="POST" 
-    action="<%= request.getContextPath() %>/order/view">
     <!-- 장바구니 헤더 -->
     <div class="cart_header">
+        <form 
+        name="orderViewFrm" 
+        method="POST" 
+        action="<%= request.getContextPath() %>/order/view">
         <div class="inner">
             <h1 class="cart_header">장바구니</h1>
             <select name="store_id" id="select_store" required >
