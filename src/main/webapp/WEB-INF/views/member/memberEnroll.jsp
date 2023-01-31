@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<section id=enroll-container>
+<section class="enroll">
 	<h2>회원 가입 정보 입력</h2>
+	<div class="enroll_card">
 	<form 
 		name="memberEnrollFrm" 
 		method="POST" 
@@ -57,6 +58,7 @@
 		<input type="submit" value="가입" >
 		<input type="reset" value="취소">
 	</form>
+	</div>
 </section>
 <form action="<%= request.getContextPath() %>/member/checkIdDuplicate" name="checkIdDuplicateFrm">
 	<input type="hidden" name="memberId" />
