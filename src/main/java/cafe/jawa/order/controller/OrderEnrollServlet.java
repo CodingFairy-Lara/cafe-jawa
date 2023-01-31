@@ -34,8 +34,10 @@ public class OrderEnrollServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
-
-		String memberId = request.getParameter("memberId");
+		
+		// 1. 사용자 id 가져오기
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		String memberId = loginMember.getMemberId();
 		System.out.println("결제진행중 " + memberId);
 		// 수령지점 정보
 		String storeId = request.getParameter("storeId");
@@ -67,6 +69,9 @@ public class OrderEnrollServlet extends HttpServlet {
 			order.setMemberId(memberId);
 			order.setStoreId(storeId);
 			order.setTotalPrice(totPrice);
+			
+			int orderNum = orderService.selectLastOrderNo();
+			order.setOrderNum(orderNum);
 			
 			for(int i = 0; i < opIdList.length; i++ ) {
 				String op_Id = opIdList[i];

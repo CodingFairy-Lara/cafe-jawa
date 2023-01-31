@@ -8,6 +8,7 @@
 	if(msg != null) session.removeAttribute("msg");
 	MemberRole user = MemberRole.valueOf("U");
 	MemberRole admin = MemberRole.valueOf("A");
+  
 %>
 <!doctype html>
 <html lang="en">
@@ -25,6 +26,7 @@
   <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-1.8.3.min.js"></script>
   <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery.elevatezoom.js"></script>
   <script type="text/javascript" src="<%= request.getContextPath() %>/js/productMenu.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <script>
   window.addEventListener('load', () => {
     <% if(msg != null) { %>

@@ -27,7 +27,7 @@ public class OrderDao {
 	}
 
 	public Order orderEnroll(Connection conn, Order order) {
-		String sql = prop.getProperty("orderEnroll"); // insert into order_tb values (seq_order_id.nextval, ?, ?, default, default, ?)
+		String sql = prop.getProperty("orderEnroll"); // insert into order_tb values (seq_order_id.nextval, ?, ?, default, default, ?, ?)
 		String sql2 = prop.getProperty("getOrderInfo"); // select * from order_tb where member_id = ? and store_id = ? and order_status = 1 and total_price = ?
 		int result = 0;
 		Order order_ = null;
@@ -36,6 +36,7 @@ public class OrderDao {
 			pstmt.setString(1, order.getMemberId());
 			pstmt.setString(2, order.getStoreId());
 			pstmt.setInt(3, order.getTotalPrice());
+			pstmt.setInt(4, order.getOrderNum());
 			
 			result = pstmt.executeUpdate();
 			if (result > 0) {
@@ -68,6 +69,7 @@ public class OrderDao {
 		order.setStatus(rset.getInt("order_status"));
 		order.setOrderDate(rset.getDate("order_date"));
 		order.setTotalPrice(rset.getInt("total_price"));
+		order.setOrderNum(rset.getInt("order_num"));
 		return order;
 	}
 
@@ -98,6 +100,51 @@ public class OrderDao {
 			throw new ProductException("장바구니 제거 오류!", e);
 		}
 		return result;
+	}
+
+	public Order getOrderStatus(Connection conn, String memberId) {
+		String sql = prop.getProperty("deleteCart"); // delete from cart where od_product_id = ?
+		Order order = new Order();
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, memberId);
+			
+		} catch (SQLException e) {
+			throw new ProductException("장바구니 제거 오류!", e);
+		}
+		return order;
+	}
+
+	public int selectLastOrderNo(Connection conn) {
+		String sql = prop.getProperty("selectLastOrderNo"); // select MAX(order_num) from order_tb
+		int orderNo = 0;
+		try(
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rset = pstmt.executeQuery();
+		){
+			if(rset.next())
+				orderNo = rset.getInt(1);
+			
+		} catch (SQLException e) {
+			throw new ProductException("주문번호 조회 오류!", e);
+		}
+		return orderNo;
+	}
+
+	public int selectLastseqNo(Connection conn) {
+		String sql = prop.getProperty("selectLastseqNo"); // SELECT seq_order_id.CURRVAL FROM DUAL
+		int orderId = 0;
+		try(
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rset = pstmt.executeQuery();
+		){
+			if(rset.next())
+				orderId = rset.getInt(1);
+			
+		} catch (SQLException e) {
+			throw new ProductException("주문ID 조회 오류!", e);
+		}
+		return orderId;
 	}
 	
 	
