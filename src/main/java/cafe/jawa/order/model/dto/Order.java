@@ -14,6 +14,7 @@ public class Order {
     private int quantity;
     // DB로부터 받을 값
 	private int orderId;
+	private int orderNum;
 	private String memberId;
 	private String storeId;
 	private int status;
@@ -25,12 +26,13 @@ public class Order {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Order(int op_id, int quantity, int orderId, String memberId, String storeId, int status,
+	public Order(int op_id, int quantity, int orderId, int orderNum, String memberId, String storeId, int status,
 			Date orderDate, int totalPrice) {
 		super();
 		this.op_id = op_id;
 		this.quantity = quantity;
 		this.orderId = orderId;
+		this.orderNum = orderNum;
 		this.memberId = memberId;
 		this.storeId = storeId;
 		this.status = status;
@@ -60,6 +62,14 @@ public class Order {
 
 	public void setOrderId(int orderId) {
 		this.orderId = orderId;
+	}
+
+	public int getOrderNum() {
+		return orderNum;
+	}
+
+	public void setOrderNum(int orderNum) {
+		this.orderNum = orderNum;
 	}
 
 	public String getMemberId() {
@@ -104,14 +114,14 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [op_id=" + op_id + ", quantity=" + quantity + ", orderId=" + orderId
+		return "Order [op_id=" + op_id + ", quantity=" + quantity + ", orderId=" + orderId + ", orderNum=" + orderNum
 				+ ", memberId=" + memberId + ", storeId=" + storeId + ", status=" + status + ", orderDate=" + orderDate
 				+ ", totalPrice=" + totalPrice + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(memberId, op_id, orderDate, orderId, quantity, status, storeId, totalPrice);
+		return Objects.hash(memberId, op_id, orderDate, orderId, orderNum, quantity, status, storeId, totalPrice);
 	}
 
 	@Override
@@ -124,11 +134,10 @@ public class Order {
 			return false;
 		Order other = (Order) obj;
 		return Objects.equals(memberId, other.memberId) && op_id == other.op_id
-				&& Objects.equals(orderDate, other.orderDate) && orderId == other.orderId && quantity == other.quantity
-				&& status == other.status && Objects.equals(storeId, other.storeId) && totalPrice == other.totalPrice;
+				&& Objects.equals(orderDate, other.orderDate) && orderId == other.orderId && orderNum == other.orderNum
+				&& quantity == other.quantity && status == other.status && Objects.equals(storeId, other.storeId)
+				&& totalPrice == other.totalPrice;
 	}
-
-	
 	
 	
 }

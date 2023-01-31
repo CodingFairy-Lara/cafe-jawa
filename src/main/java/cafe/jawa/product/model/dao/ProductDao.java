@@ -142,6 +142,7 @@ public class ProductDao {
 		orderedProduct.setCup(rset.getString("cup"));
 		orderedProduct.setCupSize(rset.getString("cup_size"));
 		orderedProduct.setMemberId(rset.getString("member_id"));
+		orderedProduct.setOrderId(rset.getInt("order_id"));
 		return orderedProduct;
 	}
 

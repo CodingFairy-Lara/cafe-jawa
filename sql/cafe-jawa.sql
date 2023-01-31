@@ -263,7 +263,7 @@ REFERENCES product (
 	id
 );
 
-ALTER TABLE pay ADD CONSTRAINT FK_order_TO_pay_1 FOREIGN KEY (
+ALTER TABLE payMENT ADD CONSTRAINT FK_order_TO_pay_1 FOREIGN KEY (
 	order_id
 )
 REFERENCES order_tb (
@@ -387,7 +387,11 @@ select * from product_images;
 
 create sequence seq_ordered_product_id;
 create sequence seq_order_id;
+create sequence seq_order_num;
 create sequence seq_cart_id;
+create sequence seq_payment_id;
+
+SELECT seq_order_id.CURRVAL FROM DUAL; 
 
 insert into ordered_product values (seq_ordered_product_id.nextval, null, 202, 2, 'venti', '일회용컵');
 --insert into ordered_product values (seq_ordered_product_id.nextval, null, ?, ?, ?, ?)
@@ -401,11 +405,18 @@ insert into ordered_product values (seq_ordered_product_id.nextval, null, 202, 2
 
 --select * from ordered_product where member_id = ? and product_id = ? and cup = ? and cup_size = ?
 select * from store;
+--cart 11 / op 14/ od 38
 
 select * from ordered_product;
 select * from cart;
+select * from payment;
 select * from order_tb;
+select * from ordered_product where order_id is not null;
 
-UPDATE ordered_product SET order_id = 022 WHERE id = 19;
+select * from payment where order_num = 10010;
+SELECT * FROM order_tb where member_ID = 'abcd12345';
+
+UPDATE ordered_product SET order_id = 30 WHERE id = 19;
 --select * from ordered_product where member_id = ? and product_id = ? and cup = ? and cup_size = ?
 select * from store;
+select MAX(order_num) from order_tb;

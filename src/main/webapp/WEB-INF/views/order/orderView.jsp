@@ -15,7 +15,7 @@
     String storeId = (String) request.getAttribute("storeId");
 %>
 
-<section id=cart-view-container>
+<section id="cart-view-container">
     <!-- 주문목록 헤더 -->
     <div class="order_header">
         <div class="inner">
