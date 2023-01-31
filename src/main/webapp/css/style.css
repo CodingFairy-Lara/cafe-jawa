@@ -47,6 +47,12 @@ body {
     background-color: rgb(241, 237, 231);
 }
 
+#content {
+  width: 100vw;
+  background-color: white;
+  overflow: hidden;
+}
+
 .inner {
   width: 1100px;
   margin: 0 auto;
@@ -2229,6 +2235,12 @@ div#empty_cart {
   	cursor: pointer;
   	line-height: 8px;
   }
+
+  /* ! orderInfo */
+  #orderInfo_container {
+    background-color: white;
+  }
+
 
   /* ! footer */
   footer {
