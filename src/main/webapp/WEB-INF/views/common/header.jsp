@@ -170,15 +170,9 @@
                       <li>
                         <h4>매장 이야기</h4>
                         <ul>
-                          	<li>
-								<a href="<%= request.getContextPath() %>/store/jamsil">CAFE JAWA 잠실점</a>
-							</li>
-							<li>
-                          		<a href="<%= request.getContextPath() %>/store/incheon">CAFE JAWA 인천점</a>
-							</li>
-							<li>
-								<a href="<%= request.getContextPath() %>/store/dongtan">CAFE JAWA 동탄점</a>
-							</li>
+                          	<li onclick="location.href='<%= request.getContextPath() %>/store/jamsil';">CAFE JAWA 잠실점</li>
+							<li onclick="location.href='<%= request.getContextPath() %>/store/incheon';">CAFE JAWA 인천점</li>
+							<li onclick="location.href='<%= request.getContextPath() %>/store/dongtan';">CAFE JAWA 동탄점</li>
                         </ul>
                       </li>
                     </ul>
