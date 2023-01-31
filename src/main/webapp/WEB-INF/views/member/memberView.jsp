@@ -3,13 +3,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<section id=enroll-container>
+<section class=info>
 	<h2>회원 정보</h2>
+	<div class=info_card>
 	<form name="memberUpdateFrm" method="post" action="<%= request.getContextPath() %>/member/memberUpdate">
 		<table>
 			<tr>
 				<th>아이디</th>
-				<td>
+				<td style= width:85%;>
 					<input type="text" name="memberId" id="memberId" value="<%= loginMember.getMemberId() %>" readonly>
 				</td>
 			</tr>
@@ -54,6 +55,7 @@
         <input type="button" value="비밀번호 변경" onclick="updatePassword();"/>
         <input type="button" onclick="deleteMember();" value="회원 탈퇴"/>
 	</form>
+	</div>
 </section>
 
 <form action="<%= request.getContextPath() %>/member/memberDelete" method="POST" name="memberDeleteFrm"></form>
