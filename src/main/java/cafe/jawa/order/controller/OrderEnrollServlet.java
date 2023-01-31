@@ -34,52 +34,56 @@ public class OrderEnrollServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
-		Order order = new Order();
-		int result2 = 0;
 
-		try {
-			Member loginMember = (Member) session.getAttribute("loginMember");
-			String memberId = loginMember.getMemberId();
+		String memberId = request.getParameter("memberId");
+		System.out.println("결제진행중 " + memberId);
+		// 수령지점 정보
+		String storeId = request.getParameter("storeId");
+		System.out.println(storeId);
+		// 결제수단 정보
+		String payment_type = request.getParameter("payment_type");
+		System.out.println(payment_type);
+		// 총 결제가격
+		int totPrice = Integer.parseInt(request.getParameter("payment_totPrice"));
+		System.out.println(totPrice);
+		// op_id List
+		String opIdList_ = request.getParameter("opIdList");		
+		String opIdList__ = opIdList_.substring(1, opIdList_.length()-1);
+		String[] opIdList = opIdList__.replace(" ", "").split(",");
+		
+		for(String val : opIdList) {
+			System.out.println(val+ " ");
+		}
+		
+		response.getWriter().write(orderEnroll(memberId, storeId, payment_type, totPrice, opIdList)+"");
+	}
 			
-			// 수령지점 정보
-			String storeId = request.getParameter("store_id");
-			System.out.println(storeId);
-			// 총 결제가격
-			int totPrice = Integer.parseInt(request.getParameter("final_totPrice"));
-			System.out.println(totPrice);
-			// op_id List
-			String [] opIdList = request.getParameterValues("get_op_id");		
-			for(String val : opIdList) {
-				System.out.println(val+ " ");
-			}
+		
+	public int orderEnroll(String memberId, String storeId, String payment_type, int totPrice, String[] opIdList) {
+		int result2 = 0;
+		Order order = new Order();
+		try {
 			
 			order.setMemberId(memberId);
 			order.setStoreId(storeId);
 			order.setTotalPrice(totPrice);
 			
-			int result = orderService.orderEnroll(order, opIdList);
-
-			if (result > 0) {
-				for(int i = 0; i < opIdList.length; i++ ) {
-					String op_Id = opIdList[i];
-					result2 = orderService.deleteCart(op_Id);
+			for(int i = 0; i < opIdList.length; i++ ) {
+				String op_Id = opIdList[i];
+				int op_id = Integer.parseInt(op_Id);
+				System.out.println(op_id);
+				
+				int result = orderService.orderEnroll(order, op_id);
+				
+				if (result > 0) {
+					result2 = orderService.deleteCart(op_id);
 				}
+			}}
+			catch(Exception e) {
+				e.printStackTrace();
+				return 0;
 			}
+			return result2;
 			
-		} catch(Exception e) {
-			session.setAttribute("msg", "상품 주문에 실패하였습니다.");
-			e.printStackTrace();
 		}
-		response.sendRedirect(request.getContextPath()+"/order/payment");
-	}
-		
-	
-		/**
-		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-		 */
-		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			response.getWriter().append("Served at: ").append(request.getContextPath());
-		}
-
-	
 }
