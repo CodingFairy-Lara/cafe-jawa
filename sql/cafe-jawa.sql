@@ -420,3 +420,29 @@ UPDATE ordered_product SET order_id = 30 WHERE id = 19;
 --select * from ordered_product where member_id = ? and product_id = ? and cup = ? and cup_size = ?
 select * from store;
 select MAX(order_num) from order_tb;
+
+create table board (
+    no number,
+    title varchar2(200) not null,
+    writer varchar2(20),
+    content varchar2(4000) not null,
+    read_count number default 0,
+    reg_date date default sysdate,
+    constraint pk_board_no primary key(no),
+    constraint fk_board_writer foreign key(writer) references member(id)
+        on delete set null
+);
+create sequence seq_board_no;
+
+create table attachment (
+    no number,
+    board_no number not null,
+    original_filename varchar2(255) not null, -- 업로드한 파일명
+    renamed_filename varchar2(255) not null, -- 실제 저장된 파일명
+    reg_date date default sysdate,
+    constraint pk_attachment_no primary key(no),
+    constraint fk_attachment_board_no foreign key(board_no) references board(no) 
+      on delete cascade
+);
+
+create sequence seq_attachment_no;
