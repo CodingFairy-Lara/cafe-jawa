@@ -84,7 +84,7 @@
     	    closeButton      : true,
     	    progressBar      : true,
     	    preventDuplicates: true,
-    	    positionClass    : "toast-bottom-full-width"
+    	    positionClass    : "toast-bottom-full-width",
     	    showMethod       : 'slideDown',
     	    timeOut          : 0, 
     	};
@@ -169,6 +169,15 @@
     	var intervalId = setInterval(getNewOrderList, 3000)
     	<% session.setAttribute("userOrderList", userOrderList); } %>
     
+    	<% if (loginMember != null && loginMember.getMemberRole() == MemberRole.valueOf("A")) {
+    		boolean flag = false;
+         for (Order order : orderListAll) {
+	   		 if ((order.getStatus() == 5 &&  flag == false) || (order.getStatus() == 4 && flag == true) || (order.getStatus() == 3 && flag == false)) { %>
+      	updateUserStatus("<%= order.getOrderNum() %>", "<%= order.getStatus() %>");
+    	<% flag = true;
+    	}}} %>
+    	
+    	
   });
 
 </script>

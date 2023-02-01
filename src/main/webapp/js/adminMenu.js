@@ -23,7 +23,7 @@ function getNewOrderList_user() {
     $.ajax({
         type : "post",
         async : true, //false인 경우 동기식으로 처리한다.
-        url : "../../jawa/user/newOrderList?user_id="+ encodeURIComponent(user_id),
+        url : "../../jawa/user/newOrderList?",
         
         success : function(data) {
 
@@ -42,7 +42,7 @@ function adminStopInterval(intervalId) {
 
 function acceptOrder_admin(order_num, order_status) {
     let button = document.querySelector('button#accept_btn_'+order_num);
-    button.disabled = 'true';
+    // button.disabled = 'true';
     order_num = parseInt(order_num);
     order_status = parInt(order_status);
 
@@ -89,4 +89,18 @@ function updateOrderStatus(orderNum, orderStatus) {
         }
     }); //end ajax	
 
+}
+
+
+function updateUserStatus(orderNum, orderStatus) {
+    orderNum = parseInt(orderNum);
+    orderStatus = parseInt(orderStatus);
+
+    if (orderStatus == 3) {
+        setTimeout(() => updateOrderStatus, 60000, orderNum, orderStatus);
+    } else if (orderStatus == 4) {
+        setTimeout(() => updateOrderStatus, 10000, orderNum, orderStatus);
+    } else if (orderStatus == 5) {
+        setTimeout(() => updateOrderStatus, 60000, orderNum, orderStatus);
+    }
 }
