@@ -239,7 +239,7 @@
                       <li>
                         <h4>공지사항</h4>
                         <ul>
-                          <li class="notice_1"><a href="<%= request.getContextPath() %>/board/boardList">공지사항 게시판</a></li>
+                          <li onclick="location.href='<%= request.getContextPath() %>/board/boardList">공지사항 게시판</li>
                         </ul>
                       </li>
                     </ul>
@@ -296,13 +296,6 @@
                   <div class="contents__menu">
                     <ul class="inner">
                       <li>
-                        <h4>매장 찾기</h4>
-                        <ul>
-                          <li>지역 검색</li>
-                          <li>My 매장</li>
-                        </ul>
-                      </li>
-                      <li>
                         <h4>매장 이야기</h4>
                         <ul>
                           	<li onclick="location.href='<%= request.getContextPath() %>/store/jamsil';">CAFE JAWA 잠실점</li>
@@ -314,42 +307,12 @@
                   </div>
                   <div class="contents__texture">
                     <div class="inner">
-                      <h4>매장 찾기</h4>
-                      <p>보다 빠르게 매장을 찾아보세요.</p>
-                      <h4 class="new">청담스타</h4>
-                      <p>CAFE JAWA 1,000호점인 청담스타점을 만나보세요.</p>
+                      <h4 class="new">잠실자와</h4>
+                      <p>CAFE JAWA 3호점인 잠실자와점을 만나보세요.</p>
                     </div>
                   </div>
                 </div>
               </li>
-              <li class="item">
-                <div class="item__name">CUSTOMER SEVICE</div>
-                <div class="item__contents">
-                  <div class="contents__menu">
-                    <ul class="inner">
-                      <li>
-                        <h4>FAQ</h4>
-                        <ul>
-                          <li>자주하는 질문</li>
-                        </ul>
-                      </li>
-                      <li>
-                        <h4>고객의 소리</h4>
-                        <ul>
-                          <li>문의하기</li>
-                          <li>문의 내역</li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="contents__texture">
-                    <div class="inner">
-                      <h4>커피원두 재활용</h4>
-                      <p>CAFE JAWA 커피 원두를 재활용 해보세요.</p>
-                    </div>
-                  </div>
-                </div>
-            </li>
           </ul>
 
         </div>
