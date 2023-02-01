@@ -248,7 +248,7 @@
                       <li>
                         <h4>공지사항</h4>
                         <ul>
-                          <li class="notice_1"><a href="<%= request.getContextPath() %>/notice/noticeList">공지사항 게시판</a></li>
+                          <li class="notice_1"><a href="<%= request.getContextPath() %>/board/boardList">공지사항 게시판</a></li>
                         </ul>
                       </li>
                     </ul>
