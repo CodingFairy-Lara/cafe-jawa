@@ -61,31 +61,34 @@ public class OrderControlServlet extends HttpServlet {
 		List<Cart> cartList = cartservice.selectCartList(memberId);
 		
 		// 주문정보 list 가져오기
-		List<Order> orderList = orderService.getOrderList(memberId);
-		System.out.println("orderList = " + orderList);
+		List<Order> userOrderList = orderService.getOrderList(memberId);
+		System.out.println("orderList = " + userOrderList);
 		
 		// 결제정보 list 가져오기
 		List<Payment> paymentList = new ArrayList<>();
-		for (Order order : orderList) {
-			if (order.getStatus() == 1) {
-				session.setAttribute("orderStatus", order.getStatus());
-			}
+		for (Order order : userOrderList) {
 			int orderNum_ = order.getOrderNum();
 			Payment payment_ = orderService.getPaymentList(orderNum_);
 			paymentList.add(payment_);
 		}
 		System.out.println("paymentList = " + paymentList);
-		
+
+		if (userOrderList != null) {
+			session.setAttribute("userOrderList", userOrderList);
+		}
 		
 		// 3. view단 위임.
+		request.setAttribute("userOrderList", userOrderList);
 		request.setAttribute("paymentList", paymentList);
-		request.setAttribute("orderList", orderList);
 		request.setAttribute("storeId", storeId);
 		request.setAttribute("productList", productList);
 		request.setAttribute("attachmentList", attachmentList);
 		request.setAttribute("orderedProductList", orderedProductList);
 		request.setAttribute("cartList", cartList);
-		request.getRequestDispatcher("/WEB-INF/views/order/orderInfo.jsp").forward(request, response);
+		
+		response.sendRedirect(request.getContextPath() + "/");
+		
+//		request.getRequestDispatcher("/WEB-INF/views/order/orderInfo.jsp").forward(request, response);
 	}
 
 }

@@ -8,6 +8,8 @@
 %>
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<div class="inner">
+
 <section id="storeControl">
 	<h2>매장 오픈/클로즈</h2>
 	<form name="StoreOpenFrm" method="post" action="<%= request.getContextPath() %>/store/storeOpen">
@@ -47,6 +49,12 @@
 		</select>
 	</form>
 </section>
+<section>
+	<h2>주문 관리</h2>
+	<input type="button" onclick="location.href='<%= request.getContextPath() %>/admin/orderControl';" value="주문 관리 페이지" class="abutton" />
+</section>
+</div>
+
 <script>
 	document.StoreOpenFrm.onsubmit = (e) => {
 		const store_id = document.querySelector("#store_id");

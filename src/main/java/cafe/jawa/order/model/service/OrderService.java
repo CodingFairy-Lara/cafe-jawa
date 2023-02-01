@@ -76,17 +76,24 @@ public class OrderService {
 
 	public int enrollPayment(Payment payment) {
 		int result = 0;
+		int result2 = 0;
 		Connection conn = getConnection();
 		try {
 			result = orderDao.enrollPayment(conn, payment);
 			commit(conn);
+			
+			if (result > 0) {
+				int orderNum = payment.getOrderNum();
+				result2 = orderDao.updateOrderStatus_2(conn, orderNum);
+				commit(conn);
+			}
 		} catch (Exception e) {
 			rollback(conn);
 			throw e;
 		} finally {
 			close(conn);
 		}
-		return result;
+		return result2;
 	}
 
 	public Payment getPaymentList(int orderNum) {
@@ -97,7 +104,59 @@ public class OrderService {
 		return payment;
 	}
 
+	public List<Order> getOrderListAll() {
+		Connection conn = getConnection();
+		List<Order> orderListAll = null;
+		orderListAll = orderDao.getOrderListAll(conn);
+		close(conn);
+		return orderListAll;
+	}
 
+	public List<Order> getNewOrderList() {
+		Connection conn = getConnection();
+		List<Order> orderListAll = null;
+		orderListAll = orderDao.getNewOrderList(conn);
+		close(conn);
+		return orderListAll;
+	}
+
+	public int acceptOrder(int order_num) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = orderDao.acceptOrder(conn, order_num);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public List<Order> getUserOrderList(String memberId) {
+		Connection conn = getConnection();
+		List<Order> orderListAll = null;
+		orderListAll = orderDao.getUserOrderList(conn, memberId);
+		close(conn);
+		return orderListAll;
+	}
+
+	public int updateStatus_4(int order_num) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = orderDao.updateStatus_4(conn, order_num);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
 	
 	
 }
