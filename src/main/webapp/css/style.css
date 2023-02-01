@@ -2343,38 +2343,11 @@ div#empty_cart {
   	cursor: pointer;
   }
 
-  /* ! orderInfo_admin */
-  #admin_orderInfo_container {
+  /* ! orderInfo */
+  #orderInfo_container {
     background-color: white;
     overflow: hidden;
   }
-
-  table {
-    color: #333;
-    width: 100%;
-    border-top: 1px solid #ddd;
-    border-collapse: collapse;
-    text-align: center;
-    vertical-align: middle;
-  }
-  th, td {
-    border-bottom: 1px solid #ddd;
-    border-left: 1px solid #ddd;
-    padding: 10px;
-    vertical-align: middle;
-  }
-  th:first-child, td:first-child {
-    border-left: none;
-  }
-
-  div#admin_orderInfo_tbl_div {
-    margin: 95px;
-  }
-
-  button.admin_info {
-    padding: 0;
-  }
-
 
   /* ! footer */
   footer {

@@ -1,57 +1,86 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<style>
+	.wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+    .wrap * {padding: 0;margin: 0;}
+    .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+    .info .close:hover {cursor: pointer;}
+    .info .body {position: relative;overflow: hidden;}
+    .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+    .desc .address {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .desc .road {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .desc .phone {font-size: 11px;color: #888;margin-top: -2px;}
+    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+    .info .link {color: #5085BB;}
+</style>
 <section class="JAWA_jamsil">
-<h1>CAFE JAWA 잠실점</h1>
-<div id ="map" style="width:600px; height:400px;" ></div>
-<div class ="address">주소 : 서울시 강남구 도곡로 457</div>
-<div class ="number">전화번호 : 1522-3232</div>
-<div class ="road">
-<p>
-오시는길 : 대치역 2번 출구에서 한티근린공원방면으로 좌회전 후 직진(546m). 은마아파트입구사거리 좌측에 위치.<br>
-　　　　　수인분분당선 한티역 2번 출구에서 직진하여 도보로 5분 거리에 위치.<br>
-　　　　　*버스 이용 시 간선버스: 333,340,420,461 은마아파트입구사거리역 하차 지선버스: 4412 은마아파트입구사거리역 하차
-</p>
-</div>
+<h1 style= text-align:center;>CAFE JAWA 잠실점</h1>
+<h2 style= text-align:center;>바쁜 일상 속, 편안함과 즐거움을 찾아줄 잠실점을 만나보세요.</h2>
+<div id ="map" style="width:100%; height:500px;" ></div>
 </section>
-			<script type"text/javascrpit" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b73e3975751cfe6ba538745c6cf799e0&libraries=services"></script>
+			<script type"text/javascrpit" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b73e3975751cfe6ba538745c6cf799e0"></script>
 			
 			<script>
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			    mapOption = {
-			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-			        level: 3 // 지도의 확대 레벨
+			        center: new kakao.maps.LatLng(37.4989533, 127.0602651), // 지도의 중심좌표
+			        level: 2 // 지도의 확대 레벨
 			    };  
 			
-			// 지도를 생성합니다    
-			var map = new kakao.maps.Map(mapContainer, mapOption); 
+			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 			
-			// 주소-좌표 변환 객체를 생성합니다
-			var geocoder = new kakao.maps.services.Geocoder();
-			
-			// 주소로 좌표를 검색합니다
-			geocoder.addressSearch('서울시 강남구 도곡로 457', function(result, status) {
-			
-			    // 정상적으로 검색이 완료됐으면 					ㅈ
-			     if (status === kakao.maps.services.Status.OK) {
-			
-			        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-			
-			        // 결과값으로 받은 위치를 마커로 표시합니다
-			        var marker = new kakao.maps.Marker({
-			            map: map,
-			            position: coords
-			        });
-			
-			        // 인포윈도우로 장소에 대한 설명을 표시합니다
-			        var infowindow = new kakao.maps.InfoWindow({
-			            content: '<div style="width:150px;text-align:center;padding:6px 0;">CAFE JAWA 잠실점</div>'
-			        });
-			        infowindow.open(map, marker);
-			
-			        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-			        map.setCenter(coords);
-			    } 
+			// 마커를 표시할 위치입니다 
+			var position =  new kakao.maps.LatLng(37.4989533, 127.0602651);
+
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+			  position: position,
+			  clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
 			});
+			
+			// 마커를 지도에 표시합니다.
+			marker.setMap(map);
+
+			var content = '<div class="wrap">' + 
+            '    <div class="info">' + 
+            '        <div class="title">' + 
+            '            CAFE JAWA 동탄점' + 
+            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+            '        </div>' + 
+            '        <div class="body">' + 
+            '            <div class="img">' +
+            '                <img src="../images/cafe_jawa_logo.png" width="73" height="70">' +
+            '           </div>' + 
+            '            <div class="desc">' + 
+            '                <div class="address">서울시 강남구 도곡로 457</div>' + 
+            '                <div class="phone">1522-3232</div>' + 
+            '                <div class="road">은마아파트입구사거리 좌측에 위치</div>' + 
+            '            </div>' + 
+            '        </div>' + 
+            '    </div>' +    
+            '</div>';
+
+// 마커 위에 커스텀오버레이를 표시합니다
+// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+var overlay = new kakao.maps.CustomOverlay({
+    content: content,
+    map: map,
+    position: marker.getPosition()       
+});
+
+// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+kakao.maps.event.addListener(marker, 'click', function() {
+    overlay.setMap(map);
+});
+
+// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+function closeOverlay() {
+    overlay.setMap(null);     
+}
 			</script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
