@@ -196,7 +196,7 @@
             <a href="<%= request.getContextPath() %>/member/login">My CAFE JAWA</a>
           </li>
         </ul>
-      <% } else { if (loginMember.getMemberRole() == user) { %>
+      <% } else if (loginMember.getMemberRole() == user) { %>
       	<ul class="loginMenu">
       	  <li>
       		<a href="<%= request.getContextPath() %>/member/logout">Sign out</a>
@@ -220,7 +220,7 @@
           <a href="<%= request.getContextPath() %>/member/admin">ADMIN</a>
         	</li>
     	 </ul>
-	<% }} %>
+	<% } %>
       </div>
 
           <ul class="main-menu">
@@ -230,16 +230,9 @@
                   <div class="contents__menu">
                     <ul class="inner">
                       <li>
-                        <h4>CAFE JAWA</h4>
-                        <ul>
-                          <li>팀원소개</li>
-                          <li>CAFE JAWA 이용안내</li>
-                        </ul>
-                      </li>
-                      <li>
                         <h4>공지사항</h4>
                         <ul>
-                          <li onclick="location.href='<%= request.getContextPath() %>/board/boardList">공지사항 게시판</li>
+                          <li onclick="location.href='<%= request.getContextPath() %>/board/boardList';">공지사항 게시판</li>
                         </ul>
                       </li>
                     </ul>
