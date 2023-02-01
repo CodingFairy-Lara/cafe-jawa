@@ -102,9 +102,7 @@
                       <li>
                         <h4>공지사항</h4>
                         <ul>
-                          <li class="notice_1"><a href="<%=request.getContextPath() %>/notice/noticeList">공지사항 게시판</a></li>
-                          <li>공지사항 게시판2</li>
-                          <li>공지사항 게시판3</li>
+                          <li onclick="location.href='<%= request.getContextPath() %>/board/boardList';">공지사항 게시판</li>
                         </ul>
                       </li>
                     </ul>
@@ -161,13 +159,6 @@
                   <div class="contents__menu">
                     <ul class="inner">
                       <li>
-                        <h4>매장 찾기</h4>
-                        <ul>
-                          <li>지역 검색</li>
-                          <li>My 매장</li>
-                        </ul>
-                      </li>
-                      <li>
                         <h4>매장 이야기</h4>
                         <ul>
                           	<li onclick="location.href='<%= request.getContextPath() %>/store/jamsil';">CAFE JAWA 잠실점</li>
@@ -181,8 +172,8 @@
                     <div class="inner">
                       <h4>매장 찾기</h4>
                       <p>보다 빠르게 매장을 찾아보세요.</p>
-                      <h4 class="new">청담스타</h4>
-                      <p>CAFE JAWA 1,000호점인 청담스타점을 만나보세요.</p>
+                      <h4 class="new">동탄자와</h4>
+                      <p>CAFE JAWA 3호점인 동탄자와점을 만나보세요.</p>
                     </div>
                   </div>
                 </div>

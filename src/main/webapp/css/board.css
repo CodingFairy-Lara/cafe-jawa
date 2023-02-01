@@ -1,0 +1,125 @@
+@CHARSET "UTF-8";
+/* 초기화 */
+tml, body, div, span, object, iframe, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    color:#444; 
+}
+
+h1 {
+    display: block;
+    font-size: 2em;
+    padding: 50px 10px;
+    font-weight: bold;
+}
+
+h2 {
+  display: block;
+  font-size: 1.2em;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+hr {
+    background:rgba(169, 169, 169, 0.353);
+    height:1px;
+    border:0;
+    margin: 0;
+}
+
+li{list-style:none}
+
+a { text-decoration: none; color: black; font-size:14px; }
+a:visited { text-decoration: none; }
+a:hover { text-decoration: none; }
+a:focus { text-decoration: none; }
+a:hover, a:active { text-decoration: none; }
+
+body {
+    font-family: 'Nanum Gothic', sans-serif;
+    background-color: rgb(241, 237, 231);
+}
+
+#content {
+  width: 100vw;
+  background-color: white;
+  /* overflow: hidden; */
+}
+
+.inner {
+  width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/*게시판*/
+section#board-container{width:600px; margin:0 auto; text-align:center;height:600px;}
+section#board-container h2{margin:0px 0;}
+table#tbl-board{width:100%; margin:0 auto; border:1px solid black; border-collapse:collapse; clear:both; }
+table#tbl-board th, table#tbl-board td {border:1px solid; padding: 5px 0; text-align:center;} 
+
+input#btn-add{float:right; margin: 0 0 15px;}
+
+div#pagebar{margin-top:10px; text-align:center; background-color:rgb(255, 255, 255); }
+div#pagebar span.cPage{color: #0066ff; margin-right: 5px;}
+div#pagebar a{margin-right: 5px;}
+
+table#tbl-board-view {
+	width:500px; 
+	margin:0 auto; 
+	border:1px solid black; 
+	border-collapse:collapse;  
+}
+table#tbl-board-view th {
+	width: 150px; 
+	height:50px;
+	border:1px solid; 
+	padding: 10px 0; 
+	text-align:center;
+	line-height : 50px;
+} 
+table#tbl-board-view td {
+	border:1px solid; 
+	padding: 5px 0 5px 15px; 
+	text-align:left;
+}
+table#tbl-board-view img {width: 16px;}
+table#tbl-board-view input[type=file] {margin: 3px 0;}
+
+span#fname{
+    position: absolute;
+    left: 92px;
+    top: 10px;
+    width: 255px;
+    font-size: 14px;
+    background: #f5f5f5;
+}
+#del_file+label{font-size:.8em; position:relative; top:-3px;}
+
+section#board-container form [type="submit"] {
+  	background-color: #646464;
+  	color: #fff;
+  	font-size: 20px;
+  	cursor: pointer;
+  }
+section#board-container form [type="button"] {
+  	background-color: #646464;
+  	border: soild;
+  	color: #fff;
+  	font-size: 20px;
+  	cursor: pointer;
+  	line-height: 8px;
+  	padding: 8px 10px;
+  	border-color : #000000;
+  	border-width : 2px;
+  }
+ a:hover {
+ 	background-color: powderblue;
+ }
