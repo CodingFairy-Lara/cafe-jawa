@@ -2,9 +2,7 @@
 <%@page import="cafe.jawa.product.model.dto.Attachment"%>
 <%@page import="cafe.jawa.product.model.dto.OrderedProduct"%>
 <%@page import="cafe.jawa.cart.model.dto.Cart"%>
-<%@page import="cafe.jawa.order.model.dto.Order"%>
 <%@page import="cafe.jawa.order.model.dto.Payment"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -13,7 +11,7 @@
 	List<Attachment> attachmentList = (List<Attachment>) request.getAttribute("attachmentList");
 	List<OrderedProduct> orderedProductList = (List<OrderedProduct>) request.getAttribute("orderedProductList");
 	List<Cart> cartList = (List<Cart>) request.getAttribute("cartList");
-	List<Order> orderList = (List<Order>) request.getAttribute("orderList");
+	List<Order> orduserOrderListerList = (List<Order>) request.getAttribute("userOrderList");
 	List<Payment> paymentList = (List<Payment>) request.getAttribute("paymentList");
 	String storeId = (String) request.getAttribute("storeId");
 %>
@@ -31,7 +29,7 @@
         <div class="order_content inner">
             <!-- 픽업지점 정보 헤더 -->
             <div class="order_list_header store_info">
-                <h2>상품 픽업 지점 정보</h2>
+                <h2>상품 픽업 지점 정보</h2>    
                 <div class="order_list_header_container">
                 </div>
             </div>

@@ -413,6 +413,39 @@ select * from payment;
 select * from order_tb;
 select * from ordered_product where order_id is not null;
 
+--LISTAGG( 합쳐지는 컬럼 [,'구분자']) WITHIN GROUP (ORDER BY 정렬하고 싶은 컬럼 ) [OVER (PARTITION BY  그룹을 나누고 싶은 컬럼)]
+select ot.order_num,
+REGEXP_REPLACE(LISTAGG(ot.member_id, ',') WITHIN GROUP (ORDER BY ot.member_id DESC ), '([^,]+)(,\1)*(,|$)', '\1\3') as member_id,
+REGEXP_REPLACE(LISTAGG(ot.ID, ',') WITHIN GROUP (ORDER BY ot.ID DESC ), '([^,]+)(,\1)*(,|$)', '\1\3') as ID,
+REGEXP_REPLACE(LISTAGG(ot.STORE_ID, ',') WITHIN GROUP (ORDER BY ot.STORE_ID DESC ), '([^,]+)(,\1)*(,|$)', '\1\3') as STORE_ID,
+REGEXP_REPLACE(LISTAGG(ot.ORDER_STATUS, ',') WITHIN GROUP (ORDER BY ot.member_id DESC ), '([^,]+)(,\1)*(,|$)', '\1\3') as ORDER_STATUS,
+REGEXP_REPLACE(LISTAGG(ot.ORDER_DATE, ',') WITHIN GROUP (ORDER BY ot.ORDER_DATE DESC ), '([^,]+)(,\1)*(,|$)', '\1\3') as ORDER_DATE,
+REGEXP_REPLACE(LISTAGG(ot.TOTAL_PRICE, ',') WITHIN GROUP (ORDER BY ot.TOTAL_PRICE DESC ), '([^,]+)(,\1)*(,|$)', '\1\3') as TOTAL_PRICE,
+REGEXP_REPLACE(LISTAGG(p.PAYMENT_METHOD, ',') WITHIN GROUP (ORDER BY p.PAYMENT_METHOD DESC ), '([^,]+)(,\1)*(,|$)', '\1\3') as PAYMENT_METHOD
+from order_tb ot, payment p
+where p.order_num = ot.order_num 
+group by ot.order_num;
+
+--SELECT ( CASE WHEN RANK = 1 THEN order_num ELSE '' END ) AS order_num,
+--STORE_ID,ORDER_STATUS,TOTAL_PRICE,ORDER_DATE
+
+--SELECT DISTINCT [중복제거할 컬럼] FROM [TABLE_NAME];
+SELECT DISTINCT member_id, order_num, STORE_ID, TOTAL_PRICE, ORDER_STATUS FROM Order_tb;
+
+--SELECT DISTINCT member_id, order_num, STORE_ID, TOTAL_PRICE, ORDER_STATUS FROM Order_tb where member_id='qwerty' ORDER BY order_status DESC;
+
+
+
+--select ot.order_num,
+--LISTAGG(ot.STORE_ID, ',') WITHIN GROUP (ORDER BY ot.STORE_ID DESC ) as STORE_ID,
+--LISTAGG(ot.ORDER_STATUS, ',') WITHIN GROUP (ORDER BY ot.member_id DESC ) as ORDER_STATUS,
+--LISTAGG(ot.ORDER_DATE, ',') WITHIN GROUP (ORDER BY ot.ORDER_DATE DESC ) as ORDER_DATE,
+--LISTAGG(ot.TOTAL_PRICE, ',') WITHIN GROUP (ORDER BY ot.TOTAL_PRICE DESC ) TOTAL_PRICE,
+--LISTAGG(p.PAYMENT_METHOD, ',') WITHIN GROUP (ORDER BY p.PAYMENT_METHOD DESC ) as PAYMENT_METHOD
+--from order_tb ot, payment p
+--where p.order_num = ot.order_num 
+--group by ot.order_num;
+
 select * from payment where order_num = 10010;
 SELECT * FROM order_tb where member_ID = 'abcd12345';
 

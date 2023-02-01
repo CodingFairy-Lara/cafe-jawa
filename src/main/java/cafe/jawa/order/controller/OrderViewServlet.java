@@ -16,6 +16,7 @@ import cafe.jawa.cart.model.dto.Cart;
 import cafe.jawa.cart.model.service.CartService;
 import cafe.jawa.member.model.dto.Member;
 import cafe.jawa.order.model.dto.Order;
+import cafe.jawa.order.model.service.OrderService;
 import cafe.jawa.product.model.dto.Attachment;
 import cafe.jawa.product.model.dto.OrderedProduct;
 import cafe.jawa.product.model.dto.Product;
@@ -29,6 +30,7 @@ public class OrderViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CartService cartservice = new CartService();
 	private ProductService productService = new ProductService();
+	private OrderService orderService = new OrderService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -49,6 +51,18 @@ public class OrderViewServlet extends HttpServlet {
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		String memberId = loginMember.getMemberId();
 		System.out.println(memberId);
+		
+		// 사용자 주문정보 가져오기
+		List<Order> userOrderList = orderService.getOrderList(memberId);
+		System.out.println("orderList = " + userOrderList);
+		
+		for (Order order : userOrderList) {
+			if (order.getStatus() > 0) {
+				session.setAttribute("msg", "이미 진행중인 주문이 존재합니다! 주문하신 상품 수령 후 이용해주세요.");
+				response.sendRedirect(request.getContextPath() + "/cart/view");
+			 	return;
+			}
+		}
 		
 		// 수령지점 정보
 		String storeId = request.getParameter("store_id");

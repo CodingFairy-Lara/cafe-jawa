@@ -1,6 +1,7 @@
 package cafe.jawa.order.model.dto;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 /**
@@ -9,59 +10,32 @@ import java.util.Objects;
  */
 public class Order {
 
-	// view단에서 받아올 값
-    private int op_id;
-    private int quantity;
     // DB로부터 받을 값
-	private int orderId;
 	private int orderNum;
+	private int orderId;
 	private String memberId;
 	private String storeId;
 	private int status;
-	private Date orderDate;
+	private Timestamp orderDate;
 	private int totalPrice;
+	private String payment_method;
 	
 	public Order() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Order(int op_id, int quantity, int orderId, int orderNum, String memberId, String storeId, int status,
-			Date orderDate, int totalPrice) {
+	public Order(int orderNum, int orderId, String memberId, String storeId, int status, Timestamp orderDate, int totalPrice,
+			String payment_method) {
 		super();
-		this.op_id = op_id;
-		this.quantity = quantity;
-		this.orderId = orderId;
 		this.orderNum = orderNum;
+		this.orderId = orderId;
 		this.memberId = memberId;
 		this.storeId = storeId;
 		this.status = status;
 		this.orderDate = orderDate;
 		this.totalPrice = totalPrice;
-	}
-
-	public int getOp_id() {
-		return op_id;
-	}
-
-	public void setOp_id(int op_id) {
-		this.op_id = op_id;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	public int getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+		this.payment_method = payment_method;
 	}
 
 	public int getOrderNum() {
@@ -70,6 +44,14 @@ public class Order {
 
 	public void setOrderNum(int orderNum) {
 		this.orderNum = orderNum;
+	}
+
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
 	}
 
 	public String getMemberId() {
@@ -96,11 +78,11 @@ public class Order {
 		this.status = status;
 	}
 
-	public Date getOrderDate() {
+	public Timestamp getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(Timestamp orderDate) {
 		this.orderDate = orderDate;
 	}
 
@@ -112,16 +94,24 @@ public class Order {
 		this.totalPrice = totalPrice;
 	}
 
+	public String getPayment_method() {
+		return payment_method;
+	}
+
+	public void setPayment_method(String payment_method) {
+		this.payment_method = payment_method;
+	}
+
 	@Override
 	public String toString() {
-		return "Order [op_id=" + op_id + ", quantity=" + quantity + ", orderId=" + orderId + ", orderNum=" + orderNum
-				+ ", memberId=" + memberId + ", storeId=" + storeId + ", status=" + status + ", orderDate=" + orderDate
-				+ ", totalPrice=" + totalPrice + "]";
+		return "Order [orderNum=" + orderNum + ", orderId=" + orderId + ", memberId=" + memberId + ", storeId="
+				+ storeId + ", status=" + status + ", orderDate=" + orderDate + ", totalPrice=" + totalPrice
+				+ ", payment_method=" + payment_method + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(memberId, op_id, orderDate, orderId, orderNum, quantity, status, storeId, totalPrice);
+		return Objects.hash(memberId, orderDate, orderId, orderNum, payment_method, status, storeId, totalPrice);
 	}
 
 	@Override
@@ -133,11 +123,13 @@ public class Order {
 		if (getClass() != obj.getClass())
 			return false;
 		Order other = (Order) obj;
-		return Objects.equals(memberId, other.memberId) && op_id == other.op_id
-				&& Objects.equals(orderDate, other.orderDate) && orderId == other.orderId && orderNum == other.orderNum
-				&& quantity == other.quantity && status == other.status && Objects.equals(storeId, other.storeId)
-				&& totalPrice == other.totalPrice;
+		return Objects.equals(memberId, other.memberId) && Objects.equals(orderDate, other.orderDate)
+				&& orderId == other.orderId && orderNum == other.orderNum
+				&& Objects.equals(payment_method, other.payment_method) && status == other.status
+				&& Objects.equals(storeId, other.storeId) && totalPrice == other.totalPrice;
 	}
+
+	
 	
 	
 }

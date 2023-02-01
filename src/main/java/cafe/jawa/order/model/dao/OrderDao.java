@@ -3,6 +3,7 @@ package cafe.jawa.order.model.dao;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -71,7 +72,7 @@ public class OrderDao {
 		order.setMemberId(rset.getString("MEMBER_ID"));
 		order.setStoreId(rset.getString("STORE_ID"));
 		order.setStatus(rset.getInt("ORDER_STATUS"));
-		order.setOrderDate(rset.getDate("ORDER_DATE"));
+//		order.setOrderDate(rset.getTimestamp("ORDER_DATE"));
 		order.setTotalPrice(rset.getInt("TOTAL_PRICE"));
 		order.setOrderNum(rset.getInt("ORDER_NUM"));
 		return order;
@@ -107,7 +108,8 @@ public class OrderDao {
 	}
 
 	public List<Order> getOrderList(Connection conn, String memberId) {
-		String sql = prop.getProperty("getOrderList"); // select * from order_tb where member_id = ?
+		// order_num 내림차순 조회
+		String sql = prop.getProperty("getOrderList"); // select * from order_tb where member_id = ? ORDER BY order_num DESC
 		List<Order> orderList = new ArrayList<>();
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -195,6 +197,133 @@ public class OrderDao {
 		payment.setOrderNum(rset.getInt("ORDER_NUM"));
 		payment.setPaymentMethod(rset.getString("PAYMENT_METHOD"));
 		return payment;
+	}
+
+	public List<Order> getOrderListAll(Connection conn) {
+		// order_num 내림차순 조회
+		String sql = prop.getProperty("getOrderListAll"); // select * from order_tb ORDER BY order_num DESC
+		List<Order> orderList = new ArrayList<>();
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					Order order = handleOrderResultSet(rset);
+					orderList.add(order);					
+				}
+			}
+		} catch (SQLException e) {
+			throw new ProductException("전체 주문목록 조회 오류!", e);
+		}
+		return orderList;
+	}
+
+	public int updateOrderStatus_2(Connection conn, int orderNum) {
+		String sql = prop.getProperty("updateOrderStatus_2"); // UPDATE order_tb SET order_status = 2 WHERE order_num = ?
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, orderNum);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ProductException("주문테이블_status 업데이트 오류! (2)", e);
+		}
+		return result;
+	}
+
+	/*
+	 * for 관리자계정
+	 * select ot.order_num,
+		REGEXP_REPLACE(LISTAGG(ot.member_id, ',') WITHIN GROUP (ORDER BY ot.member_id DESC ), '([^,]+)(,\1)*(,|$)', '\1\3') as member_id,
+		REGEXP_REPLACE(LISTAGG(ot.ID, ',') WITHIN GROUP (ORDER BY ot.ID DESC ), '([^,]+)(,\1)*(,|$)', '\1\3') as ID,
+		REGEXP_REPLACE(LISTAGG(ot.STORE_ID, ',') WITHIN GROUP (ORDER BY ot.STORE_ID DESC ), '([^,]+)(,\1)*(,|$)', '\1\3') as STORE_ID,
+		REGEXP_REPLACE(LISTAGG(ot.ORDER_STATUS, ',') WITHIN GROUP (ORDER BY ot.member_id DESC ), '([^,]+)(,\1)*(,|$)', '\1\3') as ORDER_STATUS,
+		REGEXP_REPLACE(LISTAGG(ot.ORDER_DATE, ',') WITHIN GROUP (ORDER BY ot.ORDER_DATE DESC ), '([^,]+)(,\1)*(,|$)', '\1\3') as ORDER_DATE,
+		REGEXP_REPLACE(LISTAGG(ot.TOTAL_PRICE, ',') WITHIN GROUP (ORDER BY ot.TOTAL_PRICE DESC ), '([^,]+)(,\1)*(,|$)', '\1\3') as TOTAL_PRICE,
+		REGEXP_REPLACE(LISTAGG(p.PAYMENT_METHOD, ',') WITHIN GROUP (ORDER BY p.PAYMENT_METHOD DESC ), '([^,]+)(,\1)*(,|$)', '\1\3') as PAYMENT_METHOD
+		from order_tb ot, payment p
+		where p.order_num = ot.order_num 
+		group by ot.order_num;
+	 */
+	public List<Order> getNewOrderList(Connection conn) {
+		// order_num 내림차순 조회
+		String sql = prop.getProperty("getNewOrderList");  // SELECT DISTINCT member_id, order_num, STORE_ID, TOTAL_PRICE, ORDER_STATUS FROM Order_tb;
+		List<Order> orderList = new ArrayList<>();
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					Order order = handleNewOrderResultSet(rset);
+					orderList.add(order);					
+				}
+			}
+		} catch (SQLException e) {
+			throw new ProductException("[관리자 계정] 전체 주문목록 조회 오류!", e);
+		}
+		return orderList;
+	}
+	
+	// payment 정보 추가
+	private Order handleNewOrderResultSet(ResultSet rset) throws SQLException {
+		Order order = new Order();
+//		order.setOrderId(rset.getInt("ID"));
+		order.setMemberId(rset.getString("MEMBER_ID"));
+		order.setStoreId(rset.getString("STORE_ID"));
+		order.setStatus(rset.getInt("ORDER_STATUS"));
+//		order.setOrderDate(rset.getTimestamp("ORDER_DATE"));
+		order.setTotalPrice(rset.getInt("TOTAL_PRICE"));
+		order.setOrderNum(rset.getInt("ORDER_NUM"));
+//		order.setPayment_method(rset.getString("PAYMENT_METHOD"));
+		return order;
+	}
+
+	public int acceptOrder(Connection conn, int order_num) {
+		String sql = prop.getProperty("updateOrderStatus_3"); // UPDATE order_tb SET order_status = 3 WHERE order_num = ?
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, order_num);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ProductException("주문테이블_status 업데이트 오류! (3)", e);
+		}
+		return result;
+	}
+
+	public List<Order> getUserOrderList(Connection conn, String memberId) {
+		String sql = prop.getProperty("getUserOrderList"); // SELECT DISTINCT member_id, order_num, STORE_ID, TOTAL_PRICE, ORDER_STATUS FROM Order_tb where member_id= ? ORDER BY order_status DESC
+		List<Order> orderList = new ArrayList<>();
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
+			pstmt.setString(1, memberId);
+			
+			try(ResultSet rset = pstmt.executeQuery()){
+				while(rset.next()) {
+					Order order = handleNewOrderResultSet(rset);
+					orderList.add(order);					
+				}
+			}
+		} catch (SQLException e) {
+			throw new ProductException("사용자 주문목록 조회 오류!", e);
+		}
+		return orderList;
+	}
+
+	public int updateStatus_4(Connection conn, int order_num) {
+		String sql = prop.getProperty("updateOrderStatus_3"); // UPDATE order_tb SET order_status = 4 WHERE order_num = ? //UPDATE order_tb SET order_status = 5 WHERE order_num = ? //UPDATE order_tb SET order_status = 0 WHERE order_num = ?
+		int result = 0;
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, order_num);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new ProductException("주문테이블_status 업데이트 오류! (4~0)", e);
+		}
+		return result;
 	}
 	
 }
