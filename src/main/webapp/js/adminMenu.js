@@ -44,7 +44,7 @@ function acceptOrder_admin(order_num, order_status) {
     let button = document.querySelector('button#accept_btn_'+order_num);
     // button.disabled = 'true';
     order_num = parseInt(order_num);
-    order_status = parInt(order_status);
+    order_status = parseInt(order_status);
 
     $.ajax({
         type : "post",

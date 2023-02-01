@@ -80,31 +80,22 @@
     <% } %>
     
     toastr.options = {
-    	    newestOnTop      : true,
-    	    closeButton      : true,
-    	    progressBar      : true,
-    	    preventDuplicates: true,
-    	    positionClass    : "toast-bottom-full-width",
-    	    showMethod       : 'slideDown',
-    	    timeOut          : 0, 
-    	};
-
-    	/** toastr.info */
-    	toastr.info_ = toastr.info;
-    	toastr.info = function(a,b,c){
-    	    var t = toastr.options.timeOut;
-    	    toastr.options.timeOut = 60000;
-    	    toastr.info_(a,b,c);
-    	    toastr.options.timeOut = t;
-    	};
-    	/** toastr.error */
-    	toastr.error_ = toastr.error;
-    	toastr.error = function(a,b,c){
-    	    var t = toastr.options.timeOut;
-    	    toastr.options.timeOut = 10000;
-    	    toastr.error_(a,b,c);
-    	    toastr.options.timeOut = t;
-    	};
+    		  "closeButton": true,
+    		  "debug": false,
+    		  "newestOnTop": false,
+    		  "progressBar": false,
+    		  "positionClass": "toast-bottom-full-width",
+    		  "preventDuplicates": true,
+    		  "onclick": null,
+    		  "showDuration": "300",
+    		  "hideDuration": "1000",
+    		  "timeOut": "3000",
+    		  "extendedTimeOut": "0",
+    		  "showEasing": "swing",
+    		  "hideEasing": "linear",
+    		  "showMethod": "fadeIn",
+    		  "hideMethod": "fadeOut"
+    		}
     
     
     /* toastr - user */
