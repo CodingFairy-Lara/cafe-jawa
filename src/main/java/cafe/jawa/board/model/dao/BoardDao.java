@@ -159,7 +159,7 @@ public class BoardDao {
 	}
 
 	public List<Attachment> selectAttachmentByBoardNo(Connection conn, int boardNo) {
-		String sql = prop.getProperty("selectAttachmentByBoardNo"); // select * from attachment where board_no = ?
+		String sql = prop.getProperty("selectAttachmentByBoardNo");
 		List<Attachment> attachments = new ArrayList<>();
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 			pstmt.setInt(1, boardNo);
@@ -189,7 +189,7 @@ public class BoardDao {
 	}
 
 	public int updateReadCount(Connection conn, int no) {
-		String sql = prop.getProperty("updateReadCount"); // update board set read_count = read_count + 1 where no = ?
+		String sql = prop.getProperty("updateReadCount");
 		int result = 0;
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
 			pstmt.setInt(1, no);

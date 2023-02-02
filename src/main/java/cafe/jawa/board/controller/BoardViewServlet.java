@@ -30,37 +30,8 @@ public class BoardViewServlet extends HttpServlet {
 		int no = Integer.parseInt(request.getParameter("no"));
 		System.out.println("no = " + no);
 		
-		// board 쿠키처리 board="[84][22]"
-		String boardCookieVal = "";
-		boolean hasRead = false;
-		Cookie[] cookies = request.getCookies();
-		if(cookies != null) {
-			for(Cookie cookie : cookies) {
-				String name = cookie.getName();
-				String value = cookie.getValue();
-				
-				if("board".equals(name)) {
-					boardCookieVal = value;
-					if(value.contains("[" + no + "]")) {
-						hasRead = true;
-					}
-				}
-			}
-		}
-		
-		// 응답쿠키
-		if(!hasRead) {
-			Cookie cookie = new Cookie("board", boardCookieVal + "[" + no + "]");
-			cookie.setMaxAge(365 * 24 * 60 * 60 ); // 365일
-			cookie.setPath(request.getContextPath() + "/board/boardView");
-			response.addCookie(cookie);
-		}
-		
-
 		// 2. 업무로직 - 게시판/첨부파일테이블 조회
-		// selectOneBoard = select * from board where no = ?
-		// selectAttachmentByBoardNo = select * from attachment where board_no = ?
-		Board board = boardService.selectOneBoard(no, hasRead);
+		Board board = boardService.selectOneBoard(no);
 		System.out.println("board = " + board);
 		
 		// 개행문자 변환처리
