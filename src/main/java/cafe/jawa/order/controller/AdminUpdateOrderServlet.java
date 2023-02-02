@@ -30,7 +30,13 @@ public class AdminUpdateOrderServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		
 		int order_num = Integer.parseInt(request.getParameter("order_num"));
-		int result = orderService.updateStatus_4(order_num);
+		int order_status = Integer.parseInt(request.getParameter("order_status"));
+        
+		if (order_status > 5) {
+			order_status = 1;
+        }
+		
+		int result = orderService.updateStatus_4(order_num, order_status);
 		
 
 		

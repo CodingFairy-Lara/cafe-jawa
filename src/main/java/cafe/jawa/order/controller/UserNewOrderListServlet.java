@@ -31,17 +31,26 @@ public class UserNewOrderListServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
-		
+
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		String memberId = loginMember.getMemberId();
 		List<Order> userOrderList = null;
 		
-		userOrderList = orderService.getUserOrderList(memberId);
+		userOrderList = getNewOrderList(memberId);
 		if (userOrderList != null) {
 			session.setAttribute("userOrderList", userOrderList);
 		}
 		
+		System.out.println(memberId);
+		System.out.println("userOrderList = " + userOrderList);
 	}
 
+	public List<Order> getNewOrderList(String memberId) {
+		List<Order> userOrderList = null;
+		userOrderList = orderService.getUserOrderList(memberId);
+		
+		return userOrderList;
+		
+	}
 
 }

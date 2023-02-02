@@ -8,7 +8,6 @@ import static cafe.jawa.common.JdbcTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
-import cafe.jawa.cart.model.dto.Cart;
 import cafe.jawa.order.model.dao.OrderDao;
 import cafe.jawa.order.model.dto.Order;
 import cafe.jawa.order.model.dto.Payment;
@@ -143,11 +142,11 @@ public class OrderService {
 		return orderListAll;
 	}
 
-	public int updateStatus_4(int order_num) {
+	public int updateStatus_4(int order_num, int orderStatus) {
 		int result = 0;
 		Connection conn = getConnection();
 		try {
-			result = orderDao.updateStatus_4(conn, order_num);
+			result = orderDao.updateStatus_4(conn, order_num, orderStatus);
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);

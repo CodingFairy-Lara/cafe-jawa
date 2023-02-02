@@ -134,7 +134,7 @@
             <form 
             name="cartEnrollFrm" 
             method="POST" 
-            action="<%= request.getContextPath() %>/product/orderEnroll">
+            action="<%= request.getContextPath() %>/cart/cartView">
                 <fieldset>
                     <div class="product_view_info">
         <% } %>

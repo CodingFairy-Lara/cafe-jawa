@@ -38,7 +38,11 @@
                         <th> </th>
                     </tr>
             <%
-                for( Order order : orderListAll ){
+   /*              for( Order order : orderListAll ){ */
+	   
+	   				for (int i = 0; i < orderListAll.size(); i++) {
+   					Order order = orderListAll.get(i);
+   					
                     switch (order.getStoreId()) {
                         case "003":  user_store = "CAFE JAWA 동탄점";
                                  break;
@@ -50,22 +54,27 @@
                     switch (order.getStatus()) {
                         case 5:  user_orderStats = "상품 준비완료 / 수령대기";
                                     break;
-                        case 4:  user_orderStats = "상품 준비중...";
+                        case 4:  user_orderStats = "상품 준비 임박";
                                     break;
-                        case 3:  user_orderStats = "주문수락 / 상품 준비중";
+                        case 3:  user_orderStats = "주문수락됨 / 상품 준비중";
                                     break;
                         case 2:  user_orderStats = "주문확인 요청";
+                                    break;
+                        case 1:  user_orderStats = "결제 오류";
+                                    break;
+                        case 0:  user_orderStats = "수령 완료";
                                     break;
                         }
 
             %>
                     <tr>
+                        <input type="hidden" name="update_userStats_td_<%= order.getOrderNum() %>" value="<%= user_orderStats %>">
                         <td><%= order.getOrderNum() %></td>
                         <td><%= user_store %></td>
                         <td><%= order.getMemberId() %></td>
                         <td><%= order.getTotalPrice() %> 원</td>
-                        <td id="acceptOrder_result_<=% order.getOrderNum() %>"><%= user_orderStats %></td>
-                        <td><button onclick='javascript:acceptOrder_admin("<%= order.getOrderNum() %>", "<%= order.getStatus() %>");' id="accept_btn_<=% order.getOrderNum() %>" class="abutton admin_info">주문 수락하기</button></td>
+                        <td id='acceptOrder_result_<%= order.getOrderNum() %>' class="td_userStatus"><%= user_orderStats %></td>
+                        <td><button onclick='javascript:updateUserStatus("<%= order.getOrderNum() %>", "<%= order.getStatus() %>");' id="accept_btn_<%= order.getOrderNum() %>" class="abutton admin_info">주문 수락하기</button></td>
                     </tr>
             <% } %>
                 </table>
@@ -83,8 +92,22 @@
     </div>
 
 </section>
-
+    
 <script>
+
+updateTdColor();
+
+function updateTdColor () {
+    $("td:contains('수령완료')").css({color:"rgb(194, 180, 182)"});
+    $("td:contains('결제 오류')").css({color:"red"});
+    $("td:contains('주문확인 요청')").css({color:"orange"});
+    $("td:contains('주문수락됨 / 상품 준비중')").css({color:"skyblue"});
+    $("td:contains('상품 준비 임박')").css({color:"pink"});
+    $("td:contains('상품 준비완료 / 수령대기')").css({color:"green"});
+};
+
+
+
 </script>
 
 
