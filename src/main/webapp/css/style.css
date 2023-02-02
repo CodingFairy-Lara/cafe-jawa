@@ -897,7 +897,7 @@ div.product_factor {
     color: white;
     height: 185px;
     position: sticky;
-    top: 160px;
+    top: 0;
     z-index: 1;
   }
 
@@ -2095,13 +2095,13 @@ div#empty_cart {
 
   /* ! main index */
   #main-view-container {
-    height: 1000px;
-    background-image:  url("../images/common/bg_img.jpg");
-     /* url("../images/common/dark_bg_img.png"); */
-    background-size: contain;
+    background-image: url(../images/common/bg_img.jpg), url(../images/common/dark_bg_img.png);
+    background-size: contain, 1900px;
     background-repeat: no-repeat;
-  }
-
+    background-position: top left, left bottom;
+    height: 110vh;
+    width: 100vw;
+  }s
  
  /* ! login */
   
@@ -2359,7 +2359,6 @@ div#empty_cart {
   }
   th, td {
     border-bottom: 1px solid #ddd;
-    border-left: 1px solid #ddd;
     padding: 10px;
     vertical-align: middle;
   }

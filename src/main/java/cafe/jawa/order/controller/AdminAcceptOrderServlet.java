@@ -31,8 +31,8 @@ public class AdminAcceptOrderServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		
-		int order_num = Integer.parseInt(request.getParameter("order_num"));
-		int result = orderService.acceptOrder(order_num);
+		int orderNum = Integer.parseInt(request.getParameter("orderNum"));
+		int result = orderService.acceptOrder(orderNum);
 		
 
 		

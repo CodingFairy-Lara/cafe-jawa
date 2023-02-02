@@ -8,12 +8,29 @@
 		
 
 			<% if(loginMember == null) { %>	
-			<h1>안녕하세요, 카페 자와 입니다.</h1>
+			<h1 style="    display: block;
+			font-size: 2.5em;
+			font-weight: bold;
+			padding-top: 275px;
+			padding-left: 61px;">안녕하세요, 카페 자와 입니다.</h1>
 			<% } else { %>
-			<h1>안녕하세요, 카페 자와 입니다.</h1>
+			<h1 style="    display: block;
+			font-size: 2.5em;
+			font-weight: bold;
+			line-height: 160%;
+			padding-top: 235px;
+			padding-left: 61px;"><%= loginMember.getMemberName()%> 님,<br/>안녕하세요, 카페 자와 입니다.</h1>
 			<% } %>
 
-
+			<div>
+				<img  src="<%= request.getContextPath() %>/images/common/coffe_img.png" alt="CAFE JAWA" 
+				style="
+				position: absolute;
+				margin: 0 auto;
+				top: 90px;
+				right: -110px;
+				width: 42%;">
+			</div>
 
 	</div>		
 </section>

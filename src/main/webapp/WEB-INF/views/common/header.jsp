@@ -9,7 +9,6 @@
 	Member loginMember = (Member) session.getAttribute("loginMember");
  	List<Order> orderListAll = (List<Order>) session.getAttribute("orderListAll");
  	List<Order> userOrderList = (List<Order>) session.getAttribute("userOrderList");
- 	List<Payment> paymentList = (List<Payment>) session.getAttribute("paymentList");
 	String msg = (String) session.getAttribute("msg");
 	if(msg != null) session.removeAttribute("msg");
 	MemberRole user = MemberRole.valueOf("U");
@@ -21,37 +20,6 @@
 	String user_store = null;
 %>
 	
-<%	
-	// 사용자 계정 로그인시 
-	if (userOrderList != null) {
-	for (Order order : userOrderList) {
-        switch (order.getStoreId()) {
-        case "003":  user_store = "CAFE JAWA 동탄점";
-                 break;
-        case "002":  user_store = "CAFE JAWA 인천점";
-                 break;
-        case "001":  user_store = "CAFE JAWA 잠실점";
-                 break;
-    	}
-		
-        switch (order.getStatus()) {
-        case 5:  user_orderStats = "상품 준비완료";
-	 		 user_ordermsg = "" + loginMember.getMemberName() + "님의 주문 상품이 모두 준비되었습니다! 😉 \\n"+"[ " + user_store + "] 에서 상품을 픽업해주세요 🤍"; break;
-        case 4:  user_orderStats = "상품 준비중...";
-			 user_ordermsg = ""+ loginMember.getMemberName() + "님의 주문 상품이 10초 뒤에 준비 완료될 예정입니다! ☕ ️\\n"+"상품이 준비되면 "+"[ " + user_store + "] 에서 픽업해주세요 🤍"; break;
-        case 3:  user_orderStats = "상품 준비중";
- 			 user_ordermsg = "[ " + user_store + " ]에서 "+ loginMember.getMemberName() + "님의 주문을 확인했으며, 상품을 준비하고 있습니다! ☕ ️\\n"+"상품이 준비가 완료되면 픽업해주세요 🤍"; break;
-        case 2:  user_orderStats = "결제 완료";
-		 	 user_ordermsg = "" + loginMember.getMemberName() + "님의 주문 결제가 완료되었습니다! 🍰 \\n"+"[ " + user_store + "] 에서 주문을 확인중입니다. \\n"+"잠시만 기다려주세요 🤍"; break;
-        case 1:  user_orderStats = "결제 오류";
-   			 user_ordermsg = "" + loginMember.getMemberName() + "님의 주문이 완료되었으나, 결제가 되지 않았습니다. 🥹 "+"주문 목록을 지우고 다시 결제를 시도해주세요!"; break;
-        default: user_orderStats = null; user_ordermsg = null; break;
-    	}
-	}
-		session.setAttribute("user_orderStats", user_orderStats);
-		session.setAttribute("user_ordermsg", user_ordermsg);
-	}
-%>
 
 <!doctype html>
 <html lang="en">
@@ -78,7 +46,21 @@
     <% if(msg != null) { %>
       alert("<%= msg %>"); 
     <% } %>
+
+
+
+    /* user setInterval - ajax로 5초마다 user회원정보 불러옴 */
+    <% if(loginMember != null && loginMember.getMemberRole() == MemberRole.valueOf("U")) { %>
+    	let intervalId = setInterval(getNewOrderList_user, 3000)
+      <% session.setAttribute("userOrderList", userOrderList); } %>
+    /* admin setInterval - ajax로 5초마다 회원정보 불러옴 */
+    <% if(loginMember != null && loginMember.getMemberRole() == MemberRole.valueOf("A")) { %>
+      let intervalId = setInterval(getNewOrderList, 3000)
+      <% session.setAttribute("orderListAll", orderListAll); } %>
+
+
     
+    /* toastr  */
     toastr.options = {
     		  "closeButton": true,
     		  "debug": false,
@@ -97,24 +79,61 @@
     		  "hideMethod": "fadeOut"
     		}
     
-    
-    /* toastr - user */
+		/* setInterval - toastr 시작 */
     setInterval(function() {
-    	
-	    <% if(user_orderStats != null) { 
-	    	if(user_orderStats.equals("결제 오류")) { %>
+
+      <%	
+        // 사용자 계정 로그인시 
+        if (userOrderList != null && loginMember.getMemberRole() == MemberRole.valueOf("U")) {
+        for (Order order : userOrderList) {
+              switch (order.getStoreId()) {
+              case "003":  user_store = "CAFE JAWA 동탄점";
+                      break;
+              case "002":  user_store = "CAFE JAWA 인천점";
+                      break;
+              case "001":  user_store = "CAFE JAWA 잠실점";
+                      break;
+            }
+          
+
+              switch (order.getStatus()) {
+              case 5:  user_orderStats = "상품 준비완료";
+            user_ordermsg = "" + loginMember.getMemberName() + "님의 주문 상품이 모두 준비되었습니다! 😉 \\n"+"[ " + user_store + "] 에서 상품을 픽업해주세요 🤍"; break;
+              case 4:  user_orderStats = "상품 준비 임박";
+            user_ordermsg = ""+ loginMember.getMemberName() + "님의 주문 상품이 약 10초 뒤에 준비 완료될 예정입니다! ☕ ️\\n"+"상품이 준비되면 "+"[ " + user_store + "] 에서 픽업해주세요 🤍"; break;
+              case 3:  user_orderStats = "상품 준비중";
+            user_ordermsg = "[ " + user_store + " ]에서 "+ loginMember.getMemberName() + "님의 주문을 확인했으며, 상품을 준비하고 있습니다! ☕ ️\\n"+"상품이 준비가 완료되면 픽업해주세요 🤍"; break;
+              case 2:  user_orderStats = "결제 완료";
+            user_ordermsg = "" + loginMember.getMemberName() + "님의 주문 결제가 완료되었습니다! 🍰 \\n"+"[ " + user_store + "] 에서 주문을 확인중입니다. \\n"+"잠시만 기다려주세요 🤍"; break;
+              case 1:  user_orderStats = "결제 오류";
+              user_ordermsg = "" + loginMember.getMemberName() + "님의 주문이 완료되었으나, 결제가 되지 않았습니다. 🥹 "+"주문 목록을 지우고 다시 결제를 시도해주세요!"; break;
+            }
+        }
+          session.setAttribute("user_orderStats", user_orderStats);
+          session.setAttribute("user_ordermsg", user_ordermsg);
+        
+      %>
+
+    	/* toastr - user */
+	    <%	
+        user_orderStats = (String) session.getAttribute("user_orderStats");
+        user_ordermsg = (String) session.getAttribute("user_ordermsg");
+        if(user_orderStats != null && user_orderStats.equals("결제 오류")) { %>
 	    	toastr.error('<%= user_ordermsg %>','<%= user_orderStats %>');
-	    <%	} else if(user_orderStats.equals("결제 완료")) { %>
+	    <%	} else if(user_orderStats != null && user_orderStats.equals("결제 완료")) { %>
 	    	toastr.warning('<%= user_ordermsg %>','<%= user_orderStats %>');
-	    	<% } else if (user_orderStats.equals("상품 준비중")) { %>
+	    	<% } else if (user_orderStats != null && user_orderStats.equals("상품 준비중")) { %>
 	    	toastr.info('<%= user_ordermsg %>','<%= user_orderStats %>');
-	    	<% } else if (user_orderStats.equals("상품 준비중...")) { %>
+	    	<% } else if (user_orderStats != null && user_orderStats.equals("상품 준비 임박")) { %>
 	    	toastr.error('<%= user_ordermsg %>','<%= user_orderStats %>');
-	    	<% } else if (user_orderStats.equals("상품 준비완료")) { %>
+	    	<% } else if (user_orderStats != null && user_orderStats.equals("상품 준비완료")) { %>
 	    	toastr.success('<%= user_ordermsg %>','<%= user_orderStats %>');
-	    <% }} %>
+	    <% } } %>
+	    /* toastr - user 끝 */
+	    
+
 	    /* toastr - admin */
-	    <% if (orderListAll != null) {
+	    <% if (orderListAll != null && loginMember.getMemberRole() == MemberRole.valueOf("A")) {
 		for (Order order : orderListAll) {
 		    switch (order.getStoreId()) {
 		    case "003":  user_store = "CAFE JAWA 동탄점";
@@ -124,51 +143,34 @@
 		    case "001":  user_store = "CAFE JAWA 잠실점";
 		             break;
 			}
-			
 		   		 if (order.getStatus() == 5) {
 				admin_orderStats = "상품 준비완료 / 수령대기";
-				admin_ordermsg = "[ " + user_store + " ]에서 준비중인 [ 주문번호 : " + order.getOrderNum() + "] 상품이 준비 완료되었습니다! 😉 "; %>
+				admin_ordermsg = "[ " + user_store + " ]에서 준비중인 [ 주문번호 : " + order.getOrderNum() + "] 상품이 준비 완료되었습니다! 😉 주문자가 상품을 수령할 예정입니다."; %>
 					toastr.success('<%= admin_ordermsg %>','<%= admin_orderStats %>');
-          setTimeout(() => updateOrderStatus, 60000, "<%= order.getOrderNum() %>", "<%= order.getStatus() %>");
 			<% } else if (order.getStatus() == 4) {
-				admin_orderStats = "상품 준비중...";
-				admin_ordermsg = "[ " + user_store + " ]에서 준비중인 [ 주문번호 : " + order.getOrderNum() + "] 상품이 10초 뒤에 준비 완료될 예정입니다! 🤍"; %>
+				admin_orderStats = "상품 준비 임박";
+				admin_ordermsg = "[ " + user_store + " ]에서 준비중인 [ 주문번호 : " + order.getOrderNum() + "] 상품이 약 10초 뒤에 준비 완료될 예정입니다! 🤍"; %>
 					toastr.error('<%= admin_ordermsg %>','<%= admin_orderStats %>');
-          setTimeout(() => updateOrderStatus, 10000, "<%= order.getOrderNum() %>", "<%= order.getStatus() %>");
 			<% } else if (order.getStatus() == 3) {
 				admin_orderStats = "상품 준비중";
 				admin_ordermsg = "[ " + user_store + " ]에서 [ 주문번호 : " + order.getOrderNum() + "] 요청을 수락했으며, 상품을 준비하고 있습니다! ☕ "; %>
 					toastr.info('<%= admin_ordermsg %>','<%= admin_orderStats %>');
-          setTimeout(() => updateOrderStatus, 60000, "<%= order.getOrderNum() %>", "<%= order.getStatus() %>");
 			<% } else if (order.getStatus() == 2) {
 				admin_orderStats = "주문확인 요청";
 				admin_ordermsg = "[ " + user_store + "] 에 새로운 주문이 들어왔습니다! 🍰 \\n"+"[ 주문번호 : " + order.getOrderNum() + "] 주문요청을 확인하고 상품준비를 시작하세요."; %>
 					toastr.warning('<%= admin_ordermsg %>','<%= admin_orderStats %>');
 			<% } else { admin_orderStats = null; admin_ordermsg = null;  }
 
+        if(order.getOrderNum() == 0) { %>
+          $("button#accept_btn_<%= order.getOrderNum() %>").disabled = 'true';
+       <% }
 			}} %>
+			/* toastr - admin 끝 */
     	
     	}, 5000);
+	/* setInterval - toastr 끝 */
     
-    
-    /* user setInterval - ajax로 5초마다 user회원정보 불러옴 */
-    <% if(loginMember != null && loginMember.getMemberRole() == MemberRole.valueOf("U")) { %>
-    	var intervalId = setInterval(getNewOrderList_user, 3000)
-    	<% session.setAttribute("orderListAll", orderListAll); } %>
-    /* admin setInterval - ajax로 5초마다 회원정보 불러옴 */
-    <% if(loginMember != null && loginMember.getMemberRole() == MemberRole.valueOf("A")) { %>
-    	var intervalId = setInterval(getNewOrderList, 3000)
-    	<% session.setAttribute("userOrderList", userOrderList); } %>
-    
-    	<% if (loginMember != null && loginMember.getMemberRole() == MemberRole.valueOf("A")) {
-    		boolean flag = false;
-         for (Order order : orderListAll) {
-	   		 if ((order.getStatus() == 5 &&  flag == false) || (order.getStatus() == 4 && flag == true) || (order.getStatus() == 3 && flag == false)) { %>
-      	updateUserStatus("<%= order.getOrderNum() %>", "<%= order.getStatus() %>");
-    	<% flag = true;
-    	}}} %>
-    	
-    	
+      
   });
 
 </script>

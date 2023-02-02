@@ -248,7 +248,7 @@ public class OrderDao {
 	 */
 	public List<Order> getNewOrderList(Connection conn) {
 		// order_num 내림차순 조회
-		String sql = prop.getProperty("getNewOrderList");  // SELECT DISTINCT member_id, order_num, STORE_ID, TOTAL_PRICE, ORDER_STATUS FROM Order_tb;
+		String sql = prop.getProperty("getNewOrderList");  // SELECT DISTINCT member_id, order_num, STORE_ID, TOTAL_PRICE, ORDER_STATUS FROM Order_tb ORDER BY order_num DESC
 		List<Order> orderList = new ArrayList<>();
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -312,12 +312,13 @@ public class OrderDao {
 		return orderList;
 	}
 
-	public int updateStatus_4(Connection conn, int order_num) {
-		String sql = prop.getProperty("updateOrderStatus_3"); // UPDATE order_tb SET order_status = 4 WHERE order_num = ? //UPDATE order_tb SET order_status = 5 WHERE order_num = ? //UPDATE order_tb SET order_status = 0 WHERE order_num = ?
+	public int updateStatus_4(Connection conn, int order_num, int orderStatus) {
+		String sql = prop.getProperty("updateOrderStatus_4"); // UPDATE order_tb SET order_status = ? WHERE order_num = ?
 		int result = 0;
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, order_num);
+			pstmt.setInt(1, orderStatus);
+			pstmt.setInt(2, order_num);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
