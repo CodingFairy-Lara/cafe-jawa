@@ -433,6 +433,7 @@ group by ot.order_num;
 SELECT DISTINCT member_id, order_num, STORE_ID, TOTAL_PRICE, ORDER_STATUS FROM Order_tb;
 
 SELECT DISTINCT member_id, order_num, STORE_ID, TOTAL_PRICE, ORDER_STATUS FROM Order_tb where member_id='qwerty' ORDER BY order_status DESC;
+SELECT DISTINCT member_id, order_num, STORE_ID, TOTAL_PRICE, ORDER_STATUS FROM Order_tb where member_id= ? ORDER BY order_status DESC
 
 
 
