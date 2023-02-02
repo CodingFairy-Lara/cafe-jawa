@@ -294,7 +294,7 @@ public class OrderDao {
 	}
 
 	public List<Order> getUserOrderList(Connection conn, String memberId) {
-		String sql = prop.getProperty("getUserOrderList"); // SELECT DISTINCT member_id, order_num, STORE_ID, TOTAL_PRICE, ORDER_STATUS FROM Order_tb where member_id= ? ORDER BY order_status DESC
+		String sql = prop.getProperty("getUserOrderList"); // SELECT DISTINCT member_id, order_num, STORE_ID, TOTAL_PRICE, ORDER_STATUS FROM Order_tb where member_id= ? ORDER BY order_num DESC
 		List<Order> orderList = new ArrayList<>();
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)){

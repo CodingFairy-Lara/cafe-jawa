@@ -84,6 +84,7 @@
 
       <%	
         // 사용자 계정 로그인시 
+        userOrderList = (List<Order>) session.getAttribute("userOrderList");
         if (userOrderList != null && loginMember.getMemberRole() == MemberRole.valueOf("U")) {
         for (Order order : userOrderList) {
               switch (order.getStoreId()) {
@@ -133,7 +134,8 @@
 	    
 
 	    /* toastr - admin */
-	    <% if (orderListAll != null && loginMember.getMemberRole() == MemberRole.valueOf("A")) {
+	    <% orderListAll = (List<Order>) session.getAttribute("orderListAll");
+	    if (orderListAll != null && loginMember.getMemberRole() == MemberRole.valueOf("A")) {
 		for (Order order : orderListAll) {
 		    switch (order.getStoreId()) {
 		    case "003":  user_store = "CAFE JAWA 동탄점";
@@ -209,6 +211,9 @@
       	  <li>
             <a href="<%= request.getContextPath() %>/cart/cartView">My Cart 🛒</a>
           </li>
+      	  <li>
+            <a href="<%= request.getContextPath() %>/user/orderControl">My Order List</a>
+          </li>
       	 </ul>
       <% } else if (loginMember.getMemberRole() == admin) {%>
     	<ul class="loginMenu">
@@ -220,7 +225,10 @@
     	  </li>
     	  <li>
           <a href="<%= request.getContextPath() %>/member/admin">ADMIN</a>
-        	</li>
+       	</li>
+    	  <li>
+          <a href="<%= request.getContextPath() %>/admin/orderControl">Order List</a>
+       	</li>
     	 </ul>
 	<% } %>
       </div>
