@@ -2101,21 +2101,20 @@ div#empty_cart {
     background-position: top left, left bottom;
     height: 110vh;
     width: 100vw;
-  }s
+  }
  
  /* ! login */
   
-  .login {
-  	
+  section#logn {  	
   	padding: 100px 100px;
   	background-image: url("../images/common/login.jpg");
   	background-repeat: no-repeat;
   	background-position: center;
-  	background-attchment: fixed;
+  	background-attachment: fixed;
   	background-size: cover;
 
   }
-  .login h2 {
+  section#logn h2 {
   	color: #fff;
   	font-size: 30px;
   	font-weight: 700;
@@ -2181,7 +2180,7 @@ div#empty_cart {
   	background-image: url("../images/common/enroll.jpg");
   	background-repeat: no-repeat;
   	background-position: center;
-  	background-attchment: fixed;
+  	background-attachment: fixed;
   	background-size: cover;
 
   }
@@ -2241,7 +2240,7 @@ div#empty_cart {
   	background-image: url("../images/common/info.jpg");
   	background-repeat: no-repeat;
   	background-position: center;
-  	background-attchment: fixed;
+  	background-attachment: fixed;
   	background-size: cover;
 
   }
@@ -2296,7 +2295,7 @@ div#empty_cart {
   	background-image: url("../images/common/pwd.jpg");
   	background-repeat: no-repeat;
   	background-position: center;
-  	background-attchment: fixed;
+  	background-attachment: fixed;
   	background-size: cover;
 
   }

@@ -46,7 +46,7 @@ window.addEventListener('load', () => {
 	
 });
 </script>
-<section class=login>
+<section id="logn">
 	<h2>로그인</h2><br>
 	<div class="login_card">
 	<br>
