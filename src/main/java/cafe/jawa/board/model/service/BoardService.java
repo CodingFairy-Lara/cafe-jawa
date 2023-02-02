@@ -72,15 +72,11 @@ public class BoardService {
 		}
 		return result;
 	}
-
-	public Board selectOneBoard(int no) {
-		return selectOneBoard(no, true);
-	}
 	
-	public Board selectOneBoard(int no, boolean hasRead) {
+	public Board selectOneBoard(int no) {
 		Connection conn = getConnection();
-		// 조회수 증가 시키기
-		if(!hasRead) updateReadCount(no, conn);
+		
+		updateReadCount(no, conn);
 		
 		Board board = boardDao.selectOneBoard(conn, no);
 		List<Attachment> attachments = boardDao.selectAttachmentByBoardNo(conn, no);
